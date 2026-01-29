@@ -16,4 +16,33 @@ jobs:
 
     - name: Run tests
       run: docker compose -f docker-compose.yml -f docker-compose.test.yml run --rm tests
+  
+  deploy:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v4
     
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v1.2.5
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        envs: MY_APP_SECRET, ANOTHER_VAR, GITHUB_SHA
+      env:
+        ANOTHER_VAR: "production_mode"
+        GITHUB_SHA: ${{ github.sha }}
+      script: |
+        cd /home/${{ secrets.SSH_USER }}/TodoApp
+        git pull origin main
+        echo "Создаем .env файл..."
+        echo "APP_SECRET=$MY_APP_SECRET" > .env
+        echo "MODE=$ANOTHER_VAR" >> .env
+        echo "VERSION=$GITHUB_SHA" >> .env
+        
+        echo "Перезапускаем приложение..."
+        docker compose up -d --build
+        
