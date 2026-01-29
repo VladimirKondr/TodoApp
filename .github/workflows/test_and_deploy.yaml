@@ -1,0 +1,26 @@
+name: Test And Deploy
+
+on:
+  push:
+    branches: [main]
+  
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v4
+
+    - name: Set up Docker Compose
+      uses: docker/setup-compose-action@v2
+
+    - name: Build and start services
+      run: docker compose up -d --build
+
+    - name: Build tests
+      run: docker-compose -f docker-compose.yml -f docker-compose.test.yml build tests
+
+    - name: Run tests
+      run: docker-compose -f docker-compose.yml -f docker-compose.test.yml run --rm tests
+    
