@@ -1,0 +1,82 @@
+run:
+  timeout: 5m
+  tests: true
+
+linters:
+  disable-all: true
+  enable:
+    # Базовые и критически важные
+    - errcheck      # Проверяет, что ошибки обрабатываются
+    - gosimple      # Предлагает упрощение кода
+    - govet         # Официальный статический анализатор Go
+    - ineffassign   # Находит бесполезные присваивания
+    - staticcheck   # Мощный набор проверок (как govet, но строже)
+    - typecheck     # Проверяет типы (как компилятор)
+    - unused        # Находит неиспользуемые переменные/константы
+
+    # Стиль и форматирование
+    - revivie       # Быстрая и настраиваемая замена golint
+    - goimports     # Отвечает за импорты (вместо gofmt)
+    - gofumpt       # Более строгий gofmt (стандарт в современной разработке)
+    - misspell      # Находит опечатки в комментариях
+    - unconvert     # Находит лишние конвертации типов
+
+    # Качество кода и сложность
+    - gocyclo       # Проверяет цикломатическую сложность функций
+    - gocritic      # Очень мощный линтер с советами по улучшению кода
+    - nakedret      # Запрещает "голые" возвраты в длинных функциях
+    - prealloc      # Советует преаллоцировать слайсы (оптимизация)
+    - unparam       # Находит параметры функций, которые всегда получают одно значение
+
+    # Безопасность и баги
+    - gosec         # Проверка на уязвимости (SQLi, хардкод паролей и т.д.)
+    - bodyclose     # Проверяет, закрыт ли body у HTTP ответов
+    - noctx         # Проверяет, что HTTP-запросы используют контекст
+
+    # Чистота линтинга
+    - nolintlint    # Проверяет правильность использования директив //nolint
+
+linters-settings:
+  gofumpt:
+    extra-rules: true # Включает дополнительные правила форматирования
+  
+  goimports:
+    # Укажите префикс вашего модуля, чтобы он отделялся от 3rd-party библиотек
+    # local-prefixes: github.com/your-org/your-project
+
+  gocyclo:
+    min-complexity: 25
+
+  revive:
+    rules:
+      - name: exported
+        severity: warning
+        disabled: false
+        arguments:
+          - "checkPrivateReceivers"
+          - "sayRepetitiveInsteadOfStutters"
+
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+    disabled-checks:
+      - whyNoLint
+      - unnamedResult # Для простых функций именованные возвраты избыточны
+
+issues:
+  # Исключаем некоторые папки (например, сгенерированный код или вендор)
+  exclude-dirs:
+    - vendor
+    - .git
+  # Скрываем некоторые незначительные проблемы
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - gocyclo
+        - errcheck
+        - dupl
+        - gosec

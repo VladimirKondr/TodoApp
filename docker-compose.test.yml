@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+
+  tests:
+    build:
+      context: .
+      target: builder
+    container_name: todo_app_tests
+    working_dir: /go/TodoApp
+    command: ["go", "test", "-v", "-count=1", "./..."]
+    environment:
+      TEST_DATABASE_URL: "postgres://todoapp:todoapp_password@postgres:5432/postgres_db?sslmode=disable"
+    depends_on:
+      postgres:
+        condition: service_healthy

@@ -1,0 +1,4101 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 324B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/golang:tip-alpine3.23
+#2 ...
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.3s
+
+#2 [internal] load metadata for docker.io/library/golang:tip-alpine3.23
+#2 DONE 0.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 DONE 0.0s
+
+#6 [build 1/9] FROM docker.io/library/golang:tip-alpine3.23@sha256:423a79cb31c3b5e65cf21d4919fc9310b0a0a631d9e045d63663cb18670c560f
+#6 resolve docker.io/library/golang:tip-alpine3.23@sha256:423a79cb31c3b5e65cf21d4919fc9310b0a0a631d9e045d63663cb18670c560f 0.1s done
+#6 DONE 0.1s
+
+#7 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
+#7 resolve docker.io/library/alpine:latest@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
+#7 resolve docker.io/library/alpine:latest@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659 0.1s done
+#7 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 2.05kB done
+#5 DONE 0.0s
+
+#6 [build 1/9] FROM docker.io/library/golang:tip-alpine3.23@sha256:423a79cb31c3b5e65cf21d4919fc9310b0a0a631d9e045d63663cb18670c560f
+#6 CACHED
+
+#8 [build 2/9] COPY ../ /go/TodoApp
+#8 DONE 0.1s
+
+#9 [build 3/9] WORKDIR /go/TodoApp
+#9 DONE 0.1s
+
+#10 [build 4/9] RUN echo "meow"
+#10 0.272 meow
+#10 DONE 0.3s
+
+#11 [build 5/9] RUN tree /go
+#11 0.277 /go
+#11 0.281 ├── TodoApp
+#11 0.281 │   ├── Jsonhandler.go
+#11 0.281 │   ├── docker
+#11 0.281 │   │   └── Dockerfile
+#11 0.281 │   ├── go.mod
+#11 0.281 │   ├── go.sum
+#11 0.281 │   ├── handler
+#11 0.281 │   │   ├── todo_handler.go
+#11 0.281 │   │   ├── todo_handler_integration_test.go
+#11 0.281 │   │   └── todo_handler_test.go
+#11 0.281 │   ├── init.sql
+#11 0.281 │   ├── log.log
+#11 0.281 │   ├── main
+#11 0.281 │   ├── main.go
+#11 0.281 │   ├── model
+#11 0.281 │   │   └── todo.go
+#11 0.281 │   └── store
+#11 0.281 │       └── postgres.go
+#11 0.281 ├── bin
+#11 0.281 └── src
+#11 0.281 
+#11 0.281 7 directories, 13 files
+#11 DONE 0.3s
+
+#12 [build 6/9] RUN pwd
+#12 0.245 /go/TodoApp
+#12 DONE 0.3s
+
+#13 [build 7/9] RUN ls -la
+#13 0.238 total 15228
+#13 0.238 drwxr-xr-x    7 root     root          4096 Jan 29 11:57 .
+#13 0.238 drwxrwxrwt    1 root     root          4096 Jan 29 11:57 ..
+#13 0.238 -rw-rw-r--    1 root     root           681 Jan 28 15:44 .gitignore
+#13 0.238 -rw-rw-r--    1 root     root          3644 Jan 28 15:44 .golangci.yml
+#13 0.238 drwxrwxr-x    2 root     root          4096 Jan 28 15:46 .vscode
+#13 0.238 -rw-rw-r--    1 root     root          2420 Jan 29 10:38 Jsonhandler.go
+#13 0.238 drwxrwxr-x    2 root     root          4096 Jan 29 11:57 docker
+#13 0.238 -rw-rw-r--    1 root     root           632 Jan 29 11:13 go.mod
+#13 0.238 -rw-rw-r--    1 root     root          3256 Jan 29 11:13 go.sum
+#13 0.238 drwxrwxr-x    2 root     root          4096 Jan 29 11:14 handler
+#13 0.238 -rw-rw-r--    1 root     root           133 Jan 29 11:21 init.sql
+#13 0.238 -rw-rw-r--    1 root     root          1058 Jan 29 11:57 log.log
+#13 0.238 -rwxrwxr-x    1 root     root      15530766 Jan 29 11:27 main
+#13 0.238 -rw-rw-r--    1 root     root           953 Jan 29 11:08 main.go
+#13 0.238 drwxrwxr-x    2 root     root          4096 Jan 29 11:07 model
+#13 0.238 drwxrwxr-x    2 root     root          4096 Jan 29 11:09 store
+#13 DONE 0.3s
+
+#14 [build 8/9] RUN go mod download
+#14 DONE 14.0s
+
+#15 [build 9/9] RUN go build -o /todoapp main.go
+#15 DONE 22.3s
+
+#16 [stage-1 2/3] COPY --from=build /todoapp /todoapp
+#16 DONE 0.1s
+
+#17 [stage-1 3/3] RUN tree /
+#17 0.262 /
+#17 0.262 ├── bin
+#17 0.262 │   ├── arch -> /bin/busybox
+#17 0.262 │   ├── ash -> /bin/busybox
+#17 0.262 │   ├── base64 -> /bin/busybox
+#17 0.262 │   ├── bbconfig -> /bin/busybox
+#17 0.262 │   ├── busybox
+#17 0.262 │   ├── cat -> /bin/busybox
+#17 0.262 │   ├── chattr -> /bin/busybox
+#17 0.262 │   ├── chgrp -> /bin/busybox
+#17 0.262 │   ├── chmod -> /bin/busybox
+#17 0.262 │   ├── chown -> /bin/busybox
+#17 0.262 │   ├── cp -> /bin/busybox
+#17 0.262 │   ├── date -> /bin/busybox
+#17 0.262 │   ├── dd -> /bin/busybox
+#17 0.262 │   ├── df -> /bin/busybox
+#17 0.262 │   ├── dmesg -> /bin/busybox
+#17 0.262 │   ├── dnsdomainname -> /bin/busybox
+#17 0.262 │   ├── dumpkmap -> /bin/busybox
+#17 0.262 │   ├── echo -> /bin/busybox
+#17 0.262 │   ├── egrep -> /bin/busybox
+#17 0.262 │   ├── false -> /bin/busybox
+#17 0.262 │   ├── fatattr -> /bin/busybox
+#17 0.262 │   ├── fdflush -> /bin/busybox
+#17 0.262 │   ├── fgrep -> /bin/busybox
+#17 0.262 │   ├── fsync -> /bin/busybox
+#17 0.262 │   ├── getopt -> /bin/busybox
+#17 0.262 │   ├── grep -> /bin/busybox
+#17 0.262 │   ├── gunzip -> /bin/busybox
+#17 0.262 │   ├── gzip -> /bin/busybox
+#17 0.262 │   ├── hostname -> /bin/busybox
+#17 0.262 │   ├── ionice -> /bin/busybox
+#17 0.262 │   ├── iostat -> /bin/busybox
+#17 0.262 │   ├── ipcalc -> /bin/busybox
+#17 0.262 │   ├── kbd_mode -> /bin/busybox
+#17 0.262 │   ├── kill -> /bin/busybox
+#17 0.262 │   ├── link -> /bin/busybox
+#17 0.262 │   ├── linux32 -> /bin/busybox
+#17 0.262 │   ├── linux64 -> /bin/busybox
+#17 0.262 │   ├── ln -> /bin/busybox
+#17 0.262 │   ├── login -> /bin/busybox
+#17 0.262 │   ├── ls -> /bin/busybox
+#17 0.262 │   ├── lsattr -> /bin/busybox
+#17 0.262 │   ├── lzop -> /bin/busybox
+#17 0.262 │   ├── makemime -> /bin/busybox
+#17 0.262 │   ├── mkdir -> /bin/busybox
+#17 0.262 │   ├── mknod -> /bin/busybox
+#17 0.262 │   ├── mktemp -> /bin/busybox
+#17 0.262 │   ├── more -> /bin/busybox
+#17 0.262 │   ├── mount -> /bin/busybox
+#17 0.262 │   ├── mountpoint -> /bin/busybox
+#17 0.262 │   ├── mpstat -> /bin/busybox
+#17 0.262 │   ├── mv -> /bin/busybox
+#17 0.262 │   ├── netstat -> /bin/busybox
+#17 0.262 │   ├── nice -> /bin/busybox
+#17 0.262 │   ├── pidof -> /bin/busybox
+#17 0.263 │   ├── ping -> /bin/busybox
+#17 0.263 │   ├── ping6 -> /bin/busybox
+#17 0.263 │   ├── pipe_progress -> /bin/busybox
+#17 0.263 │   ├── printenv -> /bin/busybox
+#17 0.263 │   ├── ps -> /bin/busybox
+#17 0.263 │   ├── pwd -> /bin/busybox
+#17 0.263 │   ├── reformime -> /bin/busybox
+#17 0.263 │   ├── rev -> /bin/busybox
+#17 0.263 │   ├── rm -> /bin/busybox
+#17 0.263 │   ├── rmdir -> /bin/busybox
+#17 0.263 │   ├── run-parts -> /bin/busybox
+#17 0.263 │   ├── sed -> /bin/busybox
+#17 0.263 │   ├── setpriv -> /bin/busybox
+#17 0.263 │   ├── setserial -> /bin/busybox
+#17 0.263 │   ├── sh -> /bin/busybox
+#17 0.263 │   ├── sleep -> /bin/busybox
+#17 0.263 │   ├── stat -> /bin/busybox
+#17 0.263 │   ├── stty -> /bin/busybox
+#17 0.263 │   ├── su -> /bin/busybox
+#17 0.263 │   ├── sync -> /bin/busybox
+#17 0.263 │   ├── tar -> /bin/busybox
+#17 0.263 │   ├── touch -> /bin/busybox
+#17 0.263 │   ├── true -> /bin/busybox
+#17 0.263 │   ├── umount -> /bin/busybox
+#17 0.263 │   ├── uname -> /bin/busybox
+#17 0.263 │   ├── usleep -> /bin/busybox
+#17 0.263 │   ├── watch -> /bin/busybox
+#17 0.264 │   └── zcat -> /bin/busybox
+#17 0.264 ├── dev
+#17 0.264 │   ├── core -> /proc/kcore
+#17 0.264 │   ├── fd -> /proc/self/fd
+#17 0.264 │   ├── full
+#17 0.264 │   ├── mqueue
+#17 0.264 │   ├── null
+#17 0.264 │   ├── ptmx -> pts/ptmx
+#17 0.264 │   ├── pts
+#17 0.264 │   │   └── ptmx
+#17 0.264 │   ├── random
+#17 0.264 │   ├── shm
+#17 0.264 │   ├── stderr -> /proc/self/fd/2
+#17 0.264 │   ├── stdin -> /proc/self/fd/0
+#17 0.264 │   ├── stdout -> /proc/self/fd/1
+#17 0.264 │   ├── tty
+#17 0.264 │   ├── urandom
+#17 0.264 │   └── zero
+#17 0.264 ├── etc
+#17 0.264 │   ├── alpine-release
+#17 0.264 │   ├── apk
+#17 0.264 │   │   ├── arch
+#17 0.264 │   │   ├── keys
+#17 0.264 │   │   │   ├── alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub
+#17 0.264 │   │   │   ├── alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub
+#17 0.264 │   │   │   └── alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub
+#17 0.264 │   │   ├── protected_paths.d
+#17 0.264 │   │   ├── repositories
+#17 0.264 │   │   └── world
+#17 0.264 │   ├── busybox-paths.d
+#17 0.264 │   │   └── busybox
+#17 0.265 │   ├── crontabs
+#17 0.265 │   │   └── root
+#17 0.265 │   ├── fstab
+#17 0.265 │   ├── group
+#17 0.265 │   ├── hostname
+#17 0.265 │   ├── hosts
+#17 0.265 │   ├── inittab
+#17 0.265 │   ├── issue
+#17 0.265 │   ├── logrotate.d
+#17 0.265 │   │   └── acpid
+#17 0.265 │   ├── modprobe.d
+#17 0.265 │   │   ├── aliases.conf
+#17 0.265 │   │   ├── blacklist.conf
+#17 0.265 │   │   └── i386.conf
+#17 0.265 │   ├── modules
+#17 0.265 │   ├── modules-load.d
+#17 0.265 │   ├── motd
+#17 0.265 │   ├── mtab -> ../proc/mounts
+#17 0.265 │   ├── network
+#17 0.265 │   │   ├── if-down.d
+#17 0.265 │   │   ├── if-post-down.d
+#17 0.265 │   │   ├── if-post-up.d
+#17 0.265 │   │   ├── if-pre-down.d
+#17 0.265 │   │   ├── if-pre-up.d
+#17 0.265 │   │   └── if-up.d
+#17 0.265 │   │       └── dad
+#17 0.265 │   ├── nsswitch.conf
+#17 0.265 │   ├── opt
+#17 0.265 │   ├── os-release -> ../usr/lib/os-release
+#17 0.265 │   ├── passwd
+#17 0.265 │   ├── periodic
+#17 0.265 │   │   ├── 15min
+#17 0.265 │   │   ├── daily
+#17 0.265 │   │   ├── hourly
+#17 0.265 │   │   ├── monthly
+#17 0.265 │   │   └── weekly
+#17 0.268 │   ├── profile
+#17 0.268 │   ├── profile.d
+#17 0.268 │   │   ├── 20locale.sh
+#17 0.268 │   │   ├── README
+#17 0.268 │   │   └── color_prompt.sh.disabled
+#17 0.268 │   ├── protocols
+#17 0.268 │   ├── resolv.conf
+#17 0.268 │   ├── secfixes.d
+#17 0.268 │   │   └── alpine
+#17 0.268 │   ├── securetty
+#17 0.268 │   ├── services
+#17 0.268 │   ├── shadow
+#17 0.268 │   ├── shells
+#17 0.268 │   ├── ssl
+#17 0.268 │   │   ├── cert.pem -> certs/ca-certificates.crt
+#17 0.268 │   │   ├── certs
+#17 0.268 │   │   │   └── ca-certificates.crt
+#17 0.268 │   │   ├── ct_log_list.cnf
+#17 0.268 │   │   ├── ct_log_list.cnf.dist
+#17 0.268 │   │   ├── openssl.cnf
+#17 0.268 │   │   ├── openssl.cnf.dist
+#17 0.268 │   │   └── private
+#17 0.268 │   ├── ssl1.1
+#17 0.268 │   │   ├── cert.pem -> /etc/ssl/cert.pem
+#17 0.268 │   │   └── certs -> /etc/ssl/certs
+#17 0.268 │   ├── sysctl.conf
+#17 0.268 │   ├── sysctl.d
+#17 0.268 │   └── udhcpc
+#17 0.268 │       └── udhcpc.conf
+#17 0.268 ├── home
+#17 0.268 ├── lib
+#17 0.268 │   ├── apk
+#17 0.268 │   │   ├── db
+#17 0.268 │   │   │   ├── installed
+#17 0.268 │   │   │   ├── scripts.tar.gz
+#17 0.268 │   │   │   └── triggers
+#17 0.268 │   │   └── exec
+#17 0.268 │   ├── firmware
+#17 0.268 │   ├── ld-musl-x86_64.so.1
+#17 0.268 │   ├── libc.musl-x86_64.so.1 -> ld-musl-x86_64.so.1
+#17 0.268 │   ├── modules-load.d
+#17 0.268 │   └── sysctl.d
+#17 0.268 ├── media
+#17 0.268 │   ├── cdrom
+#17 0.268 │   ├── floppy
+#17 0.268 │   └── usb
+#17 0.268 ├── mnt
+#17 0.268 ├── opt
+#17 0.268 ├── proc
+#17 0.268 │   ├── 1
+#17 0.268 │   │   ├── arch_status
+#17 0.268 │   │   ├── attr
+#17 0.268 │   │   │   ├── current
+#17 0.268 │   │   │   ├── exec
+#17 0.268 │   │   │   ├── fscreate
+#17 0.268 │   │   │   ├── keycreate
+#17 0.268 │   │   │   ├── prev
+#17 0.268 │   │   │   └── sockcreate
+#17 0.268 │   │   ├── autogroup
+#17 0.268 │   │   ├── auxv
+#17 0.268 │   │   ├── cgroup
+#17 0.268 │   │   ├── clear_refs
+#17 0.268 │   │   ├── cmdline
+#17 0.268 │   │   ├── comm
+#17 0.268 │   │   ├── coredump_filter
+#17 0.268 │   │   ├── cpuset
+#17 0.268 │   │   ├── cwd -> /proc/1
+#17 0.268 │   │   ├── environ
+#17 0.268 │   │   ├── exe -> /bin/busybox
+#17 0.268 │   │   ├── fd
+#17 0.268 │   │   │   ├── 0 -> pipe:[32013]
+#17 0.268 │   │   │   ├── 1 -> pipe:[32014]
+#17 0.268 │   │   │   ├── 2 -> pipe:[32015]
+#17 0.268 │   │   │   └── 3
+#17 0.268 │   │   ├── fdinfo
+#17 0.268 │   │   │   ├── 0
+#17 0.268 │   │   │   ├── 1
+#17 0.268 │   │   │   ├── 2
+#17 0.268 │   │   │   └── 3
+#17 0.268 │   │   ├── gid_map
+#17 0.268 │   │   ├── io
+#17 0.268 │   │   ├── ksm_merging_pages
+#17 0.268 │   │   ├── ksm_stat
+#17 0.268 │   │   ├── limits
+#17 0.268 │   │   ├── loginuid
+#17 0.268 │   │   ├── map_files
+#17 0.268 │   │   │   ├── 55a79cabd000-55a79cac3000 -> /bin/busybox
+#17 0.268 │   │   │   ├── 55a79cac3000-55a79cb5c000 -> /bin/busybox
+#17 0.268 │   │   │   ├── 55a79cb5c000-55a79cb7e000 -> /bin/busybox
+#17 0.268 │   │   │   ├── 55a79cb7e000-55a79cb82000 -> /bin/busybox
+#17 0.268 │   │   │   ├── 55a79cb82000-55a79cb83000 -> /bin/busybox
+#17 0.268 │   │   │   ├── 7feac386a000-7feac387e000 -> /lib/ld-musl-x86_64.so.1
+#17 0.268 │   │   │   ├── 7feac387e000-7feac38d6000 -> /lib/ld-musl-x86_64.so.1
+#17 0.268 │   │   │   ├── 7feac38d6000-7feac390c000 -> /lib/ld-musl-x86_64.so.1
+#17 0.268 │   │   │   ├── 7feac390c000-7feac390d000 -> /lib/ld-musl-x86_64.so.1
+#17 0.268 │   │   │   └── 7feac390d000-7feac390e000 -> /lib/ld-musl-x86_64.so.1
+#17 0.268 │   │   ├── maps
+#17 0.268 │   │   ├── mem
+#17 0.268 │   │   ├── mountinfo
+#17 0.268 │   │   ├── mounts
+#17 0.268 │   │   ├── mountstats
+#17 0.268 │   │   ├── net
+#17 0.268 │   │   │   ├── anycast6
+#17 0.268 │   │   │   ├── arp
+#17 0.268 │   │   │   ├── arp_tables_matches
+#17 0.268 │   │   │   ├── arp_tables_names
+#17 0.268 │   │   │   ├── arp_tables_targets
+#17 0.268 │   │   │   ├── bonding
+#17 0.268 │   │   │   ├── dev
+#17 0.268 │   │   │   ├── dev_mcast
+#17 0.268 │   │   │   ├── dev_snmp6
+#17 0.268 │   │   │   │   ├── erspan0
+#17 0.268 │   │   │   │   ├── eth0
+#17 0.268 │   │   │   │   ├── gretap0
+#17 0.268 │   │   │   │   ├── ip6_vti0
+#17 0.268 │   │   │   │   ├── ip6gre0
+#17 0.268 │   │   │   │   ├── ip6tnl0
+#17 0.268 │   │   │   │   ├── lo
+#17 0.268 │   │   │   │   └── sit0
+#17 0.268 │   │   │   ├── fib_trie
+#17 0.268 │   │   │   ├── fib_triestat
+#17 0.268 │   │   │   ├── icmp
+#17 0.268 │   │   │   ├── icmp6
+#17 0.268 │   │   │   ├── if_inet6
+#17 0.268 │   │   │   ├── igmp
+#17 0.268 │   │   │   ├── igmp6
+#17 0.268 │   │   │   ├── ip6_flowlabel
+#17 0.268 │   │   │   ├── ip6_tables_matches
+#17 0.268 │   │   │   ├── ip6_tables_names
+#17 0.268 │   │   │   ├── ip6_tables_targets
+#17 0.268 │   │   │   ├── ip6t_hashlimit
+#17 0.268 │   │   │   ├── ip_mr_cache
+#17 0.268 │   │   │   ├── ip_mr_vif
+#17 0.268 │   │   │   ├── ip_tables_matches
+#17 0.268 │   │   │   ├── ip_tables_names
+#17 0.268 │   │   │   ├── ip_tables_targets
+#17 0.268 │   │   │   ├── ip_vs
+#17 0.268 │   │   │   ├── ip_vs_app
+#17 0.268 │   │   │   ├── ip_vs_conn
+#17 0.268 │   │   │   ├── ip_vs_conn_sync
+#17 0.268 │   │   │   ├── ip_vs_stats
+#17 0.268 │   │   │   ├── ip_vs_stats_percpu
+#17 0.268 │   │   │   ├── ipt_hashlimit
+#17 0.268 │   │   │   ├── ipv6_route
+#17 0.268 │   │   │   ├── mcfilter
+#17 0.268 │   │   │   ├── mcfilter6
+#17 0.268 │   │   │   ├── netfilter
+#17 0.268 │   │   │   │   ├── nf_log
+#17 0.268 │   │   │   │   ├── nfnetlink_log
+#17 0.268 │   │   │   │   └── nfnetlink_queue
+#17 0.268 │   │   │   ├── netlink
+#17 0.268 │   │   │   ├── netstat
+#17 0.268 │   │   │   ├── nf_conntrack
+#17 0.268 │   │   │   ├── nf_conntrack_expect
+#17 0.268 │   │   │   ├── nfsfs
+#17 0.268 │   │   │   │   ├── servers
+#17 0.268 │   │   │   │   └── volumes
+#17 0.268 │   │   │   ├── packet
+#17 0.268 │   │   │   ├── pfkey
+#17 0.268 │   │   │   ├── pppoe
+#17 0.268 │   │   │   ├── pppol2tp
+#17 0.268 │   │   │   ├── protocols
+#17 0.268 │   │   │   ├── psched
+#17 0.268 │   │   │   ├── ptype
+#17 0.268 │   │   │   ├── raw
+#17 0.268 │   │   │   ├── raw6
+#17 0.268 │   │   │   ├── route
+#17 0.268 │   │   │   ├── rpc
+#17 0.268 │   │   │   │   ├── auth.rpcsec.context
+#17 0.268 │   │   │   │   │   ├── channel
+#17 0.268 │   │   │   │   │   └── flush
+#17 0.268 │   │   │   │   ├── auth.rpcsec.init
+#17 0.268 │   │   │   │   │   ├── channel
+#17 0.268 │   │   │   │   │   └── flush
+#17 0.268 │   │   │   │   ├── auth.unix.gid
+#17 0.268 │   │   │   │   │   ├── channel
+#17 0.268 │   │   │   │   │   ├── content
+#17 0.268 │   │   │   │   │   └── flush
+#17 0.268 │   │   │   │   ├── auth.unix.ip
+#17 0.268 │   │   │   │   │   ├── channel
+#17 0.268 │   │   │   │   │   ├── content
+#17 0.268 │   │   │   │   │   └── flush
+#17 0.268 │   │   │   │   ├── gss_krb5_enctypes
+#17 0.268 │   │   │   │   ├── nfs
+#17 0.268 │   │   │   │   ├── nfs4.idtoname
+#17 0.268 │   │   │   │   │   ├── channel
+#17 0.268 │   │   │   │   │   ├── content
+#17 0.268 │   │   │   │   │   └── flush
+#17 0.268 │   │   │   │   ├── nfs4.nametoid
+#17 0.268 │   │   │   │   │   ├── channel
+#17 0.268 │   │   │   │   │   ├── content
+#17 0.268 │   │   │   │   │   └── flush
+#17 0.268 │   │   │   │   ├── nfsd
+#17 0.268 │   │   │   │   ├── nfsd.export
+#17 0.268 │   │   │   │   │   ├── channel
+#17 0.268 │   │   │   │   │   ├── content
+#17 0.268 │   │   │   │   │   └── flush
+#17 0.268 │   │   │   │   ├── nfsd.fh
+#17 0.268 │   │   │   │   │   ├── channel
+#17 0.268 │   │   │   │   │   ├── content
+#17 0.268 │   │   │   │   │   └── flush
+#17 0.268 │   │   │   │   └── use-gss-proxy
+#17 0.268 │   │   │   ├── rt6_stats
+#17 0.268 │   │   │   ├── rt_acct
+#17 0.268 │   │   │   ├── rt_cache
+#17 0.268 │   │   │   ├── sctp
+#17 0.268 │   │   │   │   ├── assocs
+#17 0.268 │   │   │   │   ├── eps
+#17 0.268 │   │   │   │   ├── remaddr
+#17 0.268 │   │   │   │   └── snmp
+#17 0.268 │   │   │   ├── snmp
+#17 0.268 │   │   │   ├── snmp6
+#17 0.268 │   │   │   ├── sockstat
+#17 0.268 │   │   │   ├── sockstat6
+#17 0.268 │   │   │   ├── softnet_stat
+#17 0.268 │   │   │   ├── stat
+#17 0.268 │   │   │   │   ├── nf_conntrack
+#17 0.268 │   │   │   │   ├── rt_cache
+#17 0.268 │   │   │   │   └── synproxy
+#17 0.268 │   │   │   ├── tcp
+#17 0.268 │   │   │   ├── tcp6
+#17 0.268 │   │   │   ├── udp
+#17 0.268 │   │   │   ├── udp6
+#17 0.268 │   │   │   ├── udplite
+#17 0.268 │   │   │   ├── udplite6
+#17 0.268 │   │   │   ├── unix
+#17 0.268 │   │   │   ├── vlan
+#17 0.268 │   │   │   │   └── config
+#17 0.268 │   │   │   ├── xfrm_stat
+#17 0.268 │   │   │   └── xt_recent
+#17 0.268 │   │   ├── ns
+#17 0.268 │   │   │   ├── cgroup -> cgroup:[4026532532]
+#17 0.268 │   │   │   ├── ipc -> ipc:[4026532530]
+#17 0.268 │   │   │   ├── mnt -> mnt:[4026532528]
+#17 0.268 │   │   │   ├── net -> net:[4026532533]
+#17 0.268 │   │   │   ├── pid -> pid:[4026532531]
+#17 0.268 │   │   │   ├── pid_for_children -> pid:[4026532531]
+#17 0.268 │   │   │   ├── time -> time:[4026531834]
+#17 0.268 │   │   │   ├── time_for_children -> time:[4026531834]
+#17 0.268 │   │   │   ├── user -> user:[4026531837]
+#17 0.268 │   │   │   └── uts -> uts:[4026532529]
+#17 0.268 │   │   ├── oom_adj
+#17 0.268 │   │   ├── oom_score
+#17 0.268 │   │   ├── oom_score_adj
+#17 0.268 │   │   ├── pagemap
+#17 0.268 │   │   ├── personality
+#17 0.268 │   │   ├── projid_map
+#17 0.268 │   │   ├── root -> /
+#17 0.268 │   │   ├── schedstat
+#17 0.268 │   │   ├── sessionid
+#17 0.268 │   │   ├── setgroups
+#17 0.268 │   │   ├── smaps
+#17 0.268 │   │   ├── smaps_rollup
+#17 0.268 │   │   ├── stack
+#17 0.268 │   │   ├── stat
+#17 0.268 │   │   ├── statm
+#17 0.268 │   │   ├── status
+#17 0.268 │   │   ├── syscall
+#17 0.268 │   │   ├── task
+#17 0.268 │   │   │   └── 1
+#17 0.268 │   │   │       ├── arch_status
+#17 0.268 │   │   │       ├── attr
+#17 0.268 │   │   │       │   ├── current
+#17 0.268 │   │   │       │   ├── exec
+#17 0.268 │   │   │       │   ├── fscreate
+#17 0.268 │   │   │       │   ├── keycreate
+#17 0.268 │   │   │       │   ├── prev
+#17 0.268 │   │   │       │   └── sockcreate
+#17 0.268 │   │   │       ├── auxv
+#17 0.269 │   │   │       ├── cgroup
+#17 0.269 │   │   │       ├── children
+#17 0.269 │   │   │       ├── clear_refs
+#17 0.269 │   │   │       ├── cmdline
+#17 0.269 │   │   │       ├── comm
+#17 0.269 │   │   │       ├── cpuset
+#17 0.269 │   │   │       ├── cwd -> /proc/1/task/1
+#17 0.269 │   │   │       ├── environ
+#17 0.269 │   │   │       ├── exe -> /bin/busybox
+#17 0.269 │   │   │       ├── fd
+#17 0.269 │   │   │       │   ├── 0 -> pipe:[32013]
+#17 0.269 │   │   │       │   ├── 1 -> pipe:[32014]
+#17 0.269 │   │   │       │   ├── 2 -> pipe:[32015]
+#17 0.269 │   │   │       │   └── 3
+#17 0.269 │   │   │       ├── fdinfo
+#17 0.269 │   │   │       │   ├── 0
+#17 0.269 │   │   │       │   ├── 1
+#17 0.269 │   │   │       │   ├── 2
+#17 0.269 │   │   │       │   └── 3
+#17 0.269 │   │   │       ├── gid_map
+#17 0.269 │   │   │       ├── io
+#17 0.269 │   │   │       ├── ksm_merging_pages
+#17 0.269 │   │   │       ├── ksm_stat
+#17 0.269 │   │   │       ├── limits
+#17 0.269 │   │   │       ├── loginuid
+#17 0.269 │   │   │       ├── maps
+#17 0.269 │   │   │       ├── mem
+#17 0.269 │   │   │       ├── mountinfo
+#17 0.269 │   │   │       ├── mounts
+#17 0.269 │   │   │       ├── net
+#17 0.269 │   │   │       │   ├── anycast6
+#17 0.269 │   │   │       │   ├── arp
+#17 0.269 │   │   │       │   ├── arp_tables_matches
+#17 0.269 │   │   │       │   ├── arp_tables_names
+#17 0.269 │   │   │       │   ├── arp_tables_targets
+#17 0.269 │   │   │       │   ├── bonding
+#17 0.269 │   │   │       │   ├── dev
+#17 0.269 │   │   │       │   ├── dev_mcast
+#17 0.269 │   │   │       │   ├── dev_snmp6
+#17 0.269 │   │   │       │   │   ├── erspan0
+#17 0.269 │   │   │       │   │   ├── eth0
+#17 0.269 │   │   │       │   │   ├── gretap0
+#17 0.269 │   │   │       │   │   ├── ip6_vti0
+#17 0.269 │   │   │       │   │   ├── ip6gre0
+#17 0.269 │   │   │       │   │   ├── ip6tnl0
+#17 0.269 │   │   │       │   │   ├── lo
+#17 0.270 │   │   │       │   │   └── sit0
+#17 0.270 │   │   │       │   ├── fib_trie
+#17 0.270 │   │   │       │   ├── fib_triestat
+#17 0.270 │   │   │       │   ├── icmp
+#17 0.270 │   │   │       │   ├── icmp6
+#17 0.270 │   │   │       │   ├── if_inet6
+#17 0.270 │   │   │       │   ├── igmp
+#17 0.270 │   │   │       │   ├── igmp6
+#17 0.270 │   │   │       │   ├── ip6_flowlabel
+#17 0.270 │   │   │       │   ├── ip6_tables_matches
+#17 0.270 │   │   │       │   ├── ip6_tables_names
+#17 0.270 │   │   │       │   ├── ip6_tables_targets
+#17 0.270 │   │   │       │   ├── ip6t_hashlimit
+#17 0.270 │   │   │       │   ├── ip_mr_cache
+#17 0.270 │   │   │       │   ├── ip_mr_vif
+#17 0.270 │   │   │       │   ├── ip_tables_matches
+#17 0.270 │   │   │       │   ├── ip_tables_names
+#17 0.270 │   │   │       │   ├── ip_tables_targets
+#17 0.270 │   │   │       │   ├── ip_vs
+#17 0.270 │   │   │       │   ├── ip_vs_app
+#17 0.270 │   │   │       │   ├── ip_vs_conn
+#17 0.270 │   │   │       │   ├── ip_vs_conn_sync
+#17 0.270 │   │   │       │   ├── ip_vs_stats
+#17 0.270 │   │   │       │   ├── ip_vs_stats_percpu
+#17 0.270 │   │   │       │   ├── ipt_hashlimit
+#17 0.270 │   │   │       │   ├── ipv6_route
+#17 0.270 │   │   │       │   ├── mcfilter
+#17 0.270 │   │   │       │   ├── mcfilter6
+#17 0.270 │   │   │       │   ├── netfilter
+#17 0.270 │   │   │       │   │   ├── nf_log
+#17 0.270 │   │   │       │   │   ├── nfnetlink_log
+#17 0.270 │   │   │       │   │   └── nfnetlink_queue
+#17 0.270 │   │   │       │   ├── netlink
+#17 0.270 │   │   │       │   ├── netstat
+#17 0.270 │   │   │       │   ├── nf_conntrack
+#17 0.270 │   │   │       │   ├── nf_conntrack_expect
+#17 0.270 │   │   │       │   ├── nfsfs
+#17 0.270 │   │   │       │   │   ├── servers
+#17 0.270 │   │   │       │   │   └── volumes
+#17 0.270 │   │   │       │   ├── packet
+#17 0.270 │   │   │       │   ├── pfkey
+#17 0.270 │   │   │       │   ├── pppoe
+#17 0.271 │   │   │       │   ├── pppol2tp
+#17 0.271 │   │   │       │   ├── protocols
+#17 0.271 │   │   │       │   ├── psched
+#17 0.271 │   │   │       │   ├── ptype
+#17 0.271 │   │   │       │   ├── raw
+#17 0.271 │   │   │       │   ├── raw6
+#17 0.271 │   │   │       │   ├── route
+#17 0.271 │   │   │       │   ├── rpc
+#17 0.271 │   │   │       │   │   ├── auth.rpcsec.context
+#17 0.271 │   │   │       │   │   │   ├── channel
+#17 0.271 │   │   │       │   │   │   └── flush
+#17 0.271 │   │   │       │   │   ├── auth.rpcsec.init
+#17 0.271 │   │   │       │   │   │   ├── channel
+#17 0.271 │   │   │       │   │   │   └── flush
+#17 0.271 │   │   │       │   │   ├── auth.unix.gid
+#17 0.271 │   │   │       │   │   │   ├── channel
+#17 0.271 │   │   │       │   │   │   ├── content
+#17 0.271 │   │   │       │   │   │   └── flush
+#17 0.271 │   │   │       │   │   ├── auth.unix.ip
+#17 0.271 │   │   │       │   │   │   ├── channel
+#17 0.271 │   │   │       │   │   │   ├── content
+#17 0.271 │   │   │       │   │   │   └── flush
+#17 0.271 │   │   │       │   │   ├── gss_krb5_enctypes
+#17 0.271 │   │   │       │   │   ├── nfs
+#17 0.271 │   │   │       │   │   ├── nfs4.idtoname
+#17 0.271 │   │   │       │   │   │   ├── channel
+#17 0.271 │   │   │       │   │   │   ├── content
+#17 0.271 │   │   │       │   │   │   └── flush
+#17 0.271 │   │   │       │   │   ├── nfs4.nametoid
+#17 0.271 │   │   │       │   │   │   ├── channel
+#17 0.271 │   │   │       │   │   │   ├── content
+#17 0.271 │   │   │       │   │   │   └── flush
+#17 0.271 │   │   │       │   │   ├── nfsd
+#17 0.271 │   │   │       │   │   ├── nfsd.export
+#17 0.271 │   │   │       │   │   │   ├── channel
+#17 0.271 │   │   │       │   │   │   ├── content
+#17 0.271 │   │   │       │   │   │   └── flush
+#17 0.271 │   │   │       │   │   ├── nfsd.fh
+#17 0.271 │   │   │       │   │   │   ├── channel
+#17 0.271 │   │   │       │   │   │   ├── content
+#17 0.271 │   │   │       │   │   │   └── flush
+#17 0.271 │   │   │       │   │   └── use-gss-proxy
+#17 0.271 │   │   │       │   ├── rt6_stats
+#17 0.271 │   │   │       │   ├── rt_acct
+#17 0.271 │   │   │       │   ├── rt_cache
+#17 0.271 │   │   │       │   ├── sctp
+#17 0.271 │   │   │       │   │   ├── assocs
+#17 0.271 │   │   │       │   │   ├── eps
+#17 0.271 │   │   │       │   │   ├── remaddr
+#17 0.271 │   │   │       │   │   └── snmp
+#17 0.271 │   │   │       │   ├── snmp
+#17 0.271 │   │   │       │   ├── snmp6
+#17 0.271 │   │   │       │   ├── sockstat
+#17 0.271 │   │   │       │   ├── sockstat6
+#17 0.271 │   │   │       │   ├── softnet_stat
+#17 0.271 │   │   │       │   ├── stat
+#17 0.271 │   │   │       │   │   ├── nf_conntrack
+#17 0.271 │   │   │       │   │   ├── rt_cache
+#17 0.271 │   │   │       │   │   └── synproxy
+#17 0.271 │   │   │       │   ├── tcp
+#17 0.272 │   │   │       │   ├── tcp6
+#17 0.272 │   │   │       │   ├── udp
+#17 0.272 │   │   │       │   ├── udp6
+#17 0.272 │   │   │       │   ├── udplite
+#17 0.272 │   │   │       │   ├── udplite6
+#17 0.272 │   │   │       │   ├── unix
+#17 0.272 │   │   │       │   ├── vlan
+#17 0.272 │   │   │       │   │   └── config
+#17 0.272 │   │   │       │   ├── xfrm_stat
+#17 0.272 │   │   │       │   └── xt_recent
+#17 0.272 │   │   │       ├── ns
+#17 0.272 │   │   │       │   ├── cgroup -> cgroup:[4026532532]
+#17 0.272 │   │   │       │   ├── ipc -> ipc:[4026532530]
+#17 0.272 │   │   │       │   ├── mnt -> mnt:[4026532528]
+#17 0.272 │   │   │       │   ├── net -> net:[4026532533]
+#17 0.272 │   │   │       │   ├── pid -> pid:[4026532531]
+#17 0.272 │   │   │       │   ├── pid_for_children -> pid:[4026532531]
+#17 0.272 │   │   │       │   ├── time -> time:[4026531834]
+#17 0.272 │   │   │       │   ├── time_for_children -> time:[4026531834]
+#17 0.272 │   │   │       │   ├── user -> user:[4026531837]
+#17 0.272 │   │   │       │   └── uts -> uts:[4026532529]
+#17 0.272 │   │   │       ├── oom_adj
+#17 0.272 │   │   │       ├── oom_score
+#17 0.272 │   │   │       ├── oom_score_adj
+#17 0.272 │   │   │       ├── pagemap
+#17 0.272 │   │   │       ├── personality
+#17 0.272 │   │   │       ├── projid_map
+#17 0.272 │   │   │       ├── root -> /
+#17 0.272 │   │   │       ├── schedstat
+#17 0.272 │   │   │       ├── sessionid
+#17 0.272 │   │   │       ├── setgroups
+#17 0.272 │   │   │       ├── smaps
+#17 0.272 │   │   │       ├── smaps_rollup
+#17 0.272 │   │   │       ├── stack
+#17 0.272 │   │   │       ├── stat
+#17 0.272 │   │   │       ├── statm
+#17 0.272 │   │   │       ├── status
+#17 0.272 │   │   │       ├── syscall
+#17 0.272 │   │   │       ├── uid_map
+#17 0.272 │   │   │       └── wchan
+#17 0.272 │   │   ├── timens_offsets
+#17 0.272 │   │   ├── timers
+#17 0.272 │   │   ├── timerslack_ns
+#17 0.272 │   │   ├── uid_map
+#17 0.274 │   │   └── wchan
+#17 0.274 │   ├── acpi
+#17 0.274 │   ├── buddyinfo
+#17 0.274 │   ├── bus
+#17 0.274 │   │   ├── input
+#17 0.274 │   │   │   ├── devices
+#17 0.274 │   │   │   └── handlers
+#17 0.274 │   │   └── pci
+#17 0.274 │   │       ├── 00
+#17 0.274 │   │       │   ├── 00.0
+#17 0.274 │   │       │   ├── 01.0
+#17 0.274 │   │       │   ├── 02.0
+#17 0.274 │   │       │   ├── 03.0
+#17 0.274 │   │       │   ├── 04.0
+#17 0.274 │   │       │   ├── 1f.0
+#17 0.274 │   │       │   ├── 1f.2
+#17 0.274 │   │       │   └── 1f.3
+#17 0.274 │   │       └── devices
+#17 0.274 │   ├── cgroups
+#17 0.274 │   ├── cmdline
+#17 0.274 │   ├── config.gz
+#17 0.274 │   ├── consoles
+#17 0.274 │   ├── cpuinfo
+#17 0.274 │   ├── crypto
+#17 0.274 │   ├── devices
+#17 0.274 │   ├── diskstats
+#17 0.274 │   ├── dma
+#17 0.274 │   ├── docker
+#17 0.274 │   │   ├── attrib
+#17 0.274 │   │   ├── create
+#17 0.274 │   │   ├── dinval
+#17 0.274 │   │   ├── modify
+#17 0.274 │   │   └── unlink
+#17 0.274 │   ├── driver
+#17 0.274 │   │   ├── nvram
+#17 0.274 │   │   └── rtc
+#17 0.275 │   ├── execdomains
+#17 0.275 │   ├── filesystems
+#17 0.275 │   ├── fs
+#17 0.275 │   │   ├── cifs
+#17 0.275 │   │   │   ├── DebugData
+#17 0.275 │   │   │   ├── LinuxExtensionsEnabled
+#17 0.275 │   │   │   ├── LookupCacheEnabled
+#17 0.275 │   │   │   ├── SecurityFlags
+#17 0.275 │   │   │   ├── Stats
+#17 0.275 │   │   │   ├── cifsFYI
+#17 0.275 │   │   │   ├── dfscache
+#17 0.275 │   │   │   ├── mount_params
+#17 0.275 │   │   │   ├── open_files
+#17 0.275 │   │   │   └── traceSMB
+#17 0.275 │   │   ├── ext4
+#17 0.275 │   │   │   └── vda1
+#17 0.275 │   │   │       ├── es_shrinker_info
+#17 0.275 │   │   │       ├── fc_info
+#17 0.275 │   │   │       ├── mb_groups
+#17 0.275 │   │   │       ├── mb_stats
+#17 0.275 │   │   │       ├── mb_structs_summary
+#17 0.275 │   │   │       └── options
+#17 0.275 │   │   ├── f2fs
+#17 0.275 │   │   ├── fscache -> netfs
+#17 0.275 │   │   ├── jbd2
+#17 0.275 │   │   │   └── vda1-8
+#17 0.275 │   │   │       └── info
+#17 0.275 │   │   ├── lockd
+#17 0.275 │   │   │   └── nlm_end_grace
+#17 0.277 │   │   ├── netfs
+#17 0.277 │   │   │   ├── caches
+#17 0.277 │   │   │   ├── cookies
+#17 0.277 │   │   │   ├── requests
+#17 0.277 │   │   │   ├── stats
+#17 0.277 │   │   │   └── volumes
+#17 0.277 │   │   ├── nfs
+#17 0.277 │   │   │   └── exports
+#17 0.277 │   │   ├── nfsd
+#17 0.277 │   │   ├── nfsfs
+#17 0.277 │   │   │   ├── servers -> ../../net/nfsfs/servers
+#17 0.277 │   │   │   └── volumes -> ../../net/nfsfs/volumes
+#17 0.277 │   │   ├── ntfs3
+#17 0.277 │   │   └── xfs
+#17 0.277 │   │       └── stat -> /sys/fs/xfs/stats/stats
+#17 0.277 │   ├── interrupts
+#17 0.277 │   ├── iomem
+#17 0.277 │   ├── ioports
+#17 0.277 │   ├── irq
+#17 0.277 │   │   ├── 0
+#17 0.277 │   │   │   ├── affinity_hint
+#17 0.277 │   │   │   ├── effective_affinity
+#17 0.277 │   │   │   ├── effective_affinity_list
+#17 0.277 │   │   │   ├── node
+#17 0.277 │   │   │   ├── smp_affinity
+#17 0.277 │   │   │   ├── smp_affinity_list
+#17 0.277 │   │   │   └── spurious
+#17 0.277 │   │   ├── 1
+#17 0.277 │   │   │   ├── affinity_hint
+#17 0.277 │   │   │   ├── effective_affinity
+#17 0.277 │   │   │   ├── effective_affinity_list
+#17 0.277 │   │   │   ├── i8042
+#17 0.277 │   │   │   ├── node
+#17 0.277 │   │   │   ├── smp_affinity
+#17 0.277 │   │   │   ├── smp_affinity_list
+#17 0.277 │   │   │   └── spurious
+#17 0.277 │   │   ├── 10
+#17 0.277 │   │   │   ├── affinity_hint
+#17 0.277 │   │   │   ├── effective_affinity
+#17 0.277 │   │   │   ├── effective_affinity_list
+#17 0.277 │   │   │   ├── node
+#17 0.277 │   │   │   ├── smp_affinity
+#17 0.277 │   │   │   ├── smp_affinity_list
+#17 0.277 │   │   │   └── spurious
+#17 0.277 │   │   ├── 11
+#17 0.277 │   │   │   ├── affinity_hint
+#17 0.277 │   │   │   ├── effective_affinity
+#17 0.277 │   │   │   ├── effective_affinity_list
+#17 0.277 │   │   │   ├── node
+#17 0.277 │   │   │   ├── smp_affinity
+#17 0.277 │   │   │   ├── smp_affinity_list
+#17 0.277 │   │   │   └── spurious
+#17 0.277 │   │   ├── 12
+#17 0.277 │   │   │   ├── affinity_hint
+#17 0.277 │   │   │   ├── effective_affinity
+#17 0.277 │   │   │   ├── effective_affinity_list
+#17 0.277 │   │   │   ├── i8042
+#17 0.277 │   │   │   ├── node
+#17 0.277 │   │   │   ├── smp_affinity
+#17 0.277 │   │   │   ├── smp_affinity_list
+#17 0.277 │   │   │   └── spurious
+#17 0.277 │   │   ├── 13
+#17 0.277 │   │   │   ├── affinity_hint
+#17 0.277 │   │   │   ├── effective_affinity
+#17 0.277 │   │   │   ├── effective_affinity_list
+#17 0.277 │   │   │   ├── node
+#17 0.277 │   │   │   ├── smp_affinity
+#17 0.277 │   │   │   ├── smp_affinity_list
+#17 0.277 │   │   │   └── spurious
+#17 0.277 │   │   ├── 14
+#17 0.277 │   │   │   ├── affinity_hint
+#17 0.277 │   │   │   ├── effective_affinity
+#17 0.277 │   │   │   ├── effective_affinity_list
+#17 0.277 │   │   │   ├── node
+#17 0.277 │   │   │   ├── smp_affinity
+#17 0.277 │   │   │   ├── smp_affinity_list
+#17 0.277 │   │   │   └── spurious
+#17 0.277 │   │   ├── 15
+#17 0.277 │   │   │   ├── affinity_hint
+#17 0.277 │   │   │   ├── effective_affinity
+#17 0.277 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   └── spurious
+#17 0.278 │   │   ├── 2
+#17 0.278 │   │   │   ├── affinity_hint
+#17 0.278 │   │   │   ├── effective_affinity
+#17 0.278 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   └── spurious
+#17 0.278 │   │   ├── 24
+#17 0.278 │   │   │   ├── affinity_hint
+#17 0.278 │   │   │   ├── effective_affinity
+#17 0.278 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   ├── spurious
+#17 0.278 │   │   │   └── virtio3-config
+#17 0.278 │   │   ├── 25
+#17 0.278 │   │   │   ├── affinity_hint
+#17 0.278 │   │   │   ├── effective_affinity
+#17 0.278 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   ├── spurious
+#17 0.278 │   │   │   └── virtio3-hiprio
+#17 0.278 │   │   ├── 26
+#17 0.278 │   │   │   ├── affinity_hint
+#17 0.278 │   │   │   ├── effective_affinity
+#17 0.278 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   ├── spurious
+#17 0.278 │   │   │   └── virtio3-requests.0
+#17 0.278 │   │   ├── 27
+#17 0.278 │   │   │   ├── affinity_hint
+#17 0.278 │   │   │   ├── effective_affinity
+#17 0.278 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   ├── spurious
+#17 0.278 │   │   │   └── virtio1-config
+#17 0.278 │   │   ├── 28
+#17 0.278 │   │   │   ├── affinity_hint
+#17 0.278 │   │   │   ├── effective_affinity
+#17 0.278 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   ├── spurious
+#17 0.278 │   │   │   └── virtio1-req.0
+#17 0.278 │   │   ├── 29
+#17 0.278 │   │   │   ├── affinity_hint
+#17 0.278 │   │   │   ├── effective_affinity
+#17 0.278 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   ├── spurious
+#17 0.278 │   │   │   └── virtio1-req.1
+#17 0.278 │   │   ├── 3
+#17 0.278 │   │   │   ├── affinity_hint
+#17 0.278 │   │   │   ├── effective_affinity
+#17 0.278 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   └── spurious
+#17 0.278 │   │   ├── 30
+#17 0.278 │   │   │   ├── affinity_hint
+#17 0.278 │   │   │   ├── effective_affinity
+#17 0.278 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   ├── spurious
+#17 0.278 │   │   │   └── virtio1-req.2
+#17 0.278 │   │   ├── 31
+#17 0.278 │   │   │   ├── affinity_hint
+#17 0.278 │   │   │   ├── effective_affinity
+#17 0.278 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   ├── spurious
+#17 0.278 │   │   │   └── virtio1-req.3
+#17 0.278 │   │   ├── 32
+#17 0.278 │   │   │   ├── affinity_hint
+#17 0.278 │   │   │   ├── effective_affinity
+#17 0.278 │   │   │   ├── effective_affinity_list
+#17 0.278 │   │   │   ├── node
+#17 0.278 │   │   │   ├── smp_affinity
+#17 0.278 │   │   │   ├── smp_affinity_list
+#17 0.278 │   │   │   ├── spurious
+#17 0.278 │   │   │   └── virtio2-config
+#17 0.278 │   │   ├── 33
+#17 0.279 │   │   │   ├── affinity_hint
+#17 0.279 │   │   │   ├── effective_affinity
+#17 0.279 │   │   │   ├── effective_affinity_list
+#17 0.279 │   │   │   ├── node
+#17 0.279 │   │   │   ├── smp_affinity
+#17 0.279 │   │   │   ├── smp_affinity_list
+#17 0.279 │   │   │   ├── spurious
+#17 0.279 │   │   │   └── virtio2-req.0
+#17 0.279 │   │   ├── 34
+#17 0.279 │   │   │   ├── affinity_hint
+#17 0.279 │   │   │   ├── effective_affinity
+#17 0.279 │   │   │   ├── effective_affinity_list
+#17 0.279 │   │   │   ├── node
+#17 0.279 │   │   │   ├── smp_affinity
+#17 0.279 │   │   │   ├── smp_affinity_list
+#17 0.279 │   │   │   ├── spurious
+#17 0.279 │   │   │   └── virtio2-req.1
+#17 0.279 │   │   ├── 35
+#17 0.279 │   │   │   ├── affinity_hint
+#17 0.279 │   │   │   ├── effective_affinity
+#17 0.279 │   │   │   ├── effective_affinity_list
+#17 0.279 │   │   │   ├── node
+#17 0.279 │   │   │   ├── smp_affinity
+#17 0.279 │   │   │   ├── smp_affinity_list
+#17 0.279 │   │   │   ├── spurious
+#17 0.279 │   │   │   └── virtio2-req.2
+#17 0.279 │   │   ├── 36
+#17 0.279 │   │   │   ├── affinity_hint
+#17 0.279 │   │   │   ├── effective_affinity
+#17 0.279 │   │   │   ├── effective_affinity_list
+#17 0.279 │   │   │   ├── node
+#17 0.279 │   │   │   ├── smp_affinity
+#17 0.279 │   │   │   ├── smp_affinity_list
+#17 0.279 │   │   │   ├── spurious
+#17 0.279 │   │   │   └── virtio2-req.3
+#17 0.279 │   │   ├── 37
+#17 0.279 │   │   │   ├── affinity_hint
+#17 0.279 │   │   │   ├── effective_affinity
+#17 0.279 │   │   │   ├── effective_affinity_list
+#17 0.279 │   │   │   ├── node
+#17 0.279 │   │   │   ├── smp_affinity
+#17 0.279 │   │   │   ├── smp_affinity_list
+#17 0.279 │   │   │   ├── spurious
+#17 0.279 │   │   │   └── virtio0-config
+#17 0.279 │   │   ├── 38
+#17 0.279 │   │   │   ├── affinity_hint
+#17 0.279 │   │   │   ├── effective_affinity
+#17 0.279 │   │   │   ├── effective_affinity_list
+#17 0.279 │   │   │   ├── node
+#17 0.279 │   │   │   ├── smp_affinity
+#17 0.279 │   │   │   ├── smp_affinity_list
+#17 0.280 │   │   │   ├── spurious
+#17 0.280 │   │   │   └── virtio0-input.0
+#17 0.280 │   │   ├── 39
+#17 0.280 │   │   │   ├── affinity_hint
+#17 0.280 │   │   │   ├── effective_affinity
+#17 0.280 │   │   │   ├── effective_affinity_list
+#17 0.280 │   │   │   ├── node
+#17 0.280 │   │   │   ├── smp_affinity
+#17 0.280 │   │   │   ├── smp_affinity_list
+#17 0.280 │   │   │   ├── spurious
+#17 0.280 │   │   │   └── virtio0-output.0
+#17 0.280 │   │   ├── 4
+#17 0.280 │   │   │   ├── affinity_hint
+#17 0.280 │   │   │   ├── effective_affinity
+#17 0.280 │   │   │   ├── effective_affinity_list
+#17 0.280 │   │   │   ├── node
+#17 0.280 │   │   │   ├── smp_affinity
+#17 0.280 │   │   │   ├── smp_affinity_list
+#17 0.280 │   │   │   ├── spurious
+#17 0.280 │   │   │   └── ttyS0
+#17 0.280 │   │   ├── 5
+#17 0.280 │   │   │   ├── affinity_hint
+#17 0.280 │   │   │   ├── effective_affinity
+#17 0.280 │   │   │   ├── effective_affinity_list
+#17 0.280 │   │   │   ├── node
+#17 0.280 │   │   │   ├── smp_affinity
+#17 0.280 │   │   │   ├── smp_affinity_list
+#17 0.280 │   │   │   └── spurious
+#17 0.280 │   │   ├── 6
+#17 0.280 │   │   │   ├── affinity_hint
+#17 0.280 │   │   │   ├── effective_affinity
+#17 0.280 │   │   │   ├── effective_affinity_list
+#17 0.280 │   │   │   ├── node
+#17 0.280 │   │   │   ├── smp_affinity
+#17 0.280 │   │   │   ├── smp_affinity_list
+#17 0.280 │   │   │   └── spurious
+#17 0.280 │   │   ├── 7
+#17 0.280 │   │   │   ├── affinity_hint
+#17 0.280 │   │   │   ├── effective_affinity
+#17 0.280 │   │   │   ├── effective_affinity_list
+#17 0.280 │   │   │   ├── node
+#17 0.280 │   │   │   ├── smp_affinity
+#17 0.280 │   │   │   ├── smp_affinity_list
+#17 0.280 │   │   │   └── spurious
+#17 0.280 │   │   ├── 8
+#17 0.280 │   │   │   ├── affinity_hint
+#17 0.280 │   │   │   ├── effective_affinity
+#17 0.280 │   │   │   ├── effective_affinity_list
+#17 0.280 │   │   │   ├── node
+#17 0.280 │   │   │   ├── rtc0
+#17 0.280 │   │   │   ├── smp_affinity
+#17 0.280 │   │   │   ├── smp_affinity_list
+#17 0.281 │   │   │   └── spurious
+#17 0.281 │   │   ├── 9
+#17 0.281 │   │   │   ├── acpi
+#17 0.281 │   │   │   ├── affinity_hint
+#17 0.281 │   │   │   ├── effective_affinity
+#17 0.281 │   │   │   ├── effective_affinity_list
+#17 0.281 │   │   │   ├── node
+#17 0.281 │   │   │   ├── smp_affinity
+#17 0.281 │   │   │   ├── smp_affinity_list
+#17 0.281 │   │   │   └── spurious
+#17 0.281 │   │   └── default_smp_affinity
+#17 0.281 │   ├── kallsyms
+#17 0.281 │   ├── kcore
+#17 0.281 │   ├── key-users
+#17 0.281 │   ├── keys
+#17 0.281 │   ├── kmsg
+#17 0.281 │   ├── kpagecgroup
+#17 0.281 │   ├── kpagecount
+#17 0.281 │   ├── kpageflags
+#17 0.281 │   ├── loadavg
+#17 0.281 │   ├── locks
+#17 0.281 │   ├── meminfo
+#17 0.281 │   ├── misc
+#17 0.281 │   ├── modules
+#17 0.281 │   ├── mounts -> self/mounts
+#17 0.281 │   ├── mtrr
+#17 0.281 │   ├── net -> self/net
+#17 0.281 │   ├── pagetypeinfo
+#17 0.281 │   ├── partitions
+#17 0.281 │   ├── pressure
+#17 0.281 │   │   ├── cpu
+#17 0.281 │   │   ├── io
+#17 0.281 │   │   └── memory
+#17 0.281 │   ├── self -> 1
+#17 0.283 │   ├── slabinfo
+#17 0.283 │   ├── softirqs
+#17 0.283 │   ├── stat
+#17 0.283 │   ├── swaps
+#17 0.283 │   ├── sys
+#17 0.283 │   │   ├── abi
+#17 0.283 │   │   │   └── vsyscall32
+#17 0.283 │   │   ├── debug
+#17 0.283 │   │   │   ├── exception-trace
+#17 0.283 │   │   │   └── kprobes-optimization
+#17 0.283 │   │   ├── dev
+#17 0.283 │   │   │   ├── cdrom
+#17 0.283 │   │   │   │   ├── autoclose
+#17 0.283 │   │   │   │   ├── autoeject
+#17 0.283 │   │   │   │   ├── check_media
+#17 0.283 │   │   │   │   ├── debug
+#17 0.283 │   │   │   │   ├── info
+#17 0.283 │   │   │   │   └── lock
+#17 0.283 │   │   │   ├── hpet
+#17 0.283 │   │   │   │   └── max-user-freq
+#17 0.283 │   │   │   ├── scsi
+#17 0.283 │   │   │   │   └── logging_level
+#17 0.283 │   │   │   └── tty
+#17 0.283 │   │   │       ├── ldisc_autoload
+#17 0.283 │   │   │       └── legacy_tiocsti
+#17 0.283 │   │   ├── fs
+#17 0.283 │   │   │   ├── aio-max-nr
+#17 0.283 │   │   │   ├── aio-nr
+#17 0.283 │   │   │   ├── binfmt_misc
+#17 0.284 │   │   │   ├── dentry-state
+#17 0.284 │   │   │   ├── dir-notify-enable
+#17 0.284 │   │   │   ├── epoll
+#17 0.284 │   │   │   │   └── max_user_watches
+#17 0.284 │   │   │   ├── fanotify
+#17 0.284 │   │   │   │   ├── max_queued_events
+#17 0.284 │   │   │   │   ├── max_user_groups
+#17 0.284 │   │   │   │   └── max_user_marks
+#17 0.284 │   │   │   ├── file-max
+#17 0.284 │   │   │   ├── file-nr
+#17 0.284 │   │   │   ├── inode-nr
+#17 0.284 │   │   │   ├── inode-state
+#17 0.284 │   │   │   ├── inotify
+#17 0.284 │   │   │   │   ├── max_queued_events
+#17 0.284 │   │   │   │   ├── max_user_instances
+#17 0.284 │   │   │   │   └── max_user_watches
+#17 0.284 │   │   │   ├── lease-break-time
+#17 0.284 │   │   │   ├── leases-enable
+#17 0.284 │   │   │   ├── mount-max
+#17 0.284 │   │   │   ├── mqueue
+#17 0.284 │   │   │   │   ├── msg_default
+#17 0.284 │   │   │   │   ├── msg_max
+#17 0.284 │   │   │   │   ├── msgsize_default
+#17 0.284 │   │   │   │   ├── msgsize_max
+#17 0.284 │   │   │   │   └── queues_max
+#17 0.284 │   │   │   ├── nfs
+#17 0.284 │   │   │   │   ├── idmap_cache_timeout
+#17 0.284 │   │   │   │   ├── nfs_callback_tcpport
+#17 0.284 │   │   │   │   ├── nfs_congestion_kb
+#17 0.284 │   │   │   │   ├── nfs_mountpoint_timeout
+#17 0.284 │   │   │   │   ├── nlm_grace_period
+#17 0.284 │   │   │   │   ├── nlm_tcpport
+#17 0.284 │   │   │   │   ├── nlm_timeout
+#17 0.284 │   │   │   │   ├── nlm_udpport
+#17 0.284 │   │   │   │   ├── nsm_local_state
+#17 0.284 │   │   │   │   └── nsm_use_hostnames
+#17 0.284 │   │   │   ├── nr_open
+#17 0.284 │   │   │   ├── overflowgid
+#17 0.284 │   │   │   ├── overflowuid
+#17 0.284 │   │   │   ├── pipe-max-size
+#17 0.284 │   │   │   ├── pipe-user-pages-hard
+#17 0.284 │   │   │   ├── pipe-user-pages-soft
+#17 0.284 │   │   │   ├── protected_fifos
+#17 0.284 │   │   │   ├── protected_hardlinks
+#17 0.284 │   │   │   ├── protected_regular
+#17 0.284 │   │   │   ├── protected_symlinks
+#17 0.284 │   │   │   ├── quota
+#17 0.284 │   │   │   │   ├── allocated_dquots
+#17 0.284 │   │   │   │   ├── cache_hits
+#17 0.284 │   │   │   │   ├── drops
+#17 0.284 │   │   │   │   ├── free_dquots
+#17 0.284 │   │   │   │   ├── lookups
+#17 0.284 │   │   │   │   ├── reads
+#17 0.284 │   │   │   │   ├── syncs
+#17 0.284 │   │   │   │   └── writes
+#17 0.284 │   │   │   ├── suid_dumpable
+#17 0.284 │   │   │   └── xfs
+#17 0.284 │   │   │       ├── error_level
+#17 0.284 │   │   │       ├── filestream_centisecs
+#17 0.284 │   │   │       ├── inherit_noatime
+#17 0.284 │   │   │       ├── inherit_nodefrag
+#17 0.284 │   │   │       ├── inherit_nodump
+#17 0.284 │   │   │       ├── inherit_nosymlinks
+#17 0.284 │   │   │       ├── inherit_sync
+#17 0.284 │   │   │       ├── irix_sgid_inherit
+#17 0.284 │   │   │       ├── irix_symlink_mode
+#17 0.284 │   │   │       ├── panic_mask
+#17 0.284 │   │   │       ├── rotorstep
+#17 0.284 │   │   │       ├── speculative_cow_prealloc_lifetime
+#17 0.285 │   │   │       ├── speculative_prealloc_lifetime
+#17 0.285 │   │   │       ├── stats_clear
+#17 0.285 │   │   │       └── xfssyncd_centisecs
+#17 0.285 │   │   ├── kernel
+#17 0.285 │   │   │   ├── acct
+#17 0.285 │   │   │   ├── arch
+#17 0.285 │   │   │   ├── auto_msgmni
+#17 0.285 │   │   │   ├── bootloader_type
+#17 0.285 │   │   │   ├── bootloader_version
+#17 0.285 │   │   │   ├── bpf_stats_enabled
+#17 0.285 │   │   │   ├── cad_pid
+#17 0.285 │   │   │   ├── cap_last_cap
+#17 0.285 │   │   │   ├── core_file_note_size_limit
+#17 0.285 │   │   │   ├── core_pattern
+#17 0.285 │   │   │   ├── core_pipe_limit
+#17 0.285 │   │   │   ├── core_uses_pid
+#17 0.285 │   │   │   ├── ctrl-alt-del
+#17 0.285 │   │   │   ├── dmesg_restrict
+#17 0.285 │   │   │   ├── domainname
+#17 0.285 │   │   │   ├── ftrace_dump_on_oops
+#17 0.285 │   │   │   ├── ftrace_enabled
+#17 0.285 │   │   │   ├── hardlockup_all_cpu_backtrace
+#17 0.285 │   │   │   ├── hardlockup_panic
+#17 0.285 │   │   │   ├── hostname
+#17 0.285 │   │   │   ├── io_delay_type
+#17 0.285 │   │   │   ├── io_uring_disabled
+#17 0.285 │   │   │   ├── io_uring_group
+#17 0.285 │   │   │   ├── keys
+#17 0.285 │   │   │   │   ├── gc_delay
+#17 0.285 │   │   │   │   ├── maxbytes
+#17 0.285 │   │   │   │   ├── maxkeys
+#17 0.285 │   │   │   │   ├── persistent_keyring_expiry
+#17 0.285 │   │   │   │   ├── root_maxbytes
+#17 0.285 │   │   │   │   └── root_maxkeys
+#17 0.285 │   │   │   ├── kptr_restrict
+#17 0.285 │   │   │   ├── max_lock_depth
+#17 0.285 │   │   │   ├── max_rcu_stall_to_panic
+#17 0.285 │   │   │   ├── modprobe
+#17 0.285 │   │   │   ├── modules_disabled
+#17 0.285 │   │   │   ├── msg_next_id
+#17 0.285 │   │   │   ├── msgmax
+#17 0.285 │   │   │   ├── msgmnb
+#17 0.285 │   │   │   ├── msgmni
+#17 0.285 │   │   │   ├── ngroups_max
+#17 0.285 │   │   │   ├── nmi_watchdog
+#17 0.285 │   │   │   ├── ns_last_pid
+#17 0.285 │   │   │   ├── oops_all_cpu_backtrace
+#17 0.285 │   │   │   ├── oops_limit
+#17 0.285 │   │   │   ├── osrelease
+#17 0.285 │   │   │   ├── ostype
+#17 0.285 │   │   │   ├── overflowgid
+#17 0.285 │   │   │   ├── overflowuid
+#17 0.285 │   │   │   ├── panic
+#17 0.285 │   │   │   ├── panic_on_io_nmi
+#17 0.285 │   │   │   ├── panic_on_oops
+#17 0.285 │   │   │   ├── panic_on_rcu_stall
+#17 0.285 │   │   │   ├── panic_on_unrecovered_nmi
+#17 0.285 │   │   │   ├── panic_on_warn
+#17 0.285 │   │   │   ├── panic_print
+#17 0.285 │   │   │   ├── perf_cpu_time_max_percent
+#17 0.285 │   │   │   ├── perf_event_max_contexts_per_stack
+#17 0.285 │   │   │   ├── perf_event_max_sample_rate
+#17 0.285 │   │   │   ├── perf_event_max_stack
+#17 0.285 │   │   │   ├── perf_event_mlock_kb
+#17 0.285 │   │   │   ├── perf_event_paranoid
+#17 0.285 │   │   │   ├── pid_max
+#17 0.285 │   │   │   ├── poweroff_cmd
+#17 0.285 │   │   │   ├── print-fatal-signals
+#17 0.285 │   │   │   ├── printk
+#17 0.285 │   │   │   ├── printk_delay
+#17 0.285 │   │   │   ├── printk_devkmsg
+#17 0.285 │   │   │   ├── printk_ratelimit
+#17 0.285 │   │   │   ├── printk_ratelimit_burst
+#17 0.285 │   │   │   ├── pty
+#17 0.285 │   │   │   │   ├── max
+#17 0.285 │   │   │   │   ├── nr
+#17 0.285 │   │   │   │   └── reserve
+#17 0.285 │   │   │   ├── random
+#17 0.285 │   │   │   │   ├── boot_id
+#17 0.285 │   │   │   │   ├── entropy_avail
+#17 0.285 │   │   │   │   ├── poolsize
+#17 0.285 │   │   │   │   ├── urandom_min_reseed_secs
+#17 0.285 │   │   │   │   ├── uuid
+#17 0.285 │   │   │   │   └── write_wakeup_threshold
+#17 0.285 │   │   │   ├── randomize_va_space
+#17 0.285 │   │   │   ├── sched_autogroup_enabled
+#17 0.285 │   │   │   ├── sched_cfs_bandwidth_slice_us
+#17 0.285 │   │   │   ├── sched_deadline_period_max_us
+#17 0.285 │   │   │   ├── sched_deadline_period_min_us
+#17 0.285 │   │   │   ├── sched_rr_timeslice_ms
+#17 0.285 │   │   │   ├── sched_rt_period_us
+#17 0.285 │   │   │   ├── sched_rt_runtime_us
+#17 0.285 │   │   │   ├── seccomp
+#17 0.285 │   │   │   │   ├── actions_avail
+#17 0.285 │   │   │   │   └── actions_logged
+#17 0.285 │   │   │   ├── sem
+#17 0.285 │   │   │   ├── sem_next_id
+#17 0.285 │   │   │   ├── shm_next_id
+#17 0.285 │   │   │   ├── shm_rmid_forced
+#17 0.285 │   │   │   ├── shmall
+#17 0.285 │   │   │   ├── shmmax
+#17 0.285 │   │   │   ├── shmmni
+#17 0.285 │   │   │   ├── soft_watchdog
+#17 0.285 │   │   │   ├── softlockup_all_cpu_backtrace
+#17 0.285 │   │   │   ├── softlockup_panic
+#17 0.285 │   │   │   ├── split_lock_mitigate
+#17 0.285 │   │   │   ├── sysctl_writes_strict
+#17 0.285 │   │   │   ├── sysrq
+#17 0.285 │   │   │   ├── tainted
+#17 0.285 │   │   │   ├── task_delayacct
+#17 0.285 │   │   │   ├── threads-max
+#17 0.285 │   │   │   ├── timer_migration
+#17 0.285 │   │   │   ├── traceoff_on_warning
+#17 0.285 │   │   │   ├── tracepoint_printk
+#17 0.285 │   │   │   ├── unknown_nmi_panic
+#17 0.285 │   │   │   ├── unprivileged_bpf_disabled
+#17 0.285 │   │   │   ├── usermodehelper
+#17 0.285 │   │   │   │   ├── bset
+#17 0.286 │   │   │   │   └── inheritable
+#17 0.286 │   │   │   ├── version
+#17 0.286 │   │   │   ├── warn_limit
+#17 0.286 │   │   │   ├── watchdog
+#17 0.286 │   │   │   ├── watchdog_cpumask
+#17 0.286 │   │   │   └── watchdog_thresh
+#17 0.286 │   │   ├── net
+#17 0.286 │   │   │   ├── bridge
+#17 0.286 │   │   │   │   ├── bridge-nf-call-arptables
+#17 0.286 │   │   │   │   ├── bridge-nf-call-ip6tables
+#17 0.286 │   │   │   │   ├── bridge-nf-call-iptables
+#17 0.286 │   │   │   │   ├── bridge-nf-filter-pppoe-tagged
+#17 0.286 │   │   │   │   ├── bridge-nf-filter-vlan-tagged
+#17 0.286 │   │   │   │   └── bridge-nf-pass-vlan-input-dev
+#17 0.286 │   │   │   ├── core
+#17 0.286 │   │   │   │   ├── optmem_max
+#17 0.286 │   │   │   │   ├── rps_default_mask
+#17 0.286 │   │   │   │   ├── somaxconn
+#17 0.286 │   │   │   │   ├── txrehash
+#17 0.286 │   │   │   │   ├── xfrm_acq_expires
+#17 0.286 │   │   │   │   ├── xfrm_aevent_etime
+#17 0.286 │   │   │   │   ├── xfrm_aevent_rseqth
+#17 0.286 │   │   │   │   └── xfrm_larval_drop
+#17 0.286 │   │   │   ├── ipv4
+#17 0.286 │   │   │   │   ├── conf
+#17 0.286 │   │   │   │   │   ├── all
+#17 0.286 │   │   │   │   │   │   ├── accept_local
+#17 0.286 │   │   │   │   │   │   ├── accept_redirects
+#17 0.286 │   │   │   │   │   │   ├── accept_source_route
+#17 0.286 │   │   │   │   │   │   ├── arp_accept
+#17 0.286 │   │   │   │   │   │   ├── arp_announce
+#17 0.286 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.286 │   │   │   │   │   │   ├── arp_filter
+#17 0.286 │   │   │   │   │   │   ├── arp_ignore
+#17 0.286 │   │   │   │   │   │   ├── arp_notify
+#17 0.286 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.286 │   │   │   │   │   │   ├── bootp_relay
+#17 0.286 │   │   │   │   │   │   ├── disable_policy
+#17 0.286 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.286 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.286 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.286 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.286 │   │   │   │   │   │   ├── forwarding
+#17 0.286 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.286 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.286 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.286 │   │   │   │   │   │   ├── log_martians
+#17 0.286 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.286 │   │   │   │   │   │   ├── medium_id
+#17 0.286 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.286 │   │   │   │   │   │   ├── proxy_arp
+#17 0.286 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.286 │   │   │   │   │   │   ├── route_localnet
+#17 0.286 │   │   │   │   │   │   ├── rp_filter
+#17 0.286 │   │   │   │   │   │   ├── secure_redirects
+#17 0.286 │   │   │   │   │   │   ├── send_redirects
+#17 0.287 │   │   │   │   │   │   ├── shared_media
+#17 0.287 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.287 │   │   │   │   │   │   └── tag
+#17 0.287 │   │   │   │   │   ├── default
+#17 0.287 │   │   │   │   │   │   ├── accept_local
+#17 0.287 │   │   │   │   │   │   ├── accept_redirects
+#17 0.287 │   │   │   │   │   │   ├── accept_source_route
+#17 0.287 │   │   │   │   │   │   ├── arp_accept
+#17 0.287 │   │   │   │   │   │   ├── arp_announce
+#17 0.287 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.287 │   │   │   │   │   │   ├── arp_filter
+#17 0.287 │   │   │   │   │   │   ├── arp_ignore
+#17 0.287 │   │   │   │   │   │   ├── arp_notify
+#17 0.287 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.287 │   │   │   │   │   │   ├── bootp_relay
+#17 0.287 │   │   │   │   │   │   ├── disable_policy
+#17 0.287 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.287 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.287 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.287 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.287 │   │   │   │   │   │   ├── forwarding
+#17 0.287 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.287 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.287 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.287 │   │   │   │   │   │   ├── log_martians
+#17 0.287 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.287 │   │   │   │   │   │   ├── medium_id
+#17 0.287 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.287 │   │   │   │   │   │   ├── proxy_arp
+#17 0.287 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.287 │   │   │   │   │   │   ├── route_localnet
+#17 0.287 │   │   │   │   │   │   ├── rp_filter
+#17 0.287 │   │   │   │   │   │   ├── secure_redirects
+#17 0.287 │   │   │   │   │   │   ├── send_redirects
+#17 0.287 │   │   │   │   │   │   ├── shared_media
+#17 0.287 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.287 │   │   │   │   │   │   └── tag
+#17 0.287 │   │   │   │   │   ├── erspan0
+#17 0.287 │   │   │   │   │   │   ├── accept_local
+#17 0.287 │   │   │   │   │   │   ├── accept_redirects
+#17 0.287 │   │   │   │   │   │   ├── accept_source_route
+#17 0.287 │   │   │   │   │   │   ├── arp_accept
+#17 0.287 │   │   │   │   │   │   ├── arp_announce
+#17 0.287 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.287 │   │   │   │   │   │   ├── arp_filter
+#17 0.287 │   │   │   │   │   │   ├── arp_ignore
+#17 0.287 │   │   │   │   │   │   ├── arp_notify
+#17 0.287 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.287 │   │   │   │   │   │   ├── bootp_relay
+#17 0.287 │   │   │   │   │   │   ├── disable_policy
+#17 0.287 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.287 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.287 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.287 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.287 │   │   │   │   │   │   ├── forwarding
+#17 0.287 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.287 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.287 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.287 │   │   │   │   │   │   ├── log_martians
+#17 0.287 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.287 │   │   │   │   │   │   ├── medium_id
+#17 0.287 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.287 │   │   │   │   │   │   ├── proxy_arp
+#17 0.287 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.287 │   │   │   │   │   │   ├── route_localnet
+#17 0.287 │   │   │   │   │   │   ├── rp_filter
+#17 0.287 │   │   │   │   │   │   ├── secure_redirects
+#17 0.287 │   │   │   │   │   │   ├── send_redirects
+#17 0.287 │   │   │   │   │   │   ├── shared_media
+#17 0.287 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.287 │   │   │   │   │   │   └── tag
+#17 0.287 │   │   │   │   │   ├── eth0
+#17 0.287 │   │   │   │   │   │   ├── accept_local
+#17 0.287 │   │   │   │   │   │   ├── accept_redirects
+#17 0.287 │   │   │   │   │   │   ├── accept_source_route
+#17 0.287 │   │   │   │   │   │   ├── arp_accept
+#17 0.287 │   │   │   │   │   │   ├── arp_announce
+#17 0.287 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.287 │   │   │   │   │   │   ├── arp_filter
+#17 0.287 │   │   │   │   │   │   ├── arp_ignore
+#17 0.287 │   │   │   │   │   │   ├── arp_notify
+#17 0.287 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.287 │   │   │   │   │   │   ├── bootp_relay
+#17 0.287 │   │   │   │   │   │   ├── disable_policy
+#17 0.287 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.287 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.287 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.287 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.287 │   │   │   │   │   │   ├── forwarding
+#17 0.287 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.287 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.287 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.287 │   │   │   │   │   │   ├── log_martians
+#17 0.287 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.287 │   │   │   │   │   │   ├── medium_id
+#17 0.287 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.287 │   │   │   │   │   │   ├── proxy_arp
+#17 0.287 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.287 │   │   │   │   │   │   ├── route_localnet
+#17 0.287 │   │   │   │   │   │   ├── rp_filter
+#17 0.287 │   │   │   │   │   │   ├── secure_redirects
+#17 0.287 │   │   │   │   │   │   ├── send_redirects
+#17 0.287 │   │   │   │   │   │   ├── shared_media
+#17 0.287 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.287 │   │   │   │   │   │   └── tag
+#17 0.287 │   │   │   │   │   ├── gre0
+#17 0.287 │   │   │   │   │   │   ├── accept_local
+#17 0.287 │   │   │   │   │   │   ├── accept_redirects
+#17 0.287 │   │   │   │   │   │   ├── accept_source_route
+#17 0.287 │   │   │   │   │   │   ├── arp_accept
+#17 0.287 │   │   │   │   │   │   ├── arp_announce
+#17 0.287 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.287 │   │   │   │   │   │   ├── arp_filter
+#17 0.287 │   │   │   │   │   │   ├── arp_ignore
+#17 0.287 │   │   │   │   │   │   ├── arp_notify
+#17 0.287 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.287 │   │   │   │   │   │   ├── bootp_relay
+#17 0.287 │   │   │   │   │   │   ├── disable_policy
+#17 0.287 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.287 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.287 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.287 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.287 │   │   │   │   │   │   ├── forwarding
+#17 0.287 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.287 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.287 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.287 │   │   │   │   │   │   ├── log_martians
+#17 0.287 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.287 │   │   │   │   │   │   ├── medium_id
+#17 0.287 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.287 │   │   │   │   │   │   ├── proxy_arp
+#17 0.287 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.287 │   │   │   │   │   │   ├── route_localnet
+#17 0.287 │   │   │   │   │   │   ├── rp_filter
+#17 0.287 │   │   │   │   │   │   ├── secure_redirects
+#17 0.287 │   │   │   │   │   │   ├── send_redirects
+#17 0.288 │   │   │   │   │   │   ├── shared_media
+#17 0.288 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.288 │   │   │   │   │   │   └── tag
+#17 0.288 │   │   │   │   │   ├── gretap0
+#17 0.288 │   │   │   │   │   │   ├── accept_local
+#17 0.288 │   │   │   │   │   │   ├── accept_redirects
+#17 0.288 │   │   │   │   │   │   ├── accept_source_route
+#17 0.288 │   │   │   │   │   │   ├── arp_accept
+#17 0.288 │   │   │   │   │   │   ├── arp_announce
+#17 0.288 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.288 │   │   │   │   │   │   ├── arp_filter
+#17 0.288 │   │   │   │   │   │   ├── arp_ignore
+#17 0.288 │   │   │   │   │   │   ├── arp_notify
+#17 0.288 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.288 │   │   │   │   │   │   ├── bootp_relay
+#17 0.288 │   │   │   │   │   │   ├── disable_policy
+#17 0.288 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.288 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.288 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.288 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.288 │   │   │   │   │   │   ├── forwarding
+#17 0.288 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.288 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.288 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.288 │   │   │   │   │   │   ├── log_martians
+#17 0.288 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.288 │   │   │   │   │   │   ├── medium_id
+#17 0.288 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.288 │   │   │   │   │   │   ├── proxy_arp
+#17 0.288 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.288 │   │   │   │   │   │   ├── route_localnet
+#17 0.288 │   │   │   │   │   │   ├── rp_filter
+#17 0.288 │   │   │   │   │   │   ├── secure_redirects
+#17 0.288 │   │   │   │   │   │   ├── send_redirects
+#17 0.289 │   │   │   │   │   │   ├── shared_media
+#17 0.289 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.289 │   │   │   │   │   │   └── tag
+#17 0.289 │   │   │   │   │   ├── ip6_vti0
+#17 0.289 │   │   │   │   │   │   ├── accept_local
+#17 0.289 │   │   │   │   │   │   ├── accept_redirects
+#17 0.289 │   │   │   │   │   │   ├── accept_source_route
+#17 0.289 │   │   │   │   │   │   ├── arp_accept
+#17 0.289 │   │   │   │   │   │   ├── arp_announce
+#17 0.289 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.289 │   │   │   │   │   │   ├── arp_filter
+#17 0.289 │   │   │   │   │   │   ├── arp_ignore
+#17 0.289 │   │   │   │   │   │   ├── arp_notify
+#17 0.289 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.289 │   │   │   │   │   │   ├── bootp_relay
+#17 0.289 │   │   │   │   │   │   ├── disable_policy
+#17 0.289 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.289 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.289 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.289 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.289 │   │   │   │   │   │   ├── forwarding
+#17 0.289 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.289 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.289 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.289 │   │   │   │   │   │   ├── log_martians
+#17 0.289 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.289 │   │   │   │   │   │   ├── medium_id
+#17 0.289 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.289 │   │   │   │   │   │   ├── proxy_arp
+#17 0.289 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.289 │   │   │   │   │   │   ├── route_localnet
+#17 0.289 │   │   │   │   │   │   ├── rp_filter
+#17 0.289 │   │   │   │   │   │   ├── secure_redirects
+#17 0.289 │   │   │   │   │   │   ├── send_redirects
+#17 0.289 │   │   │   │   │   │   ├── shared_media
+#17 0.289 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.289 │   │   │   │   │   │   └── tag
+#17 0.289 │   │   │   │   │   ├── ip6gre0
+#17 0.289 │   │   │   │   │   │   ├── accept_local
+#17 0.289 │   │   │   │   │   │   ├── accept_redirects
+#17 0.289 │   │   │   │   │   │   ├── accept_source_route
+#17 0.289 │   │   │   │   │   │   ├── arp_accept
+#17 0.289 │   │   │   │   │   │   ├── arp_announce
+#17 0.289 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.289 │   │   │   │   │   │   ├── arp_filter
+#17 0.289 │   │   │   │   │   │   ├── arp_ignore
+#17 0.289 │   │   │   │   │   │   ├── arp_notify
+#17 0.289 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.289 │   │   │   │   │   │   ├── bootp_relay
+#17 0.289 │   │   │   │   │   │   ├── disable_policy
+#17 0.289 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.289 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.289 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.289 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.289 │   │   │   │   │   │   ├── forwarding
+#17 0.289 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.289 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.289 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.289 │   │   │   │   │   │   ├── log_martians
+#17 0.289 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.289 │   │   │   │   │   │   ├── medium_id
+#17 0.289 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.289 │   │   │   │   │   │   ├── proxy_arp
+#17 0.289 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.289 │   │   │   │   │   │   ├── route_localnet
+#17 0.289 │   │   │   │   │   │   ├── rp_filter
+#17 0.289 │   │   │   │   │   │   ├── secure_redirects
+#17 0.289 │   │   │   │   │   │   ├── send_redirects
+#17 0.289 │   │   │   │   │   │   ├── shared_media
+#17 0.289 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.289 │   │   │   │   │   │   └── tag
+#17 0.289 │   │   │   │   │   ├── ip6tnl0
+#17 0.289 │   │   │   │   │   │   ├── accept_local
+#17 0.289 │   │   │   │   │   │   ├── accept_redirects
+#17 0.289 │   │   │   │   │   │   ├── accept_source_route
+#17 0.289 │   │   │   │   │   │   ├── arp_accept
+#17 0.289 │   │   │   │   │   │   ├── arp_announce
+#17 0.289 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.289 │   │   │   │   │   │   ├── arp_filter
+#17 0.289 │   │   │   │   │   │   ├── arp_ignore
+#17 0.289 │   │   │   │   │   │   ├── arp_notify
+#17 0.289 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.289 │   │   │   │   │   │   ├── bootp_relay
+#17 0.289 │   │   │   │   │   │   ├── disable_policy
+#17 0.289 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.289 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.289 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.289 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.289 │   │   │   │   │   │   ├── forwarding
+#17 0.289 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.289 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.289 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.289 │   │   │   │   │   │   ├── log_martians
+#17 0.289 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.289 │   │   │   │   │   │   ├── medium_id
+#17 0.289 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.289 │   │   │   │   │   │   ├── proxy_arp
+#17 0.289 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.289 │   │   │   │   │   │   ├── route_localnet
+#17 0.289 │   │   │   │   │   │   ├── rp_filter
+#17 0.289 │   │   │   │   │   │   ├── secure_redirects
+#17 0.289 │   │   │   │   │   │   ├── send_redirects
+#17 0.290 │   │   │   │   │   │   ├── shared_media
+#17 0.290 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.290 │   │   │   │   │   │   └── tag
+#17 0.290 │   │   │   │   │   ├── ip_vti0
+#17 0.290 │   │   │   │   │   │   ├── accept_local
+#17 0.290 │   │   │   │   │   │   ├── accept_redirects
+#17 0.290 │   │   │   │   │   │   ├── accept_source_route
+#17 0.290 │   │   │   │   │   │   ├── arp_accept
+#17 0.290 │   │   │   │   │   │   ├── arp_announce
+#17 0.290 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.290 │   │   │   │   │   │   ├── arp_filter
+#17 0.290 │   │   │   │   │   │   ├── arp_ignore
+#17 0.290 │   │   │   │   │   │   ├── arp_notify
+#17 0.290 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.290 │   │   │   │   │   │   ├── bootp_relay
+#17 0.290 │   │   │   │   │   │   ├── disable_policy
+#17 0.290 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.290 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.290 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.290 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.290 │   │   │   │   │   │   ├── forwarding
+#17 0.290 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.290 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.290 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.290 │   │   │   │   │   │   ├── log_martians
+#17 0.290 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.290 │   │   │   │   │   │   ├── medium_id
+#17 0.290 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.290 │   │   │   │   │   │   ├── proxy_arp
+#17 0.290 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.290 │   │   │   │   │   │   ├── route_localnet
+#17 0.290 │   │   │   │   │   │   ├── rp_filter
+#17 0.290 │   │   │   │   │   │   ├── secure_redirects
+#17 0.290 │   │   │   │   │   │   ├── send_redirects
+#17 0.290 │   │   │   │   │   │   ├── shared_media
+#17 0.290 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.290 │   │   │   │   │   │   └── tag
+#17 0.290 │   │   │   │   │   ├── lo
+#17 0.290 │   │   │   │   │   │   ├── accept_local
+#17 0.290 │   │   │   │   │   │   ├── accept_redirects
+#17 0.290 │   │   │   │   │   │   ├── accept_source_route
+#17 0.290 │   │   │   │   │   │   ├── arp_accept
+#17 0.290 │   │   │   │   │   │   ├── arp_announce
+#17 0.290 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.290 │   │   │   │   │   │   ├── arp_filter
+#17 0.290 │   │   │   │   │   │   ├── arp_ignore
+#17 0.290 │   │   │   │   │   │   ├── arp_notify
+#17 0.290 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.290 │   │   │   │   │   │   ├── bootp_relay
+#17 0.290 │   │   │   │   │   │   ├── disable_policy
+#17 0.290 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.290 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.290 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.290 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.290 │   │   │   │   │   │   ├── forwarding
+#17 0.290 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.290 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.290 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.290 │   │   │   │   │   │   ├── log_martians
+#17 0.290 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.290 │   │   │   │   │   │   ├── medium_id
+#17 0.290 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.290 │   │   │   │   │   │   ├── proxy_arp
+#17 0.290 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.290 │   │   │   │   │   │   ├── route_localnet
+#17 0.290 │   │   │   │   │   │   ├── rp_filter
+#17 0.290 │   │   │   │   │   │   ├── secure_redirects
+#17 0.290 │   │   │   │   │   │   ├── send_redirects
+#17 0.290 │   │   │   │   │   │   ├── shared_media
+#17 0.290 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.290 │   │   │   │   │   │   └── tag
+#17 0.290 │   │   │   │   │   ├── sit0
+#17 0.290 │   │   │   │   │   │   ├── accept_local
+#17 0.290 │   │   │   │   │   │   ├── accept_redirects
+#17 0.290 │   │   │   │   │   │   ├── accept_source_route
+#17 0.290 │   │   │   │   │   │   ├── arp_accept
+#17 0.290 │   │   │   │   │   │   ├── arp_announce
+#17 0.290 │   │   │   │   │   │   ├── arp_evict_nocarrier
+#17 0.290 │   │   │   │   │   │   ├── arp_filter
+#17 0.290 │   │   │   │   │   │   ├── arp_ignore
+#17 0.290 │   │   │   │   │   │   ├── arp_notify
+#17 0.290 │   │   │   │   │   │   ├── bc_forwarding
+#17 0.290 │   │   │   │   │   │   ├── bootp_relay
+#17 0.290 │   │   │   │   │   │   ├── disable_policy
+#17 0.290 │   │   │   │   │   │   ├── disable_xfrm
+#17 0.290 │   │   │   │   │   │   ├── drop_gratuitous_arp
+#17 0.290 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.290 │   │   │   │   │   │   ├── force_igmp_version
+#17 0.290 │   │   │   │   │   │   ├── forwarding
+#17 0.290 │   │   │   │   │   │   ├── igmpv2_unsolicited_report_interval
+#17 0.290 │   │   │   │   │   │   ├── igmpv3_unsolicited_report_interval
+#17 0.290 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.290 │   │   │   │   │   │   ├── log_martians
+#17 0.290 │   │   │   │   │   │   ├── mc_forwarding
+#17 0.290 │   │   │   │   │   │   ├── medium_id
+#17 0.290 │   │   │   │   │   │   ├── promote_secondaries
+#17 0.290 │   │   │   │   │   │   ├── proxy_arp
+#17 0.290 │   │   │   │   │   │   ├── proxy_arp_pvlan
+#17 0.290 │   │   │   │   │   │   ├── route_localnet
+#17 0.290 │   │   │   │   │   │   ├── rp_filter
+#17 0.290 │   │   │   │   │   │   ├── secure_redirects
+#17 0.290 │   │   │   │   │   │   ├── send_redirects
+#17 0.290 │   │   │   │   │   │   ├── shared_media
+#17 0.290 │   │   │   │   │   │   ├── src_valid_mark
+#17 0.290 │   │   │   │   │   │   └── tag
+#17 0.290 │   │   │   │   │   └── tunl0
+#17 0.290 │   │   │   │   │       ├── accept_local
+#17 0.290 │   │   │   │   │       ├── accept_redirects
+#17 0.290 │   │   │   │   │       ├── accept_source_route
+#17 0.290 │   │   │   │   │       ├── arp_accept
+#17 0.290 │   │   │   │   │       ├── arp_announce
+#17 0.290 │   │   │   │   │       ├── arp_evict_nocarrier
+#17 0.290 │   │   │   │   │       ├── arp_filter
+#17 0.290 │   │   │   │   │       ├── arp_ignore
+#17 0.290 │   │   │   │   │       ├── arp_notify
+#17 0.290 │   │   │   │   │       ├── bc_forwarding
+#17 0.290 │   │   │   │   │       ├── bootp_relay
+#17 0.290 │   │   │   │   │       ├── disable_policy
+#17 0.290 │   │   │   │   │       ├── disable_xfrm
+#17 0.290 │   │   │   │   │       ├── drop_gratuitous_arp
+#17 0.290 │   │   │   │   │       ├── drop_unicast_in_l2_multicast
+#17 0.290 │   │   │   │   │       ├── force_igmp_version
+#17 0.290 │   │   │   │   │       ├── forwarding
+#17 0.290 │   │   │   │   │       ├── igmpv2_unsolicited_report_interval
+#17 0.290 │   │   │   │   │       ├── igmpv3_unsolicited_report_interval
+#17 0.290 │   │   │   │   │       ├── ignore_routes_with_linkdown
+#17 0.290 │   │   │   │   │       ├── log_martians
+#17 0.290 │   │   │   │   │       ├── mc_forwarding
+#17 0.290 │   │   │   │   │       ├── medium_id
+#17 0.290 │   │   │   │   │       ├── promote_secondaries
+#17 0.290 │   │   │   │   │       ├── proxy_arp
+#17 0.290 │   │   │   │   │       ├── proxy_arp_pvlan
+#17 0.290 │   │   │   │   │       ├── route_localnet
+#17 0.290 │   │   │   │   │       ├── rp_filter
+#17 0.290 │   │   │   │   │       ├── secure_redirects
+#17 0.290 │   │   │   │   │       ├── send_redirects
+#17 0.290 │   │   │   │   │       ├── shared_media
+#17 0.291 │   │   │   │   │       ├── src_valid_mark
+#17 0.291 │   │   │   │   │       └── tag
+#17 0.291 │   │   │   │   ├── fib_multipath_hash_fields
+#17 0.291 │   │   │   │   ├── fib_multipath_hash_policy
+#17 0.291 │   │   │   │   ├── fib_multipath_use_neigh
+#17 0.291 │   │   │   │   ├── fib_notify_on_flag_change
+#17 0.291 │   │   │   │   ├── fwmark_reflect
+#17 0.291 │   │   │   │   ├── icmp_echo_enable_probe
+#17 0.291 │   │   │   │   ├── icmp_echo_ignore_all
+#17 0.291 │   │   │   │   ├── icmp_echo_ignore_broadcasts
+#17 0.291 │   │   │   │   ├── icmp_errors_use_inbound_ifaddr
+#17 0.291 │   │   │   │   ├── icmp_ignore_bogus_error_responses
+#17 0.291 │   │   │   │   ├── icmp_ratelimit
+#17 0.291 │   │   │   │   ├── icmp_ratemask
+#17 0.291 │   │   │   │   ├── igmp_link_local_mcast_reports
+#17 0.291 │   │   │   │   ├── igmp_max_memberships
+#17 0.291 │   │   │   │   ├── igmp_max_msf
+#17 0.291 │   │   │   │   ├── igmp_qrv
+#17 0.291 │   │   │   │   ├── ip_autobind_reuse
+#17 0.291 │   │   │   │   ├── ip_default_ttl
+#17 0.291 │   │   │   │   ├── ip_dynaddr
+#17 0.291 │   │   │   │   ├── ip_early_demux
+#17 0.291 │   │   │   │   ├── ip_forward
+#17 0.291 │   │   │   │   ├── ip_forward_update_priority
+#17 0.291 │   │   │   │   ├── ip_forward_use_pmtu
+#17 0.291 │   │   │   │   ├── ip_local_port_range
+#17 0.291 │   │   │   │   ├── ip_local_reserved_ports
+#17 0.291 │   │   │   │   ├── ip_no_pmtu_disc
+#17 0.291 │   │   │   │   ├── ip_nonlocal_bind
+#17 0.291 │   │   │   │   ├── ip_unprivileged_port_start
+#17 0.291 │   │   │   │   ├── ipfrag_high_thresh
+#17 0.291 │   │   │   │   ├── ipfrag_low_thresh
+#17 0.291 │   │   │   │   ├── ipfrag_max_dist
+#17 0.291 │   │   │   │   ├── ipfrag_time
+#17 0.291 │   │   │   │   ├── neigh
+#17 0.291 │   │   │   │   │   ├── erspan0
+#17 0.291 │   │   │   │   │   │   ├── anycast_delay
+#17 0.291 │   │   │   │   │   │   ├── app_solicit
+#17 0.291 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.291 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.291 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.291 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.291 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.291 │   │   │   │   │   │   ├── locktime
+#17 0.291 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.291 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.291 │   │   │   │   │   │   ├── proxy_delay
+#17 0.291 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.291 │   │   │   │   │   │   ├── retrans_time
+#17 0.291 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.291 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.291 │   │   │   │   │   │   ├── unres_qlen
+#17 0.291 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.291 │   │   │   │   │   ├── eth0
+#17 0.291 │   │   │   │   │   │   ├── anycast_delay
+#17 0.291 │   │   │   │   │   │   ├── app_solicit
+#17 0.291 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.291 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.291 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.291 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.291 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.291 │   │   │   │   │   │   ├── locktime
+#17 0.291 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.291 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.291 │   │   │   │   │   │   ├── proxy_delay
+#17 0.291 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.291 │   │   │   │   │   │   ├── retrans_time
+#17 0.291 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.291 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.291 │   │   │   │   │   │   ├── unres_qlen
+#17 0.291 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.291 │   │   │   │   │   ├── gre0
+#17 0.291 │   │   │   │   │   │   ├── anycast_delay
+#17 0.291 │   │   │   │   │   │   ├── app_solicit
+#17 0.291 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.291 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.291 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.291 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.291 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.291 │   │   │   │   │   │   ├── locktime
+#17 0.291 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.291 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.291 │   │   │   │   │   │   ├── proxy_delay
+#17 0.291 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.291 │   │   │   │   │   │   ├── retrans_time
+#17 0.291 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.291 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.291 │   │   │   │   │   │   ├── unres_qlen
+#17 0.291 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.291 │   │   │   │   │   ├── gretap0
+#17 0.291 │   │   │   │   │   │   ├── anycast_delay
+#17 0.291 │   │   │   │   │   │   ├── app_solicit
+#17 0.291 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.291 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.291 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.291 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.291 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.291 │   │   │   │   │   │   ├── locktime
+#17 0.291 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.291 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.291 │   │   │   │   │   │   ├── proxy_delay
+#17 0.291 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.291 │   │   │   │   │   │   ├── retrans_time
+#17 0.291 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.291 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.291 │   │   │   │   │   │   ├── unres_qlen
+#17 0.291 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.291 │   │   │   │   │   ├── ip6_vti0
+#17 0.291 │   │   │   │   │   │   ├── anycast_delay
+#17 0.291 │   │   │   │   │   │   ├── app_solicit
+#17 0.291 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.291 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.291 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.291 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.291 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.291 │   │   │   │   │   │   ├── locktime
+#17 0.291 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.291 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.291 │   │   │   │   │   │   ├── proxy_delay
+#17 0.291 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.291 │   │   │   │   │   │   ├── retrans_time
+#17 0.291 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.291 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.291 │   │   │   │   │   │   ├── unres_qlen
+#17 0.292 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.292 │   │   │   │   │   ├── ip6gre0
+#17 0.292 │   │   │   │   │   │   ├── anycast_delay
+#17 0.292 │   │   │   │   │   │   ├── app_solicit
+#17 0.292 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.292 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.292 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.292 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.292 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.292 │   │   │   │   │   │   ├── locktime
+#17 0.292 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.292 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.292 │   │   │   │   │   │   ├── proxy_delay
+#17 0.292 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.292 │   │   │   │   │   │   ├── retrans_time
+#17 0.292 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.292 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.292 │   │   │   │   │   │   ├── unres_qlen
+#17 0.292 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.292 │   │   │   │   │   ├── ip6tnl0
+#17 0.292 │   │   │   │   │   │   ├── anycast_delay
+#17 0.292 │   │   │   │   │   │   ├── app_solicit
+#17 0.292 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.292 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.292 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.292 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.292 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.292 │   │   │   │   │   │   ├── locktime
+#17 0.292 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.292 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.292 │   │   │   │   │   │   ├── proxy_delay
+#17 0.292 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.292 │   │   │   │   │   │   ├── retrans_time
+#17 0.292 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.292 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.292 │   │   │   │   │   │   ├── unres_qlen
+#17 0.292 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.292 │   │   │   │   │   ├── ip_vti0
+#17 0.292 │   │   │   │   │   │   ├── anycast_delay
+#17 0.292 │   │   │   │   │   │   ├── app_solicit
+#17 0.292 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.292 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.292 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.292 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.292 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.292 │   │   │   │   │   │   ├── locktime
+#17 0.292 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.292 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.292 │   │   │   │   │   │   ├── proxy_delay
+#17 0.292 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.292 │   │   │   │   │   │   ├── retrans_time
+#17 0.292 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.292 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.292 │   │   │   │   │   │   ├── unres_qlen
+#17 0.292 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.292 │   │   │   │   │   ├── lo
+#17 0.292 │   │   │   │   │   │   ├── anycast_delay
+#17 0.292 │   │   │   │   │   │   ├── app_solicit
+#17 0.292 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.292 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.292 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.292 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.292 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.292 │   │   │   │   │   │   ├── locktime
+#17 0.292 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.292 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.292 │   │   │   │   │   │   ├── proxy_delay
+#17 0.292 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.292 │   │   │   │   │   │   ├── retrans_time
+#17 0.292 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.292 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.292 │   │   │   │   │   │   ├── unres_qlen
+#17 0.292 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.292 │   │   │   │   │   ├── sit0
+#17 0.292 │   │   │   │   │   │   ├── anycast_delay
+#17 0.292 │   │   │   │   │   │   ├── app_solicit
+#17 0.292 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.292 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.292 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.292 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.292 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.292 │   │   │   │   │   │   ├── locktime
+#17 0.292 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.292 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.292 │   │   │   │   │   │   ├── proxy_delay
+#17 0.293 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.293 │   │   │   │   │   │   ├── retrans_time
+#17 0.293 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.293 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.293 │   │   │   │   │   │   ├── unres_qlen
+#17 0.293 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.293 │   │   │   │   │   └── tunl0
+#17 0.293 │   │   │   │   │       ├── anycast_delay
+#17 0.293 │   │   │   │   │       ├── app_solicit
+#17 0.293 │   │   │   │   │       ├── base_reachable_time
+#17 0.293 │   │   │   │   │       ├── base_reachable_time_ms
+#17 0.293 │   │   │   │   │       ├── delay_first_probe_time
+#17 0.293 │   │   │   │   │       ├── gc_stale_time
+#17 0.293 │   │   │   │   │       ├── interval_probe_time_ms
+#17 0.293 │   │   │   │   │       ├── locktime
+#17 0.293 │   │   │   │   │       ├── mcast_resolicit
+#17 0.293 │   │   │   │   │       ├── mcast_solicit
+#17 0.293 │   │   │   │   │       ├── proxy_delay
+#17 0.293 │   │   │   │   │       ├── proxy_qlen
+#17 0.293 │   │   │   │   │       ├── retrans_time
+#17 0.293 │   │   │   │   │       ├── retrans_time_ms
+#17 0.293 │   │   │   │   │       ├── ucast_solicit
+#17 0.293 │   │   │   │   │       ├── unres_qlen
+#17 0.293 │   │   │   │   │       └── unres_qlen_bytes
+#17 0.293 │   │   │   │   ├── nexthop_compat_mode
+#17 0.293 │   │   │   │   ├── ping_group_range
+#17 0.293 │   │   │   │   ├── raw_l3mdev_accept
+#17 0.293 │   │   │   │   ├── route
+#17 0.293 │   │   │   │   │   ├── flush
+#17 0.293 │   │   │   │   │   ├── min_adv_mss
+#17 0.293 │   │   │   │   │   ├── min_pmtu
+#17 0.293 │   │   │   │   │   └── mtu_expires
+#17 0.293 │   │   │   │   ├── tcp_abort_on_overflow
+#17 0.293 │   │   │   │   ├── tcp_adv_win_scale
+#17 0.293 │   │   │   │   ├── tcp_allowed_congestion_control
+#17 0.293 │   │   │   │   ├── tcp_app_win
+#17 0.293 │   │   │   │   ├── tcp_autocorking
+#17 0.293 │   │   │   │   ├── tcp_available_congestion_control
+#17 0.293 │   │   │   │   ├── tcp_backlog_ack_defer
+#17 0.293 │   │   │   │   ├── tcp_base_mss
+#17 0.293 │   │   │   │   ├── tcp_challenge_ack_limit
+#17 0.293 │   │   │   │   ├── tcp_child_ehash_entries
+#17 0.293 │   │   │   │   ├── tcp_comp_sack_delay_ns
+#17 0.293 │   │   │   │   ├── tcp_comp_sack_nr
+#17 0.293 │   │   │   │   ├── tcp_comp_sack_slack_ns
+#17 0.293 │   │   │   │   ├── tcp_congestion_control
+#17 0.293 │   │   │   │   ├── tcp_dsack
+#17 0.293 │   │   │   │   ├── tcp_early_demux
+#17 0.293 │   │   │   │   ├── tcp_early_retrans
+#17 0.293 │   │   │   │   ├── tcp_ecn
+#17 0.293 │   │   │   │   ├── tcp_ecn_fallback
+#17 0.293 │   │   │   │   ├── tcp_ehash_entries
+#17 0.293 │   │   │   │   ├── tcp_fack
+#17 0.293 │   │   │   │   ├── tcp_fastopen
+#17 0.293 │   │   │   │   ├── tcp_fastopen_blackhole_timeout_sec
+#17 0.293 │   │   │   │   ├── tcp_fastopen_key
+#17 0.293 │   │   │   │   ├── tcp_fin_timeout
+#17 0.293 │   │   │   │   ├── tcp_frto
+#17 0.293 │   │   │   │   ├── tcp_fwmark_accept
+#17 0.293 │   │   │   │   ├── tcp_invalid_ratelimit
+#17 0.293 │   │   │   │   ├── tcp_keepalive_intvl
+#17 0.293 │   │   │   │   ├── tcp_keepalive_probes
+#17 0.293 │   │   │   │   ├── tcp_keepalive_time
+#17 0.293 │   │   │   │   ├── tcp_l3mdev_accept
+#17 0.293 │   │   │   │   ├── tcp_limit_output_bytes
+#17 0.293 │   │   │   │   ├── tcp_max_reordering
+#17 0.293 │   │   │   │   ├── tcp_max_syn_backlog
+#17 0.293 │   │   │   │   ├── tcp_max_tw_buckets
+#17 0.293 │   │   │   │   ├── tcp_migrate_req
+#17 0.293 │   │   │   │   ├── tcp_min_rtt_wlen
+#17 0.293 │   │   │   │   ├── tcp_min_snd_mss
+#17 0.293 │   │   │   │   ├── tcp_min_tso_segs
+#17 0.293 │   │   │   │   ├── tcp_moderate_rcvbuf
+#17 0.293 │   │   │   │   ├── tcp_mtu_probe_floor
+#17 0.293 │   │   │   │   ├── tcp_mtu_probing
+#17 0.293 │   │   │   │   ├── tcp_no_metrics_save
+#17 0.293 │   │   │   │   ├── tcp_no_ssthresh_metrics_save
+#17 0.293 │   │   │   │   ├── tcp_notsent_lowat
+#17 0.293 │   │   │   │   ├── tcp_orphan_retries
+#17 0.293 │   │   │   │   ├── tcp_pacing_ca_ratio
+#17 0.293 │   │   │   │   ├── tcp_pacing_ss_ratio
+#17 0.293 │   │   │   │   ├── tcp_pingpong_thresh
+#17 0.293 │   │   │   │   ├── tcp_plb_cong_thresh
+#17 0.293 │   │   │   │   ├── tcp_plb_enabled
+#17 0.293 │   │   │   │   ├── tcp_plb_idle_rehash_rounds
+#17 0.293 │   │   │   │   ├── tcp_plb_rehash_rounds
+#17 0.293 │   │   │   │   ├── tcp_plb_suspend_rto_sec
+#17 0.293 │   │   │   │   ├── tcp_probe_interval
+#17 0.293 │   │   │   │   ├── tcp_probe_threshold
+#17 0.293 │   │   │   │   ├── tcp_recovery
+#17 0.293 │   │   │   │   ├── tcp_reflect_tos
+#17 0.293 │   │   │   │   ├── tcp_reordering
+#17 0.293 │   │   │   │   ├── tcp_retrans_collapse
+#17 0.293 │   │   │   │   ├── tcp_retries1
+#17 0.293 │   │   │   │   ├── tcp_retries2
+#17 0.293 │   │   │   │   ├── tcp_rfc1337
+#17 0.293 │   │   │   │   ├── tcp_rmem
+#17 0.293 │   │   │   │   ├── tcp_sack
+#17 0.293 │   │   │   │   ├── tcp_shrink_window
+#17 0.293 │   │   │   │   ├── tcp_slow_start_after_idle
+#17 0.293 │   │   │   │   ├── tcp_stdurg
+#17 0.293 │   │   │   │   ├── tcp_syn_linear_timeouts
+#17 0.293 │   │   │   │   ├── tcp_syn_retries
+#17 0.293 │   │   │   │   ├── tcp_synack_retries
+#17 0.293 │   │   │   │   ├── tcp_syncookies
+#17 0.293 │   │   │   │   ├── tcp_thin_linear_timeouts
+#17 0.293 │   │   │   │   ├── tcp_timestamps
+#17 0.293 │   │   │   │   ├── tcp_tso_rtt_log
+#17 0.293 │   │   │   │   ├── tcp_tso_win_divisor
+#17 0.293 │   │   │   │   ├── tcp_tw_reuse
+#17 0.293 │   │   │   │   ├── tcp_window_scaling
+#17 0.293 │   │   │   │   ├── tcp_wmem
+#17 0.293 │   │   │   │   ├── tcp_workaround_signed_windows
+#17 0.293 │   │   │   │   ├── udp_child_hash_entries
+#17 0.293 │   │   │   │   ├── udp_early_demux
+#17 0.293 │   │   │   │   ├── udp_hash_entries
+#17 0.293 │   │   │   │   ├── udp_l3mdev_accept
+#17 0.293 │   │   │   │   ├── udp_rmem_min
+#17 0.293 │   │   │   │   ├── udp_wmem_min
+#17 0.293 │   │   │   │   ├── vs
+#17 0.293 │   │   │   │   │   ├── am_droprate
+#17 0.293 │   │   │   │   │   ├── amemthresh
+#17 0.293 │   │   │   │   │   ├── backup_only
+#17 0.293 │   │   │   │   │   ├── cache_bypass
+#17 0.293 │   │   │   │   │   ├── conn_reuse_mode
+#17 0.293 │   │   │   │   │   ├── conntrack
+#17 0.293 │   │   │   │   │   ├── debug_level
+#17 0.293 │   │   │   │   │   ├── drop_entry
+#17 0.293 │   │   │   │   │   ├── drop_packet
+#17 0.293 │   │   │   │   │   ├── est_cpulist
+#17 0.293 │   │   │   │   │   ├── est_nice
+#17 0.293 │   │   │   │   │   ├── expire_nodest_conn
+#17 0.293 │   │   │   │   │   ├── expire_quiescent_template
+#17 0.293 │   │   │   │   │   ├── ignore_tunneled
+#17 0.293 │   │   │   │   │   ├── nat_icmp_send
+#17 0.293 │   │   │   │   │   ├── pmtu_disc
+#17 0.293 │   │   │   │   │   ├── run_estimation
+#17 0.293 │   │   │   │   │   ├── schedule_icmp
+#17 0.293 │   │   │   │   │   ├── secure_tcp
+#17 0.293 │   │   │   │   │   ├── sloppy_sctp
+#17 0.293 │   │   │   │   │   ├── sloppy_tcp
+#17 0.293 │   │   │   │   │   ├── snat_reroute
+#17 0.293 │   │   │   │   │   ├── sync_persist_mode
+#17 0.293 │   │   │   │   │   ├── sync_ports
+#17 0.293 │   │   │   │   │   ├── sync_qlen_max
+#17 0.293 │   │   │   │   │   ├── sync_refresh_period
+#17 0.293 │   │   │   │   │   ├── sync_retries
+#17 0.293 │   │   │   │   │   ├── sync_sock_size
+#17 0.293 │   │   │   │   │   ├── sync_threshold
+#17 0.293 │   │   │   │   │   └── sync_version
+#17 0.293 │   │   │   │   └── xfrm4_gc_thresh
+#17 0.293 │   │   │   ├── ipv6
+#17 0.293 │   │   │   │   ├── anycast_src_echo_reply
+#17 0.293 │   │   │   │   ├── auto_flowlabels
+#17 0.293 │   │   │   │   ├── bindv6only
+#17 0.293 │   │   │   │   ├── conf
+#17 0.293 │   │   │   │   │   ├── all
+#17 0.294 │   │   │   │   │   │   ├── accept_dad
+#17 0.294 │   │   │   │   │   │   ├── accept_ra
+#17 0.294 │   │   │   │   │   │   ├── accept_ra_defrtr
+#17 0.294 │   │   │   │   │   │   ├── accept_ra_from_local
+#17 0.294 │   │   │   │   │   │   ├── accept_ra_min_hop_limit
+#17 0.294 │   │   │   │   │   │   ├── accept_ra_min_lft
+#17 0.294 │   │   │   │   │   │   ├── accept_ra_mtu
+#17 0.294 │   │   │   │   │   │   ├── accept_ra_pinfo
+#17 0.294 │   │   │   │   │   │   ├── accept_ra_rtr_pref
+#17 0.294 │   │   │   │   │   │   ├── accept_redirects
+#17 0.294 │   │   │   │   │   │   ├── accept_source_route
+#17 0.294 │   │   │   │   │   │   ├── accept_untracked_na
+#17 0.294 │   │   │   │   │   │   ├── addr_gen_mode
+#17 0.294 │   │   │   │   │   │   ├── autoconf
+#17 0.294 │   │   │   │   │   │   ├── dad_transmits
+#17 0.294 │   │   │   │   │   │   ├── disable_ipv6
+#17 0.294 │   │   │   │   │   │   ├── disable_policy
+#17 0.294 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.294 │   │   │   │   │   │   ├── drop_unsolicited_na
+#17 0.294 │   │   │   │   │   │   ├── enhanced_dad
+#17 0.294 │   │   │   │   │   │   ├── force_mld_version
+#17 0.294 │   │   │   │   │   │   ├── force_tllao
+#17 0.294 │   │   │   │   │   │   ├── forwarding
+#17 0.294 │   │   │   │   │   │   ├── hop_limit
+#17 0.294 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.294 │   │   │   │   │   │   ├── ioam6_enabled
+#17 0.294 │   │   │   │   │   │   ├── ioam6_id
+#17 0.294 │   │   │   │   │   │   ├── ioam6_id_wide
+#17 0.294 │   │   │   │   │   │   ├── keep_addr_on_down
+#17 0.294 │   │   │   │   │   │   ├── max_addresses
+#17 0.294 │   │   │   │   │   │   ├── max_desync_factor
+#17 0.294 │   │   │   │   │   │   ├── mldv1_unsolicited_report_interval
+#17 0.294 │   │   │   │   │   │   ├── mldv2_unsolicited_report_interval
+#17 0.294 │   │   │   │   │   │   ├── mtu
+#17 0.294 │   │   │   │   │   │   ├── ndisc_evict_nocarrier
+#17 0.294 │   │   │   │   │   │   ├── ndisc_notify
+#17 0.294 │   │   │   │   │   │   ├── ndisc_tclass
+#17 0.294 │   │   │   │   │   │   ├── proxy_ndp
+#17 0.294 │   │   │   │   │   │   ├── ra_defrtr_metric
+#17 0.294 │   │   │   │   │   │   ├── ra_honor_pio_life
+#17 0.294 │   │   │   │   │   │   ├── regen_max_retry
+#17 0.294 │   │   │   │   │   │   ├── regen_min_advance
+#17 0.294 │   │   │   │   │   │   ├── router_probe_interval
+#17 0.294 │   │   │   │   │   │   ├── router_solicitation_delay
+#17 0.294 │   │   │   │   │   │   ├── router_solicitation_interval
+#17 0.294 │   │   │   │   │   │   ├── router_solicitation_max_interval
+#17 0.294 │   │   │   │   │   │   ├── router_solicitations
+#17 0.294 │   │   │   │   │   │   ├── rpl_seg_enabled
+#17 0.294 │   │   │   │   │   │   ├── seg6_enabled
+#17 0.295 │   │   │   │   │   │   ├── stable_secret
+#17 0.295 │   │   │   │   │   │   ├── suppress_frag_ndisc
+#17 0.295 │   │   │   │   │   │   ├── temp_prefered_lft
+#17 0.295 │   │   │   │   │   │   ├── temp_valid_lft
+#17 0.295 │   │   │   │   │   │   ├── use_oif_addrs_only
+#17 0.295 │   │   │   │   │   │   └── use_tempaddr
+#17 0.295 │   │   │   │   │   ├── default
+#17 0.295 │   │   │   │   │   │   ├── accept_dad
+#17 0.295 │   │   │   │   │   │   ├── accept_ra
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_defrtr
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_from_local
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_min_hop_limit
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_min_lft
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_mtu
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_pinfo
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_rtr_pref
+#17 0.295 │   │   │   │   │   │   ├── accept_redirects
+#17 0.295 │   │   │   │   │   │   ├── accept_source_route
+#17 0.295 │   │   │   │   │   │   ├── accept_untracked_na
+#17 0.295 │   │   │   │   │   │   ├── addr_gen_mode
+#17 0.295 │   │   │   │   │   │   ├── autoconf
+#17 0.295 │   │   │   │   │   │   ├── dad_transmits
+#17 0.295 │   │   │   │   │   │   ├── disable_ipv6
+#17 0.295 │   │   │   │   │   │   ├── disable_policy
+#17 0.295 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.295 │   │   │   │   │   │   ├── drop_unsolicited_na
+#17 0.295 │   │   │   │   │   │   ├── enhanced_dad
+#17 0.295 │   │   │   │   │   │   ├── force_mld_version
+#17 0.295 │   │   │   │   │   │   ├── force_tllao
+#17 0.295 │   │   │   │   │   │   ├── forwarding
+#17 0.295 │   │   │   │   │   │   ├── hop_limit
+#17 0.295 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.295 │   │   │   │   │   │   ├── ioam6_enabled
+#17 0.295 │   │   │   │   │   │   ├── ioam6_id
+#17 0.295 │   │   │   │   │   │   ├── ioam6_id_wide
+#17 0.295 │   │   │   │   │   │   ├── keep_addr_on_down
+#17 0.295 │   │   │   │   │   │   ├── max_addresses
+#17 0.295 │   │   │   │   │   │   ├── max_desync_factor
+#17 0.295 │   │   │   │   │   │   ├── mldv1_unsolicited_report_interval
+#17 0.295 │   │   │   │   │   │   ├── mldv2_unsolicited_report_interval
+#17 0.295 │   │   │   │   │   │   ├── mtu
+#17 0.295 │   │   │   │   │   │   ├── ndisc_evict_nocarrier
+#17 0.295 │   │   │   │   │   │   ├── ndisc_notify
+#17 0.295 │   │   │   │   │   │   ├── ndisc_tclass
+#17 0.295 │   │   │   │   │   │   ├── proxy_ndp
+#17 0.295 │   │   │   │   │   │   ├── ra_defrtr_metric
+#17 0.295 │   │   │   │   │   │   ├── ra_honor_pio_life
+#17 0.295 │   │   │   │   │   │   ├── regen_max_retry
+#17 0.295 │   │   │   │   │   │   ├── regen_min_advance
+#17 0.295 │   │   │   │   │   │   ├── router_probe_interval
+#17 0.295 │   │   │   │   │   │   ├── router_solicitation_delay
+#17 0.295 │   │   │   │   │   │   ├── router_solicitation_interval
+#17 0.295 │   │   │   │   │   │   ├── router_solicitation_max_interval
+#17 0.295 │   │   │   │   │   │   ├── router_solicitations
+#17 0.295 │   │   │   │   │   │   ├── rpl_seg_enabled
+#17 0.295 │   │   │   │   │   │   ├── seg6_enabled
+#17 0.295 │   │   │   │   │   │   ├── stable_secret
+#17 0.295 │   │   │   │   │   │   ├── suppress_frag_ndisc
+#17 0.295 │   │   │   │   │   │   ├── temp_prefered_lft
+#17 0.295 │   │   │   │   │   │   ├── temp_valid_lft
+#17 0.295 │   │   │   │   │   │   ├── use_oif_addrs_only
+#17 0.295 │   │   │   │   │   │   └── use_tempaddr
+#17 0.295 │   │   │   │   │   ├── erspan0
+#17 0.295 │   │   │   │   │   │   ├── accept_dad
+#17 0.295 │   │   │   │   │   │   ├── accept_ra
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_defrtr
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_from_local
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_min_hop_limit
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_min_lft
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_mtu
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_pinfo
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_rtr_pref
+#17 0.295 │   │   │   │   │   │   ├── accept_redirects
+#17 0.295 │   │   │   │   │   │   ├── accept_source_route
+#17 0.295 │   │   │   │   │   │   ├── accept_untracked_na
+#17 0.295 │   │   │   │   │   │   ├── addr_gen_mode
+#17 0.295 │   │   │   │   │   │   ├── autoconf
+#17 0.295 │   │   │   │   │   │   ├── dad_transmits
+#17 0.295 │   │   │   │   │   │   ├── disable_ipv6
+#17 0.295 │   │   │   │   │   │   ├── disable_policy
+#17 0.295 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.295 │   │   │   │   │   │   ├── drop_unsolicited_na
+#17 0.295 │   │   │   │   │   │   ├── enhanced_dad
+#17 0.295 │   │   │   │   │   │   ├── force_mld_version
+#17 0.295 │   │   │   │   │   │   ├── force_tllao
+#17 0.295 │   │   │   │   │   │   ├── forwarding
+#17 0.295 │   │   │   │   │   │   ├── hop_limit
+#17 0.295 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.295 │   │   │   │   │   │   ├── ioam6_enabled
+#17 0.295 │   │   │   │   │   │   ├── ioam6_id
+#17 0.295 │   │   │   │   │   │   ├── ioam6_id_wide
+#17 0.295 │   │   │   │   │   │   ├── keep_addr_on_down
+#17 0.295 │   │   │   │   │   │   ├── max_addresses
+#17 0.295 │   │   │   │   │   │   ├── max_desync_factor
+#17 0.295 │   │   │   │   │   │   ├── mldv1_unsolicited_report_interval
+#17 0.295 │   │   │   │   │   │   ├── mldv2_unsolicited_report_interval
+#17 0.295 │   │   │   │   │   │   ├── mtu
+#17 0.295 │   │   │   │   │   │   ├── ndisc_evict_nocarrier
+#17 0.295 │   │   │   │   │   │   ├── ndisc_notify
+#17 0.295 │   │   │   │   │   │   ├── ndisc_tclass
+#17 0.295 │   │   │   │   │   │   ├── proxy_ndp
+#17 0.295 │   │   │   │   │   │   ├── ra_defrtr_metric
+#17 0.295 │   │   │   │   │   │   ├── ra_honor_pio_life
+#17 0.295 │   │   │   │   │   │   ├── regen_max_retry
+#17 0.295 │   │   │   │   │   │   ├── regen_min_advance
+#17 0.295 │   │   │   │   │   │   ├── router_probe_interval
+#17 0.295 │   │   │   │   │   │   ├── router_solicitation_delay
+#17 0.295 │   │   │   │   │   │   ├── router_solicitation_interval
+#17 0.295 │   │   │   │   │   │   ├── router_solicitation_max_interval
+#17 0.295 │   │   │   │   │   │   ├── router_solicitations
+#17 0.295 │   │   │   │   │   │   ├── rpl_seg_enabled
+#17 0.295 │   │   │   │   │   │   ├── seg6_enabled
+#17 0.295 │   │   │   │   │   │   ├── stable_secret
+#17 0.295 │   │   │   │   │   │   ├── suppress_frag_ndisc
+#17 0.295 │   │   │   │   │   │   ├── temp_prefered_lft
+#17 0.295 │   │   │   │   │   │   ├── temp_valid_lft
+#17 0.295 │   │   │   │   │   │   ├── use_oif_addrs_only
+#17 0.295 │   │   │   │   │   │   └── use_tempaddr
+#17 0.295 │   │   │   │   │   ├── eth0
+#17 0.295 │   │   │   │   │   │   ├── accept_dad
+#17 0.295 │   │   │   │   │   │   ├── accept_ra
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_defrtr
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_from_local
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_min_hop_limit
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_min_lft
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_mtu
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_pinfo
+#17 0.295 │   │   │   │   │   │   ├── accept_ra_rtr_pref
+#17 0.295 │   │   │   │   │   │   ├── accept_redirects
+#17 0.295 │   │   │   │   │   │   ├── accept_source_route
+#17 0.295 │   │   │   │   │   │   ├── accept_untracked_na
+#17 0.295 │   │   │   │   │   │   ├── addr_gen_mode
+#17 0.295 │   │   │   │   │   │   ├── autoconf
+#17 0.295 │   │   │   │   │   │   ├── dad_transmits
+#17 0.295 │   │   │   │   │   │   ├── disable_ipv6
+#17 0.295 │   │   │   │   │   │   ├── disable_policy
+#17 0.295 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.295 │   │   │   │   │   │   ├── drop_unsolicited_na
+#17 0.295 │   │   │   │   │   │   ├── enhanced_dad
+#17 0.295 │   │   │   │   │   │   ├── force_mld_version
+#17 0.295 │   │   │   │   │   │   ├── force_tllao
+#17 0.295 │   │   │   │   │   │   ├── forwarding
+#17 0.295 │   │   │   │   │   │   ├── hop_limit
+#17 0.295 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.295 │   │   │   │   │   │   ├── ioam6_enabled
+#17 0.295 │   │   │   │   │   │   ├── ioam6_id
+#17 0.295 │   │   │   │   │   │   ├── ioam6_id_wide
+#17 0.295 │   │   │   │   │   │   ├── keep_addr_on_down
+#17 0.295 │   │   │   │   │   │   ├── max_addresses
+#17 0.295 │   │   │   │   │   │   ├── max_desync_factor
+#17 0.295 │   │   │   │   │   │   ├── mldv1_unsolicited_report_interval
+#17 0.295 │   │   │   │   │   │   ├── mldv2_unsolicited_report_interval
+#17 0.295 │   │   │   │   │   │   ├── mtu
+#17 0.295 │   │   │   │   │   │   ├── ndisc_evict_nocarrier
+#17 0.295 │   │   │   │   │   │   ├── ndisc_notify
+#17 0.295 │   │   │   │   │   │   ├── ndisc_tclass
+#17 0.295 │   │   │   │   │   │   ├── proxy_ndp
+#17 0.295 │   │   │   │   │   │   ├── ra_defrtr_metric
+#17 0.295 │   │   │   │   │   │   ├── ra_honor_pio_life
+#17 0.295 │   │   │   │   │   │   ├── regen_max_retry
+#17 0.295 │   │   │   │   │   │   ├── regen_min_advance
+#17 0.295 │   │   │   │   │   │   ├── router_probe_interval
+#17 0.295 │   │   │   │   │   │   ├── router_solicitation_delay
+#17 0.295 │   │   │   │   │   │   ├── router_solicitation_interval
+#17 0.295 │   │   │   │   │   │   ├── router_solicitation_max_interval
+#17 0.295 │   │   │   │   │   │   ├── router_solicitations
+#17 0.296 │   │   │   │   │   │   ├── rpl_seg_enabled
+#17 0.296 │   │   │   │   │   │   ├── seg6_enabled
+#17 0.296 │   │   │   │   │   │   ├── stable_secret
+#17 0.296 │   │   │   │   │   │   ├── suppress_frag_ndisc
+#17 0.296 │   │   │   │   │   │   ├── temp_prefered_lft
+#17 0.296 │   │   │   │   │   │   ├── temp_valid_lft
+#17 0.296 │   │   │   │   │   │   ├── use_oif_addrs_only
+#17 0.296 │   │   │   │   │   │   └── use_tempaddr
+#17 0.296 │   │   │   │   │   ├── gretap0
+#17 0.296 │   │   │   │   │   │   ├── accept_dad
+#17 0.296 │   │   │   │   │   │   ├── accept_ra
+#17 0.296 │   │   │   │   │   │   ├── accept_ra_defrtr
+#17 0.296 │   │   │   │   │   │   ├── accept_ra_from_local
+#17 0.296 │   │   │   │   │   │   ├── accept_ra_min_hop_limit
+#17 0.296 │   │   │   │   │   │   ├── accept_ra_min_lft
+#17 0.296 │   │   │   │   │   │   ├── accept_ra_mtu
+#17 0.296 │   │   │   │   │   │   ├── accept_ra_pinfo
+#17 0.296 │   │   │   │   │   │   ├── accept_ra_rtr_pref
+#17 0.296 │   │   │   │   │   │   ├── accept_redirects
+#17 0.296 │   │   │   │   │   │   ├── accept_source_route
+#17 0.296 │   │   │   │   │   │   ├── accept_untracked_na
+#17 0.296 │   │   │   │   │   │   ├── addr_gen_mode
+#17 0.296 │   │   │   │   │   │   ├── autoconf
+#17 0.296 │   │   │   │   │   │   ├── dad_transmits
+#17 0.296 │   │   │   │   │   │   ├── disable_ipv6
+#17 0.296 │   │   │   │   │   │   ├── disable_policy
+#17 0.296 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.296 │   │   │   │   │   │   ├── drop_unsolicited_na
+#17 0.296 │   │   │   │   │   │   ├── enhanced_dad
+#17 0.296 │   │   │   │   │   │   ├── force_mld_version
+#17 0.296 │   │   │   │   │   │   ├── force_tllao
+#17 0.296 │   │   │   │   │   │   ├── forwarding
+#17 0.296 │   │   │   │   │   │   ├── hop_limit
+#17 0.296 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.296 │   │   │   │   │   │   ├── ioam6_enabled
+#17 0.296 │   │   │   │   │   │   ├── ioam6_id
+#17 0.296 │   │   │   │   │   │   ├── ioam6_id_wide
+#17 0.296 │   │   │   │   │   │   ├── keep_addr_on_down
+#17 0.296 │   │   │   │   │   │   ├── max_addresses
+#17 0.296 │   │   │   │   │   │   ├── max_desync_factor
+#17 0.296 │   │   │   │   │   │   ├── mldv1_unsolicited_report_interval
+#17 0.296 │   │   │   │   │   │   ├── mldv2_unsolicited_report_interval
+#17 0.296 │   │   │   │   │   │   ├── mtu
+#17 0.296 │   │   │   │   │   │   ├── ndisc_evict_nocarrier
+#17 0.296 │   │   │   │   │   │   ├── ndisc_notify
+#17 0.296 │   │   │   │   │   │   ├── ndisc_tclass
+#17 0.296 │   │   │   │   │   │   ├── proxy_ndp
+#17 0.296 │   │   │   │   │   │   ├── ra_defrtr_metric
+#17 0.296 │   │   │   │   │   │   ├── ra_honor_pio_life
+#17 0.296 │   │   │   │   │   │   ├── regen_max_retry
+#17 0.297 │   │   │   │   │   │   ├── regen_min_advance
+#17 0.297 │   │   │   │   │   │   ├── router_probe_interval
+#17 0.297 │   │   │   │   │   │   ├── router_solicitation_delay
+#17 0.297 │   │   │   │   │   │   ├── router_solicitation_interval
+#17 0.297 │   │   │   │   │   │   ├── router_solicitation_max_interval
+#17 0.297 │   │   │   │   │   │   ├── router_solicitations
+#17 0.297 │   │   │   │   │   │   ├── rpl_seg_enabled
+#17 0.297 │   │   │   │   │   │   ├── seg6_enabled
+#17 0.297 │   │   │   │   │   │   ├── stable_secret
+#17 0.297 │   │   │   │   │   │   ├── suppress_frag_ndisc
+#17 0.297 │   │   │   │   │   │   ├── temp_prefered_lft
+#17 0.297 │   │   │   │   │   │   ├── temp_valid_lft
+#17 0.297 │   │   │   │   │   │   ├── use_oif_addrs_only
+#17 0.297 │   │   │   │   │   │   └── use_tempaddr
+#17 0.297 │   │   │   │   │   ├── ip6_vti0
+#17 0.297 │   │   │   │   │   │   ├── accept_dad
+#17 0.297 │   │   │   │   │   │   ├── accept_ra
+#17 0.297 │   │   │   │   │   │   ├── accept_ra_defrtr
+#17 0.297 │   │   │   │   │   │   ├── accept_ra_from_local
+#17 0.297 │   │   │   │   │   │   ├── accept_ra_min_hop_limit
+#17 0.297 │   │   │   │   │   │   ├── accept_ra_min_lft
+#17 0.297 │   │   │   │   │   │   ├── accept_ra_mtu
+#17 0.297 │   │   │   │   │   │   ├── accept_ra_pinfo
+#17 0.297 │   │   │   │   │   │   ├── accept_ra_rtr_pref
+#17 0.297 │   │   │   │   │   │   ├── accept_redirects
+#17 0.297 │   │   │   │   │   │   ├── accept_source_route
+#17 0.297 │   │   │   │   │   │   ├── accept_untracked_na
+#17 0.297 │   │   │   │   │   │   ├── addr_gen_mode
+#17 0.297 │   │   │   │   │   │   ├── autoconf
+#17 0.297 │   │   │   │   │   │   ├── dad_transmits
+#17 0.297 │   │   │   │   │   │   ├── disable_ipv6
+#17 0.297 │   │   │   │   │   │   ├── disable_policy
+#17 0.297 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.297 │   │   │   │   │   │   ├── drop_unsolicited_na
+#17 0.297 │   │   │   │   │   │   ├── enhanced_dad
+#17 0.297 │   │   │   │   │   │   ├── force_mld_version
+#17 0.297 │   │   │   │   │   │   ├── force_tllao
+#17 0.297 │   │   │   │   │   │   ├── forwarding
+#17 0.297 │   │   │   │   │   │   ├── hop_limit
+#17 0.297 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.297 │   │   │   │   │   │   ├── ioam6_enabled
+#17 0.297 │   │   │   │   │   │   ├── ioam6_id
+#17 0.297 │   │   │   │   │   │   ├── ioam6_id_wide
+#17 0.297 │   │   │   │   │   │   ├── keep_addr_on_down
+#17 0.297 │   │   │   │   │   │   ├── max_addresses
+#17 0.297 │   │   │   │   │   │   ├── max_desync_factor
+#17 0.297 │   │   │   │   │   │   ├── mldv1_unsolicited_report_interval
+#17 0.297 │   │   │   │   │   │   ├── mldv2_unsolicited_report_interval
+#17 0.297 │   │   │   │   │   │   ├── mtu
+#17 0.297 │   │   │   │   │   │   ├── ndisc_evict_nocarrier
+#17 0.297 │   │   │   │   │   │   ├── ndisc_notify
+#17 0.297 │   │   │   │   │   │   ├── ndisc_tclass
+#17 0.297 │   │   │   │   │   │   ├── proxy_ndp
+#17 0.297 │   │   │   │   │   │   ├── ra_defrtr_metric
+#17 0.297 │   │   │   │   │   │   ├── ra_honor_pio_life
+#17 0.297 │   │   │   │   │   │   ├── regen_max_retry
+#17 0.297 │   │   │   │   │   │   ├── regen_min_advance
+#17 0.297 │   │   │   │   │   │   ├── router_probe_interval
+#17 0.297 │   │   │   │   │   │   ├── router_solicitation_delay
+#17 0.297 │   │   │   │   │   │   ├── router_solicitation_interval
+#17 0.297 │   │   │   │   │   │   ├── router_solicitation_max_interval
+#17 0.297 │   │   │   │   │   │   ├── router_solicitations
+#17 0.297 │   │   │   │   │   │   ├── rpl_seg_enabled
+#17 0.297 │   │   │   │   │   │   ├── seg6_enabled
+#17 0.297 │   │   │   │   │   │   ├── stable_secret
+#17 0.298 │   │   │   │   │   │   ├── suppress_frag_ndisc
+#17 0.298 │   │   │   │   │   │   ├── temp_prefered_lft
+#17 0.298 │   │   │   │   │   │   ├── temp_valid_lft
+#17 0.298 │   │   │   │   │   │   ├── use_oif_addrs_only
+#17 0.298 │   │   │   │   │   │   └── use_tempaddr
+#17 0.298 │   │   │   │   │   ├── ip6gre0
+#17 0.298 │   │   │   │   │   │   ├── accept_dad
+#17 0.298 │   │   │   │   │   │   ├── accept_ra
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_defrtr
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_from_local
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_min_hop_limit
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_min_lft
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_mtu
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_pinfo
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_rtr_pref
+#17 0.298 │   │   │   │   │   │   ├── accept_redirects
+#17 0.298 │   │   │   │   │   │   ├── accept_source_route
+#17 0.298 │   │   │   │   │   │   ├── accept_untracked_na
+#17 0.298 │   │   │   │   │   │   ├── addr_gen_mode
+#17 0.298 │   │   │   │   │   │   ├── autoconf
+#17 0.298 │   │   │   │   │   │   ├── dad_transmits
+#17 0.298 │   │   │   │   │   │   ├── disable_ipv6
+#17 0.298 │   │   │   │   │   │   ├── disable_policy
+#17 0.298 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.298 │   │   │   │   │   │   ├── drop_unsolicited_na
+#17 0.298 │   │   │   │   │   │   ├── enhanced_dad
+#17 0.298 │   │   │   │   │   │   ├── force_mld_version
+#17 0.298 │   │   │   │   │   │   ├── force_tllao
+#17 0.298 │   │   │   │   │   │   ├── forwarding
+#17 0.298 │   │   │   │   │   │   ├── hop_limit
+#17 0.298 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.298 │   │   │   │   │   │   ├── ioam6_enabled
+#17 0.298 │   │   │   │   │   │   ├── ioam6_id
+#17 0.298 │   │   │   │   │   │   ├── ioam6_id_wide
+#17 0.298 │   │   │   │   │   │   ├── keep_addr_on_down
+#17 0.298 │   │   │   │   │   │   ├── max_addresses
+#17 0.298 │   │   │   │   │   │   ├── max_desync_factor
+#17 0.298 │   │   │   │   │   │   ├── mldv1_unsolicited_report_interval
+#17 0.298 │   │   │   │   │   │   ├── mldv2_unsolicited_report_interval
+#17 0.298 │   │   │   │   │   │   ├── mtu
+#17 0.298 │   │   │   │   │   │   ├── ndisc_evict_nocarrier
+#17 0.298 │   │   │   │   │   │   ├── ndisc_notify
+#17 0.298 │   │   │   │   │   │   ├── ndisc_tclass
+#17 0.298 │   │   │   │   │   │   ├── proxy_ndp
+#17 0.298 │   │   │   │   │   │   ├── ra_defrtr_metric
+#17 0.298 │   │   │   │   │   │   ├── ra_honor_pio_life
+#17 0.298 │   │   │   │   │   │   ├── regen_max_retry
+#17 0.298 │   │   │   │   │   │   ├── regen_min_advance
+#17 0.298 │   │   │   │   │   │   ├── router_probe_interval
+#17 0.298 │   │   │   │   │   │   ├── router_solicitation_delay
+#17 0.298 │   │   │   │   │   │   ├── router_solicitation_interval
+#17 0.298 │   │   │   │   │   │   ├── router_solicitation_max_interval
+#17 0.298 │   │   │   │   │   │   ├── router_solicitations
+#17 0.298 │   │   │   │   │   │   ├── rpl_seg_enabled
+#17 0.298 │   │   │   │   │   │   ├── seg6_enabled
+#17 0.298 │   │   │   │   │   │   ├── stable_secret
+#17 0.298 │   │   │   │   │   │   ├── suppress_frag_ndisc
+#17 0.298 │   │   │   │   │   │   ├── temp_prefered_lft
+#17 0.298 │   │   │   │   │   │   ├── temp_valid_lft
+#17 0.298 │   │   │   │   │   │   ├── use_oif_addrs_only
+#17 0.298 │   │   │   │   │   │   └── use_tempaddr
+#17 0.298 │   │   │   │   │   ├── ip6tnl0
+#17 0.298 │   │   │   │   │   │   ├── accept_dad
+#17 0.298 │   │   │   │   │   │   ├── accept_ra
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_defrtr
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_from_local
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_min_hop_limit
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_min_lft
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_mtu
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_pinfo
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_rtr_pref
+#17 0.298 │   │   │   │   │   │   ├── accept_redirects
+#17 0.298 │   │   │   │   │   │   ├── accept_source_route
+#17 0.298 │   │   │   │   │   │   ├── accept_untracked_na
+#17 0.298 │   │   │   │   │   │   ├── addr_gen_mode
+#17 0.298 │   │   │   │   │   │   ├── autoconf
+#17 0.298 │   │   │   │   │   │   ├── dad_transmits
+#17 0.298 │   │   │   │   │   │   ├── disable_ipv6
+#17 0.298 │   │   │   │   │   │   ├── disable_policy
+#17 0.298 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.298 │   │   │   │   │   │   ├── drop_unsolicited_na
+#17 0.298 │   │   │   │   │   │   ├── enhanced_dad
+#17 0.298 │   │   │   │   │   │   ├── force_mld_version
+#17 0.298 │   │   │   │   │   │   ├── force_tllao
+#17 0.298 │   │   │   │   │   │   ├── forwarding
+#17 0.298 │   │   │   │   │   │   ├── hop_limit
+#17 0.298 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.298 │   │   │   │   │   │   ├── ioam6_enabled
+#17 0.298 │   │   │   │   │   │   ├── ioam6_id
+#17 0.298 │   │   │   │   │   │   ├── ioam6_id_wide
+#17 0.298 │   │   │   │   │   │   ├── keep_addr_on_down
+#17 0.298 │   │   │   │   │   │   ├── max_addresses
+#17 0.298 │   │   │   │   │   │   ├── max_desync_factor
+#17 0.298 │   │   │   │   │   │   ├── mldv1_unsolicited_report_interval
+#17 0.298 │   │   │   │   │   │   ├── mldv2_unsolicited_report_interval
+#17 0.298 │   │   │   │   │   │   ├── mtu
+#17 0.298 │   │   │   │   │   │   ├── ndisc_evict_nocarrier
+#17 0.298 │   │   │   │   │   │   ├── ndisc_notify
+#17 0.298 │   │   │   │   │   │   ├── ndisc_tclass
+#17 0.298 │   │   │   │   │   │   ├── proxy_ndp
+#17 0.298 │   │   │   │   │   │   ├── ra_defrtr_metric
+#17 0.298 │   │   │   │   │   │   ├── ra_honor_pio_life
+#17 0.298 │   │   │   │   │   │   ├── regen_max_retry
+#17 0.298 │   │   │   │   │   │   ├── regen_min_advance
+#17 0.298 │   │   │   │   │   │   ├── router_probe_interval
+#17 0.298 │   │   │   │   │   │   ├── router_solicitation_delay
+#17 0.298 │   │   │   │   │   │   ├── router_solicitation_interval
+#17 0.298 │   │   │   │   │   │   ├── router_solicitation_max_interval
+#17 0.298 │   │   │   │   │   │   ├── router_solicitations
+#17 0.298 │   │   │   │   │   │   ├── rpl_seg_enabled
+#17 0.298 │   │   │   │   │   │   ├── seg6_enabled
+#17 0.298 │   │   │   │   │   │   ├── stable_secret
+#17 0.298 │   │   │   │   │   │   ├── suppress_frag_ndisc
+#17 0.298 │   │   │   │   │   │   ├── temp_prefered_lft
+#17 0.298 │   │   │   │   │   │   ├── temp_valid_lft
+#17 0.298 │   │   │   │   │   │   ├── use_oif_addrs_only
+#17 0.298 │   │   │   │   │   │   └── use_tempaddr
+#17 0.298 │   │   │   │   │   ├── lo
+#17 0.298 │   │   │   │   │   │   ├── accept_dad
+#17 0.298 │   │   │   │   │   │   ├── accept_ra
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_defrtr
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_from_local
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_min_hop_limit
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_min_lft
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_mtu
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_pinfo
+#17 0.298 │   │   │   │   │   │   ├── accept_ra_rtr_pref
+#17 0.298 │   │   │   │   │   │   ├── accept_redirects
+#17 0.298 │   │   │   │   │   │   ├── accept_source_route
+#17 0.298 │   │   │   │   │   │   ├── accept_untracked_na
+#17 0.298 │   │   │   │   │   │   ├── addr_gen_mode
+#17 0.298 │   │   │   │   │   │   ├── autoconf
+#17 0.298 │   │   │   │   │   │   ├── dad_transmits
+#17 0.299 │   │   │   │   │   │   ├── disable_ipv6
+#17 0.299 │   │   │   │   │   │   ├── disable_policy
+#17 0.299 │   │   │   │   │   │   ├── drop_unicast_in_l2_multicast
+#17 0.299 │   │   │   │   │   │   ├── drop_unsolicited_na
+#17 0.299 │   │   │   │   │   │   ├── enhanced_dad
+#17 0.299 │   │   │   │   │   │   ├── force_mld_version
+#17 0.299 │   │   │   │   │   │   ├── force_tllao
+#17 0.299 │   │   │   │   │   │   ├── forwarding
+#17 0.299 │   │   │   │   │   │   ├── hop_limit
+#17 0.299 │   │   │   │   │   │   ├── ignore_routes_with_linkdown
+#17 0.299 │   │   │   │   │   │   ├── ioam6_enabled
+#17 0.299 │   │   │   │   │   │   ├── ioam6_id
+#17 0.299 │   │   │   │   │   │   ├── ioam6_id_wide
+#17 0.299 │   │   │   │   │   │   ├── keep_addr_on_down
+#17 0.299 │   │   │   │   │   │   ├── max_addresses
+#17 0.299 │   │   │   │   │   │   ├── max_desync_factor
+#17 0.299 │   │   │   │   │   │   ├── mldv1_unsolicited_report_interval
+#17 0.299 │   │   │   │   │   │   ├── mldv2_unsolicited_report_interval
+#17 0.299 │   │   │   │   │   │   ├── mtu
+#17 0.299 │   │   │   │   │   │   ├── ndisc_evict_nocarrier
+#17 0.299 │   │   │   │   │   │   ├── ndisc_notify
+#17 0.299 │   │   │   │   │   │   ├── ndisc_tclass
+#17 0.299 │   │   │   │   │   │   ├── proxy_ndp
+#17 0.299 │   │   │   │   │   │   ├── ra_defrtr_metric
+#17 0.299 │   │   │   │   │   │   ├── ra_honor_pio_life
+#17 0.299 │   │   │   │   │   │   ├── regen_max_retry
+#17 0.299 │   │   │   │   │   │   ├── regen_min_advance
+#17 0.299 │   │   │   │   │   │   ├── router_probe_interval
+#17 0.299 │   │   │   │   │   │   ├── router_solicitation_delay
+#17 0.299 │   │   │   │   │   │   ├── router_solicitation_interval
+#17 0.299 │   │   │   │   │   │   ├── router_solicitation_max_interval
+#17 0.299 │   │   │   │   │   │   ├── router_solicitations
+#17 0.299 │   │   │   │   │   │   ├── rpl_seg_enabled
+#17 0.299 │   │   │   │   │   │   ├── seg6_enabled
+#17 0.299 │   │   │   │   │   │   ├── stable_secret
+#17 0.299 │   │   │   │   │   │   ├── suppress_frag_ndisc
+#17 0.299 │   │   │   │   │   │   ├── temp_prefered_lft
+#17 0.299 │   │   │   │   │   │   ├── temp_valid_lft
+#17 0.299 │   │   │   │   │   │   ├── use_oif_addrs_only
+#17 0.299 │   │   │   │   │   │   └── use_tempaddr
+#17 0.299 │   │   │   │   │   └── sit0
+#17 0.299 │   │   │   │   │       ├── accept_dad
+#17 0.299 │   │   │   │   │       ├── accept_ra
+#17 0.299 │   │   │   │   │       ├── accept_ra_defrtr
+#17 0.299 │   │   │   │   │       ├── accept_ra_from_local
+#17 0.299 │   │   │   │   │       ├── accept_ra_min_hop_limit
+#17 0.299 │   │   │   │   │       ├── accept_ra_min_lft
+#17 0.299 │   │   │   │   │       ├── accept_ra_mtu
+#17 0.299 │   │   │   │   │       ├── accept_ra_pinfo
+#17 0.299 │   │   │   │   │       ├── accept_ra_rtr_pref
+#17 0.299 │   │   │   │   │       ├── accept_redirects
+#17 0.299 │   │   │   │   │       ├── accept_source_route
+#17 0.299 │   │   │   │   │       ├── accept_untracked_na
+#17 0.299 │   │   │   │   │       ├── addr_gen_mode
+#17 0.299 │   │   │   │   │       ├── autoconf
+#17 0.299 │   │   │   │   │       ├── dad_transmits
+#17 0.299 │   │   │   │   │       ├── disable_ipv6
+#17 0.299 │   │   │   │   │       ├── disable_policy
+#17 0.299 │   │   │   │   │       ├── drop_unicast_in_l2_multicast
+#17 0.299 │   │   │   │   │       ├── drop_unsolicited_na
+#17 0.299 │   │   │   │   │       ├── enhanced_dad
+#17 0.299 │   │   │   │   │       ├── force_mld_version
+#17 0.299 │   │   │   │   │       ├── force_tllao
+#17 0.299 │   │   │   │   │       ├── forwarding
+#17 0.299 │   │   │   │   │       ├── hop_limit
+#17 0.299 │   │   │   │   │       ├── ignore_routes_with_linkdown
+#17 0.299 │   │   │   │   │       ├── ioam6_enabled
+#17 0.299 │   │   │   │   │       ├── ioam6_id
+#17 0.299 │   │   │   │   │       ├── ioam6_id_wide
+#17 0.299 │   │   │   │   │       ├── keep_addr_on_down
+#17 0.299 │   │   │   │   │       ├── max_addresses
+#17 0.299 │   │   │   │   │       ├── max_desync_factor
+#17 0.299 │   │   │   │   │       ├── mldv1_unsolicited_report_interval
+#17 0.299 │   │   │   │   │       ├── mldv2_unsolicited_report_interval
+#17 0.299 │   │   │   │   │       ├── mtu
+#17 0.299 │   │   │   │   │       ├── ndisc_evict_nocarrier
+#17 0.299 │   │   │   │   │       ├── ndisc_notify
+#17 0.299 │   │   │   │   │       ├── ndisc_tclass
+#17 0.299 │   │   │   │   │       ├── proxy_ndp
+#17 0.299 │   │   │   │   │       ├── ra_defrtr_metric
+#17 0.299 │   │   │   │   │       ├── ra_honor_pio_life
+#17 0.299 │   │   │   │   │       ├── regen_max_retry
+#17 0.299 │   │   │   │   │       ├── regen_min_advance
+#17 0.299 │   │   │   │   │       ├── router_probe_interval
+#17 0.299 │   │   │   │   │       ├── router_solicitation_delay
+#17 0.299 │   │   │   │   │       ├── router_solicitation_interval
+#17 0.299 │   │   │   │   │       ├── router_solicitation_max_interval
+#17 0.299 │   │   │   │   │       ├── router_solicitations
+#17 0.299 │   │   │   │   │       ├── rpl_seg_enabled
+#17 0.299 │   │   │   │   │       ├── seg6_enabled
+#17 0.299 │   │   │   │   │       ├── stable_secret
+#17 0.299 │   │   │   │   │       ├── suppress_frag_ndisc
+#17 0.299 │   │   │   │   │       ├── temp_prefered_lft
+#17 0.299 │   │   │   │   │       ├── temp_valid_lft
+#17 0.299 │   │   │   │   │       ├── use_oif_addrs_only
+#17 0.299 │   │   │   │   │       └── use_tempaddr
+#17 0.299 │   │   │   │   ├── fib_multipath_hash_fields
+#17 0.299 │   │   │   │   ├── fib_multipath_hash_policy
+#17 0.299 │   │   │   │   ├── fib_notify_on_flag_change
+#17 0.299 │   │   │   │   ├── flowlabel_consistency
+#17 0.299 │   │   │   │   ├── flowlabel_reflect
+#17 0.300 │   │   │   │   ├── flowlabel_state_ranges
+#17 0.300 │   │   │   │   ├── fwmark_reflect
+#17 0.300 │   │   │   │   ├── icmp
+#17 0.300 │   │   │   │   │   ├── echo_ignore_all
+#17 0.300 │   │   │   │   │   ├── echo_ignore_anycast
+#17 0.300 │   │   │   │   │   ├── echo_ignore_multicast
+#17 0.300 │   │   │   │   │   ├── error_anycast_as_unicast
+#17 0.300 │   │   │   │   │   ├── ratelimit
+#17 0.300 │   │   │   │   │   └── ratemask
+#17 0.300 │   │   │   │   ├── idgen_delay
+#17 0.300 │   │   │   │   ├── idgen_retries
+#17 0.300 │   │   │   │   ├── ioam6_id
+#17 0.300 │   │   │   │   ├── ioam6_id_wide
+#17 0.300 │   │   │   │   ├── ip6frag_high_thresh
+#17 0.300 │   │   │   │   ├── ip6frag_low_thresh
+#17 0.300 │   │   │   │   ├── ip6frag_time
+#17 0.300 │   │   │   │   ├── ip_nonlocal_bind
+#17 0.300 │   │   │   │   ├── max_dst_opts_length
+#17 0.300 │   │   │   │   ├── max_dst_opts_number
+#17 0.300 │   │   │   │   ├── max_hbh_length
+#17 0.300 │   │   │   │   ├── max_hbh_opts_number
+#17 0.300 │   │   │   │   ├── neigh
+#17 0.300 │   │   │   │   │   ├── erspan0
+#17 0.300 │   │   │   │   │   │   ├── anycast_delay
+#17 0.300 │   │   │   │   │   │   ├── app_solicit
+#17 0.300 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.300 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.300 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.300 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.300 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.300 │   │   │   │   │   │   ├── locktime
+#17 0.300 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.300 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.300 │   │   │   │   │   │   ├── proxy_delay
+#17 0.300 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.300 │   │   │   │   │   │   ├── retrans_time
+#17 0.300 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.300 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.300 │   │   │   │   │   │   ├── unres_qlen
+#17 0.300 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.300 │   │   │   │   │   ├── eth0
+#17 0.300 │   │   │   │   │   │   ├── anycast_delay
+#17 0.300 │   │   │   │   │   │   ├── app_solicit
+#17 0.300 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.300 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.300 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.300 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.300 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.300 │   │   │   │   │   │   ├── locktime
+#17 0.300 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.300 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.300 │   │   │   │   │   │   ├── proxy_delay
+#17 0.300 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.300 │   │   │   │   │   │   ├── retrans_time
+#17 0.300 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.300 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.300 │   │   │   │   │   │   ├── unres_qlen
+#17 0.300 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.300 │   │   │   │   │   ├── gretap0
+#17 0.300 │   │   │   │   │   │   ├── anycast_delay
+#17 0.300 │   │   │   │   │   │   ├── app_solicit
+#17 0.300 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.300 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.300 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.300 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.300 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.300 │   │   │   │   │   │   ├── locktime
+#17 0.300 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.300 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.300 │   │   │   │   │   │   ├── proxy_delay
+#17 0.300 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.300 │   │   │   │   │   │   ├── retrans_time
+#17 0.300 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.300 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.300 │   │   │   │   │   │   ├── unres_qlen
+#17 0.300 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.300 │   │   │   │   │   ├── ip6_vti0
+#17 0.300 │   │   │   │   │   │   ├── anycast_delay
+#17 0.300 │   │   │   │   │   │   ├── app_solicit
+#17 0.300 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.300 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.300 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.300 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.300 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.300 │   │   │   │   │   │   ├── locktime
+#17 0.300 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.300 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.300 │   │   │   │   │   │   ├── proxy_delay
+#17 0.300 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.300 │   │   │   │   │   │   ├── retrans_time
+#17 0.300 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.300 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.300 │   │   │   │   │   │   ├── unres_qlen
+#17 0.300 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.300 │   │   │   │   │   ├── ip6gre0
+#17 0.300 │   │   │   │   │   │   ├── anycast_delay
+#17 0.300 │   │   │   │   │   │   ├── app_solicit
+#17 0.300 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.300 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.300 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.300 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.300 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.300 │   │   │   │   │   │   ├── locktime
+#17 0.300 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.300 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.300 │   │   │   │   │   │   ├── proxy_delay
+#17 0.301 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.301 │   │   │   │   │   │   ├── retrans_time
+#17 0.301 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.301 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.301 │   │   │   │   │   │   ├── unres_qlen
+#17 0.301 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.301 │   │   │   │   │   ├── ip6tnl0
+#17 0.301 │   │   │   │   │   │   ├── anycast_delay
+#17 0.301 │   │   │   │   │   │   ├── app_solicit
+#17 0.301 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.301 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.301 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.301 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.301 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.301 │   │   │   │   │   │   ├── locktime
+#17 0.301 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.301 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.301 │   │   │   │   │   │   ├── proxy_delay
+#17 0.301 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.301 │   │   │   │   │   │   ├── retrans_time
+#17 0.301 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.301 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.301 │   │   │   │   │   │   ├── unres_qlen
+#17 0.301 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.301 │   │   │   │   │   ├── lo
+#17 0.301 │   │   │   │   │   │   ├── anycast_delay
+#17 0.301 │   │   │   │   │   │   ├── app_solicit
+#17 0.301 │   │   │   │   │   │   ├── base_reachable_time
+#17 0.301 │   │   │   │   │   │   ├── base_reachable_time_ms
+#17 0.301 │   │   │   │   │   │   ├── delay_first_probe_time
+#17 0.301 │   │   │   │   │   │   ├── gc_stale_time
+#17 0.301 │   │   │   │   │   │   ├── interval_probe_time_ms
+#17 0.301 │   │   │   │   │   │   ├── locktime
+#17 0.301 │   │   │   │   │   │   ├── mcast_resolicit
+#17 0.301 │   │   │   │   │   │   ├── mcast_solicit
+#17 0.301 │   │   │   │   │   │   ├── proxy_delay
+#17 0.301 │   │   │   │   │   │   ├── proxy_qlen
+#17 0.301 │   │   │   │   │   │   ├── retrans_time
+#17 0.301 │   │   │   │   │   │   ├── retrans_time_ms
+#17 0.301 │   │   │   │   │   │   ├── ucast_solicit
+#17 0.301 │   │   │   │   │   │   ├── unres_qlen
+#17 0.301 │   │   │   │   │   │   └── unres_qlen_bytes
+#17 0.301 │   │   │   │   │   └── sit0
+#17 0.301 │   │   │   │   │       ├── anycast_delay
+#17 0.301 │   │   │   │   │       ├── app_solicit
+#17 0.301 │   │   │   │   │       ├── base_reachable_time
+#17 0.301 │   │   │   │   │       ├── base_reachable_time_ms
+#17 0.301 │   │   │   │   │       ├── delay_first_probe_time
+#17 0.301 │   │   │   │   │       ├── gc_stale_time
+#17 0.301 │   │   │   │   │       ├── interval_probe_time_ms
+#17 0.301 │   │   │   │   │       ├── locktime
+#17 0.301 │   │   │   │   │       ├── mcast_resolicit
+#17 0.301 │   │   │   │   │       ├── mcast_solicit
+#17 0.301 │   │   │   │   │       ├── proxy_delay
+#17 0.301 │   │   │   │   │       ├── proxy_qlen
+#17 0.301 │   │   │   │   │       ├── retrans_time
+#17 0.301 │   │   │   │   │       ├── retrans_time_ms
+#17 0.301 │   │   │   │   │       ├── ucast_solicit
+#17 0.301 │   │   │   │   │       ├── unres_qlen
+#17 0.301 │   │   │   │   │       └── unres_qlen_bytes
+#17 0.301 │   │   │   │   ├── route
+#17 0.301 │   │   │   │   │   ├── flush
+#17 0.301 │   │   │   │   │   ├── gc_elasticity
+#17 0.301 │   │   │   │   │   ├── gc_interval
+#17 0.301 │   │   │   │   │   ├── gc_min_interval
+#17 0.301 │   │   │   │   │   ├── gc_min_interval_ms
+#17 0.301 │   │   │   │   │   ├── gc_thresh
+#17 0.301 │   │   │   │   │   ├── gc_timeout
+#17 0.301 │   │   │   │   │   ├── max_size
+#17 0.301 │   │   │   │   │   ├── min_adv_mss
+#17 0.301 │   │   │   │   │   ├── mtu_expires
+#17 0.301 │   │   │   │   │   └── skip_notify_on_dev_down
+#17 0.301 │   │   │   │   ├── seg6_flowlabel
+#17 0.301 │   │   │   │   └── xfrm6_gc_thresh
+#17 0.301 │   │   │   ├── mpls
+#17 0.301 │   │   │   │   ├── conf
+#17 0.301 │   │   │   │   │   ├── erspan0
+#17 0.301 │   │   │   │   │   │   └── input
+#17 0.301 │   │   │   │   │   ├── eth0
+#17 0.301 │   │   │   │   │   │   └── input
+#17 0.301 │   │   │   │   │   ├── gre0
+#17 0.301 │   │   │   │   │   │   └── input
+#17 0.301 │   │   │   │   │   ├── gretap0
+#17 0.301 │   │   │   │   │   │   └── input
+#17 0.301 │   │   │   │   │   ├── ip6_vti0
+#17 0.301 │   │   │   │   │   │   └── input
+#17 0.301 │   │   │   │   │   ├── ip6gre0
+#17 0.301 │   │   │   │   │   │   └── input
+#17 0.301 │   │   │   │   │   ├── ip6tnl0
+#17 0.301 │   │   │   │   │   │   └── input
+#17 0.301 │   │   │   │   │   ├── ip_vti0
+#17 0.302 │   │   │   │   │   │   └── input
+#17 0.302 │   │   │   │   │   ├── lo
+#17 0.302 │   │   │   │   │   │   └── input
+#17 0.302 │   │   │   │   │   ├── sit0
+#17 0.302 │   │   │   │   │   │   └── input
+#17 0.302 │   │   │   │   │   └── tunl0
+#17 0.302 │   │   │   │   │       └── input
+#17 0.302 │   │   │   │   ├── default_ttl
+#17 0.302 │   │   │   │   ├── ip_ttl_propagate
+#17 0.302 │   │   │   │   └── platform_labels
+#17 0.302 │   │   │   ├── netfilter
+#17 0.302 │   │   │   │   ├── nf_conntrack_acct
+#17 0.302 │   │   │   │   ├── nf_conntrack_buckets
+#17 0.302 │   │   │   │   ├── nf_conntrack_checksum
+#17 0.302 │   │   │   │   ├── nf_conntrack_count
+#17 0.302 │   │   │   │   ├── nf_conntrack_dccp_loose
+#17 0.302 │   │   │   │   ├── nf_conntrack_dccp_timeout_closereq
+#17 0.302 │   │   │   │   ├── nf_conntrack_dccp_timeout_closing
+#17 0.302 │   │   │   │   ├── nf_conntrack_dccp_timeout_open
+#17 0.302 │   │   │   │   ├── nf_conntrack_dccp_timeout_partopen
+#17 0.302 │   │   │   │   ├── nf_conntrack_dccp_timeout_request
+#17 0.302 │   │   │   │   ├── nf_conntrack_dccp_timeout_respond
+#17 0.302 │   │   │   │   ├── nf_conntrack_dccp_timeout_timewait
+#17 0.302 │   │   │   │   ├── nf_conntrack_events
+#17 0.302 │   │   │   │   ├── nf_conntrack_expect_max
+#17 0.302 │   │   │   │   ├── nf_conntrack_frag6_high_thresh
+#17 0.302 │   │   │   │   ├── nf_conntrack_frag6_low_thresh
+#17 0.302 │   │   │   │   ├── nf_conntrack_frag6_timeout
+#17 0.302 │   │   │   │   ├── nf_conntrack_generic_timeout
+#17 0.302 │   │   │   │   ├── nf_conntrack_icmp_timeout
+#17 0.302 │   │   │   │   ├── nf_conntrack_icmpv6_timeout
+#17 0.302 │   │   │   │   ├── nf_conntrack_log_invalid
+#17 0.302 │   │   │   │   ├── nf_conntrack_max
+#17 0.302 │   │   │   │   ├── nf_conntrack_sctp_timeout_closed
+#17 0.302 │   │   │   │   ├── nf_conntrack_sctp_timeout_cookie_echoed
+#17 0.302 │   │   │   │   ├── nf_conntrack_sctp_timeout_cookie_wait
+#17 0.302 │   │   │   │   ├── nf_conntrack_sctp_timeout_established
+#17 0.302 │   │   │   │   ├── nf_conntrack_sctp_timeout_heartbeat_sent
+#17 0.302 │   │   │   │   ├── nf_conntrack_sctp_timeout_shutdown_ack_sent
+#17 0.302 │   │   │   │   ├── nf_conntrack_sctp_timeout_shutdown_recd
+#17 0.302 │   │   │   │   ├── nf_conntrack_sctp_timeout_shutdown_sent
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_be_liberal
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_ignore_invalid_rst
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_loose
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_max_retrans
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_timeout_close
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_timeout_close_wait
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_timeout_established
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_timeout_fin_wait
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_timeout_last_ack
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_timeout_max_retrans
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_timeout_syn_recv
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_timeout_syn_sent
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_timeout_time_wait
+#17 0.302 │   │   │   │   ├── nf_conntrack_tcp_timeout_unacknowledged
+#17 0.302 │   │   │   │   ├── nf_conntrack_timestamp
+#17 0.302 │   │   │   │   ├── nf_conntrack_udp_timeout
+#17 0.302 │   │   │   │   ├── nf_conntrack_udp_timeout_stream
+#17 0.302 │   │   │   │   ├── nf_hooks_lwtunnel
+#17 0.302 │   │   │   │   └── nf_log
+#17 0.302 │   │   │   │       ├── 0
+#17 0.302 │   │   │   │       ├── 1
+#17 0.302 │   │   │   │       ├── 10
+#17 0.302 │   │   │   │       ├── 2
+#17 0.302 │   │   │   │       ├── 3
+#17 0.302 │   │   │   │       ├── 4
+#17 0.302 │   │   │   │       ├── 5
+#17 0.302 │   │   │   │       ├── 6
+#17 0.302 │   │   │   │       ├── 7
+#17 0.302 │   │   │   │       ├── 8
+#17 0.302 │   │   │   │       └── 9
+#17 0.302 │   │   │   ├── sctp
+#17 0.304 │   │   │   │   ├── addip_enable
+#17 0.304 │   │   │   │   ├── addip_noauth_enable
+#17 0.304 │   │   │   │   ├── addr_scope_policy
+#17 0.304 │   │   │   │   ├── association_max_retrans
+#17 0.304 │   │   │   │   ├── auth_enable
+#17 0.304 │   │   │   │   ├── cookie_hmac_alg
+#17 0.304 │   │   │   │   ├── cookie_preserve_enable
+#17 0.304 │   │   │   │   ├── default_auto_asconf
+#17 0.304 │   │   │   │   ├── ecn_enable
+#17 0.304 │   │   │   │   ├── encap_port
+#17 0.304 │   │   │   │   ├── hb_interval
+#17 0.304 │   │   │   │   ├── intl_enable
+#17 0.304 │   │   │   │   ├── l3mdev_accept
+#17 0.304 │   │   │   │   ├── max_autoclose
+#17 0.304 │   │   │   │   ├── max_burst
+#17 0.304 │   │   │   │   ├── max_init_retransmits
+#17 0.304 │   │   │   │   ├── path_max_retrans
+#17 0.304 │   │   │   │   ├── pf_enable
+#17 0.304 │   │   │   │   ├── pf_expose
+#17 0.304 │   │   │   │   ├── pf_retrans
+#17 0.304 │   │   │   │   ├── plpmtud_probe_interval
+#17 0.304 │   │   │   │   ├── prsctp_enable
+#17 0.304 │   │   │   │   ├── ps_retrans
+#17 0.304 │   │   │   │   ├── rcvbuf_policy
+#17 0.304 │   │   │   │   ├── reconf_enable
+#17 0.304 │   │   │   │   ├── rto_alpha_exp_divisor
+#17 0.304 │   │   │   │   ├── rto_beta_exp_divisor
+#17 0.304 │   │   │   │   ├── rto_initial
+#17 0.304 │   │   │   │   ├── rto_max
+#17 0.304 │   │   │   │   ├── rto_min
+#17 0.304 │   │   │   │   ├── rwnd_update_shift
+#17 0.304 │   │   │   │   ├── sack_timeout
+#17 0.304 │   │   │   │   ├── sndbuf_policy
+#17 0.304 │   │   │   │   ├── udp_port
+#17 0.304 │   │   │   │   └── valid_cookie_life
+#17 0.304 │   │   │   └── unix
+#17 0.304 │   │   │       └── max_dgram_qlen
+#17 0.304 │   │   ├── sunrpc
+#17 0.304 │   │   │   ├── max_resvport
+#17 0.304 │   │   │   ├── min_resvport
+#17 0.304 │   │   │   ├── tcp_fin_timeout
+#17 0.304 │   │   │   ├── tcp_max_slot_table_entries
+#17 0.304 │   │   │   ├── tcp_slot_table_entries
+#17 0.304 │   │   │   └── udp_slot_table_entries
+#17 0.304 │   │   ├── user
+#17 0.304 │   │   │   ├── max_cgroup_namespaces
+#17 0.304 │   │   │   ├── max_fanotify_groups
+#17 0.304 │   │   │   ├── max_fanotify_marks
+#17 0.304 │   │   │   ├── max_inotify_instances
+#17 0.304 │   │   │   ├── max_inotify_watches
+#17 0.304 │   │   │   ├── max_ipc_namespaces
+#17 0.304 │   │   │   ├── max_mnt_namespaces
+#17 0.304 │   │   │   ├── max_net_namespaces
+#17 0.304 │   │   │   ├── max_pid_namespaces
+#17 0.304 │   │   │   ├── max_time_namespaces
+#17 0.304 │   │   │   ├── max_user_namespaces
+#17 0.304 │   │   │   └── max_uts_namespaces
+#17 0.304 │   │   └── vm
+#17 0.304 │   │       ├── admin_reserve_kbytes
+#17 0.304 │   │       ├── compact_memory
+#17 0.304 │   │       ├── compact_unevictable_allowed
+#17 0.304 │   │       ├── compaction_proactiveness
+#17 0.304 │   │       ├── dirty_background_bytes
+#17 0.304 │   │       ├── dirty_background_ratio
+#17 0.304 │   │       ├── dirty_bytes
+#17 0.304 │   │       ├── dirty_expire_centisecs
+#17 0.304 │   │       ├── dirty_ratio
+#17 0.304 │   │       ├── dirty_writeback_centisecs
+#17 0.304 │   │       ├── dirtytime_expire_seconds
+#17 0.304 │   │       ├── drop_caches
+#17 0.304 │   │       ├── extfrag_threshold
+#17 0.304 │   │       ├── hugetlb_optimize_vmemmap
+#17 0.304 │   │       ├── hugetlb_shm_group
+#17 0.304 │   │       ├── laptop_mode
+#17 0.304 │   │       ├── legacy_va_layout
+#17 0.304 │   │       ├── lowmem_reserve_ratio
+#17 0.304 │   │       ├── max_map_count
+#17 0.304 │   │       ├── memfd_noexec
+#17 0.304 │   │       ├── min_free_kbytes
+#17 0.304 │   │       ├── mmap_min_addr
+#17 0.304 │   │       ├── mmap_rnd_bits
+#17 0.304 │   │       ├── mmap_rnd_compat_bits
+#17 0.304 │   │       ├── nr_hugepages
+#17 0.304 │   │       ├── nr_overcommit_hugepages
+#17 0.304 │   │       ├── oom_dump_tasks
+#17 0.304 │   │       ├── oom_kill_allocating_task
+#17 0.304 │   │       ├── overcommit_kbytes
+#17 0.304 │   │       ├── overcommit_memory
+#17 0.304 │   │       ├── overcommit_ratio
+#17 0.304 │   │       ├── page-cluster
+#17 0.304 │   │       ├── page_lock_unfairness
+#17 0.304 │   │       ├── panic_on_oom
+#17 0.304 │   │       ├── percpu_pagelist_high_fraction
+#17 0.304 │   │       ├── stat_interval
+#17 0.304 │   │       ├── stat_refresh
+#17 0.304 │   │       ├── swappiness
+#17 0.304 │   │       ├── user_reserve_kbytes
+#17 0.304 │   │       ├── vfs_cache_pressure
+#17 0.304 │   │       ├── watermark_boost_factor
+#17 0.304 │   │       └── watermark_scale_factor
+#17 0.304 │   ├── sysrq-trigger
+#17 0.304 │   ├── sysvipc
+#17 0.304 │   │   ├── msg
+#17 0.304 │   │   ├── sem
+#17 0.304 │   │   └── shm
+#17 0.304 │   ├── thread-self -> 1/task/1
+#17 0.304 │   ├── timer_list
+#17 0.304 │   ├── tty
+#17 0.304 │   │   ├── driver
+#17 0.304 │   │   │   ├── serial
+#17 0.304 │   │   │   └── usbserial
+#17 0.304 │   │   ├── drivers
+#17 0.304 │   │   ├── ldisc
+#17 0.304 │   │   └── ldiscs
+#17 0.304 │   ├── uptime
+#17 0.304 │   ├── version
+#17 0.304 │   ├── vmallocinfo
+#17 0.304 │   ├── vmstat
+#17 0.304 │   └── zoneinfo
+#17 0.304 ├── root
+#17 0.304 ├── run
+#17 0.304 │   └── lock
+#17 0.304 ├── sbin
+#17 0.304 │   ├── acpid -> /bin/busybox
+#17 0.304 │   ├── adjtimex -> /bin/busybox
+#17 0.304 │   ├── apk
+#17 0.304 │   ├── arp -> /bin/busybox
+#17 0.304 │   ├── blkdiscard -> /bin/busybox
+#17 0.304 │   ├── blkid -> /bin/busybox
+#17 0.304 │   ├── blockdev -> /bin/busybox
+#17 0.304 │   ├── depmod -> /bin/busybox
+#17 0.304 │   ├── fbsplash -> /bin/busybox
+#17 0.304 │   ├── fdisk -> /bin/busybox
+#17 0.304 │   ├── findfs -> /bin/busybox
+#17 0.304 │   ├── fsck -> /bin/busybox
+#17 0.304 │   ├── fstrim -> /bin/busybox
+#17 0.304 │   ├── getty -> /bin/busybox
+#17 0.304 │   ├── halt -> /bin/busybox
+#17 0.304 │   ├── hwclock -> /bin/busybox
+#17 0.304 │   ├── ifconfig -> /bin/busybox
+#17 0.304 │   ├── ifdown -> /bin/busybox
+#17 0.304 │   ├── ifenslave -> /bin/busybox
+#17 0.304 │   ├── ifup -> /bin/busybox
+#17 0.304 │   ├── init -> /bin/busybox
+#17 0.304 │   ├── inotifyd -> /bin/busybox
+#17 0.304 │   ├── insmod -> /bin/busybox
+#17 0.304 │   ├── ip -> /bin/busybox
+#17 0.304 │   ├── ipaddr -> /bin/busybox
+#17 0.304 │   ├── iplink -> /bin/busybox
+#17 0.304 │   ├── ipneigh -> /bin/busybox
+#17 0.304 │   ├── iproute -> /bin/busybox
+#17 0.304 │   ├── iprule -> /bin/busybox
+#17 0.304 │   ├── iptunnel -> /bin/busybox
+#17 0.304 │   ├── klogd -> /bin/busybox
+#17 0.304 │   ├── ldconfig
+#17 0.304 │   ├── loadkmap -> /bin/busybox
+#17 0.304 │   ├── logread -> /bin/busybox
+#17 0.304 │   ├── losetup -> /bin/busybox
+#17 0.304 │   ├── lsmod -> /bin/busybox
+#17 0.304 │   ├── mdev -> /bin/busybox
+#17 0.304 │   ├── mkdosfs -> /bin/busybox
+#17 0.304 │   ├── mkfs.vfat -> /bin/busybox
+#17 0.304 │   ├── mkswap -> /bin/busybox
+#17 0.304 │   ├── modinfo -> /bin/busybox
+#17 0.304 │   ├── modprobe -> /bin/busybox
+#17 0.304 │   ├── nameif -> /bin/busybox
+#17 0.304 │   ├── nologin -> /bin/busybox
+#17 0.304 │   ├── pivot_root -> /bin/busybox
+#17 0.304 │   ├── poweroff -> /bin/busybox
+#17 0.304 │   ├── raidautorun -> /bin/busybox
+#17 0.304 │   ├── reboot -> /bin/busybox
+#17 0.304 │   ├── rmmod -> /bin/busybox
+#17 0.304 │   ├── route -> /bin/busybox
+#17 0.304 │   ├── setconsole -> /bin/busybox
+#17 0.304 │   ├── slattach -> /bin/busybox
+#17 0.304 │   ├── swapoff -> /bin/busybox
+#17 0.312 │   ├── swapon -> /bin/busybox
+#17 0.312 │   ├── switch_root -> /bin/busybox
+#17 0.312 │   ├── sysctl -> /bin/busybox
+#17 0.312 │   ├── syslogd -> /bin/busybox
+#17 0.312 │   ├── tunctl -> /bin/busybox
+#17 0.312 │   ├── udhcpc -> /bin/busybox
+#17 0.312 │   ├── vconfig -> /bin/busybox
+#17 0.312 │   ├── watchdog -> /bin/busybox
+#17 0.312 │   └── zcip -> /bin/busybox
+#17 0.312 ├── srv
+#17 0.312 ├── sys
+#17 0.312 │   ├── block
+#17 0.312 │   │   ├── loop0 -> ../devices/virtual/block/loop0
+#17 0.312 │   │   ├── loop1 -> ../devices/virtual/block/loop1
+#17 0.312 │   │   ├── loop2 -> ../devices/virtual/block/loop2
+#17 0.312 │   │   ├── loop3 -> ../devices/virtual/block/loop3
+#17 0.312 │   │   ├── loop4 -> ../devices/virtual/block/loop4
+#17 0.312 │   │   ├── loop5 -> ../devices/virtual/block/loop5
+#17 0.312 │   │   ├── loop6 -> ../devices/virtual/block/loop6
+#17 0.312 │   │   ├── loop7 -> ../devices/virtual/block/loop7
+#17 0.312 │   │   ├── nbd0 -> ../devices/virtual/block/nbd0
+#17 0.312 │   │   ├── nbd1 -> ../devices/virtual/block/nbd1
+#17 0.315 │   │   ├── nbd10 -> ../devices/virtual/block/nbd10
+#17 0.315 │   │   ├── nbd11 -> ../devices/virtual/block/nbd11
+#17 0.315 │   │   ├── nbd12 -> ../devices/virtual/block/nbd12
+#17 0.315 │   │   ├── nbd13 -> ../devices/virtual/block/nbd13
+#17 0.315 │   │   ├── nbd14 -> ../devices/virtual/block/nbd14
+#17 0.315 │   │   ├── nbd15 -> ../devices/virtual/block/nbd15
+#17 0.315 │   │   ├── nbd2 -> ../devices/virtual/block/nbd2
+#17 0.315 │   │   ├── nbd3 -> ../devices/virtual/block/nbd3
+#17 0.315 │   │   ├── nbd4 -> ../devices/virtual/block/nbd4
+#17 0.315 │   │   ├── nbd5 -> ../devices/virtual/block/nbd5
+#17 0.315 │   │   ├── nbd6 -> ../devices/virtual/block/nbd6
+#17 0.315 │   │   ├── nbd7 -> ../devices/virtual/block/nbd7
+#17 0.315 │   │   ├── nbd8 -> ../devices/virtual/block/nbd8
+#17 0.315 │   │   ├── nbd9 -> ../devices/virtual/block/nbd9
+#17 0.315 │   │   ├── ram0 -> ../devices/virtual/block/ram0
+#17 0.315 │   │   ├── ram1 -> ../devices/virtual/block/ram1
+#17 0.315 │   │   ├── ram10 -> ../devices/virtual/block/ram10
+#17 0.319 │   │   ├── ram11 -> ../devices/virtual/block/ram11
+#17 0.319 │   │   ├── ram12 -> ../devices/virtual/block/ram12
+#17 0.319 │   │   ├── ram13 -> ../devices/virtual/block/ram13
+#17 0.319 │   │   ├── ram14 -> ../devices/virtual/block/ram14
+#17 0.319 │   │   ├── ram15 -> ../devices/virtual/block/ram15
+#17 0.319 │   │   ├── ram2 -> ../devices/virtual/block/ram2
+#17 0.319 │   │   ├── ram3 -> ../devices/virtual/block/ram3
+#17 0.319 │   │   ├── ram4 -> ../devices/virtual/block/ram4
+#17 0.319 │   │   ├── ram5 -> ../devices/virtual/block/ram5
+#17 0.319 │   │   ├── ram6 -> ../devices/virtual/block/ram6
+#17 0.319 │   │   ├── ram7 -> ../devices/virtual/block/ram7
+#17 0.319 │   │   ├── ram8 -> ../devices/virtual/block/ram8
+#17 0.319 │   │   ├── ram9 -> ../devices/virtual/block/ram9
+#17 0.319 │   │   ├── vda -> ../devices/pci0000:00/0000:00:02.0/virtio1/block/vda
+#17 0.319 │   │   └── vdb -> ../devices/pci0000:00/0000:00:03.0/virtio2/block/vdb
+#17 0.319 │   ├── bus
+#17 0.319 │   │   ├── acpi
+#17 0.319 │   │   │   ├── devices
+#17 0.321 │   │   │   │   ├── ACPI0010:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0010:00
+#17 0.321 │   │   │   │   ├── LNXCPU:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0010:00/LNXCPU:00
+#17 0.321 │   │   │   │   ├── LNXCPU:01 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0010:00/LNXCPU:01
+#17 0.321 │   │   │   │   ├── LNXCPU:02 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0010:00/LNXCPU:02
+#17 0.321 │   │   │   │   ├── LNXCPU:03 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0010:00/LNXCPU:03
+#17 0.321 │   │   │   │   ├── LNXPWRBN:00 -> ../../../devices/LNXSYSTM:00/LNXPWRBN:00
+#17 0.321 │   │   │   │   ├── LNXSYBUS:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00
+#17 0.321 │   │   │   │   ├── LNXSYBUS:01 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:01
+#17 0.321 │   │   │   │   ├── LNXSYSTM:00 -> ../../../devices/LNXSYSTM:00
+#17 0.321 │   │   │   │   ├── PNP0103:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0103:00
+#17 0.321 │   │   │   │   ├── PNP0303:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:05/PNP0303:00
+#17 0.321 │   │   │   │   ├── PNP0400:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:05/PNP0400:00
+#17 0.321 │   │   │   │   ├── PNP0501:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:05/PNP0501:00
+#17 0.321 │   │   │   │   ├── PNP0A06:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/PNP0A06:00
+#17 0.321 │   │   │   │   ├── PNP0A06:01 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/PNP0A06:01
+#17 0.321 │   │   │   │   ├── PNP0A06:02 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/PNP0A06:02
+#17 0.321 │   │   │   │   ├── PNP0A08:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00
+#17 0.321 │   │   │   │   ├── PNP0B00:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:05/PNP0B00:00
+#17 0.321 │   │   │   │   ├── PNP0C01:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C01:00
+#17 0.321 │   │   │   │   ├── PNP0C0F:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:00
+#17 0.321 │   │   │   │   ├── PNP0C0F:01 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:01
+#17 0.321 │   │   │   │   ├── PNP0C0F:02 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:02
+#17 0.321 │   │   │   │   ├── PNP0C0F:03 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:03
+#17 0.321 │   │   │   │   ├── PNP0C0F:04 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:04
+#17 0.321 │   │   │   │   ├── PNP0C0F:05 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:05
+#17 0.321 │   │   │   │   ├── PNP0C0F:06 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:06
+#17 0.321 │   │   │   │   ├── PNP0C0F:07 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:07
+#17 0.321 │   │   │   │   ├── PNP0C0F:08 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:08
+#17 0.321 │   │   │   │   ├── PNP0C0F:09 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:09
+#17 0.321 │   │   │   │   ├── PNP0C0F:0a -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:0a
+#17 0.321 │   │   │   │   ├── PNP0C0F:0b -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:0b
+#17 0.321 │   │   │   │   ├── PNP0C0F:0c -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:0c
+#17 0.321 │   │   │   │   ├── PNP0C0F:0d -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:0d
+#17 0.321 │   │   │   │   ├── PNP0C0F:0e -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:0e
+#17 0.321 │   │   │   │   ├── PNP0C0F:0f -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0F:0f
+#17 0.321 │   │   │   │   ├── PNP0F13:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:05/PNP0F13:00
+#17 0.321 │   │   │   │   ├── QEMU0002:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/QEMU0002:00
+#17 0.321 │   │   │   │   ├── device:00 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:00
+#17 0.321 │   │   │   │   ├── device:01 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:01
+#17 0.321 │   │   │   │   ├── device:02 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:02
+#17 0.322 │   │   │   │   ├── device:03 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:03
+#17 0.322 │   │   │   │   ├── device:04 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:04
+#17 0.322 │   │   │   │   ├── device:05 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:05
+#17 0.322 │   │   │   │   ├── device:06 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:06
+#17 0.322 │   │   │   │   └── device:07 -> ../../../devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:07
+#17 0.322 │   │   │   ├── drivers
+#17 0.322 │   │   │   │   ├── Atlas ACPI
+#17 0.322 │   │   │   │   │   ├── bind
+#17 0.322 │   │   │   │   │   ├── uevent
+#17 0.322 │   │   │   │   │   └── unbind
+#17 0.322 │   │   │   │   ├── ec
+#17 0.322 │   │   │   │   │   ├── bind
+#17 0.322 │   │   │   │   │   ├── uevent
+#17 0.322 │   │   │   │   │   └── unbind
+#17 0.322 │   │   │   │   └── hpet
+#17 0.322 │   │   │   │       ├── bind
+#17 0.322 │   │   │   │       ├── uevent
+#17 0.322 │   │   │   │       └── unbind
+#17 0.322 │   │   │   ├── drivers_autoprobe
+#17 0.322 │   │   │   ├── drivers_probe
+#17 0.322 │   │   │   └── uevent
+#17 0.322 │   │   ├── clockevents
+#17 0.322 │   │   │   ├── devices
+#17 0.322 │   │   │   │   ├── broadcast -> ../../../devices/system/clockevents/broadcast
+#17 0.322 │   │   │   │   ├── clockevent0 -> ../../../devices/system/clockevents/clockevent0
+#17 0.322 │   │   │   │   ├── clockevent1 -> ../../../devices/system/clockevents/clockevent1
+#17 0.322 │   │   │   │   ├── clockevent2 -> ../../../devices/system/clockevents/clockevent2
+#17 0.322 │   │   │   │   └── clockevent3 -> ../../../devices/system/clockevents/clockevent3
+#17 0.322 │   │   │   ├── drivers
+#17 0.322 │   │   │   ├── drivers_autoprobe
+#17 0.322 │   │   │   ├── drivers_probe
+#17 0.322 │   │   │   └── uevent
+#17 0.322 │   │   ├── clocksource
+#17 0.322 │   │   │   ├── devices
+#17 0.322 │   │   │   │   └── clocksource0 -> ../../../devices/system/clocksource/clocksource0
+#17 0.323 │   │   │   ├── drivers
+#17 0.323 │   │   │   ├── drivers_autoprobe
+#17 0.323 │   │   │   ├── drivers_probe
+#17 0.323 │   │   │   └── uevent
+#17 0.323 │   │   ├── container
+#17 0.323 │   │   │   ├── devices
+#17 0.323 │   │   │   │   ├── PNP0A06:00 -> ../../../devices/system/container/PNP0A06:00
+#17 0.323 │   │   │   │   ├── PNP0A06:01 -> ../../../devices/system/container/PNP0A06:01
+#17 0.323 │   │   │   │   └── PNP0A06:02 -> ../../../devices/system/container/PNP0A06:02
+#17 0.323 │   │   │   ├── drivers
+#17 0.323 │   │   │   ├── drivers_autoprobe
+#17 0.323 │   │   │   ├── drivers_probe
+#17 0.323 │   │   │   └── uevent
+#17 0.323 │   │   ├── cpu
+#17 0.323 │   │   │   ├── devices
+#17 0.323 │   │   │   │   ├── cpu0 -> ../../../devices/system/cpu/cpu0
+#17 0.323 │   │   │   │   ├── cpu1 -> ../../../devices/system/cpu/cpu1
+#17 0.323 │   │   │   │   ├── cpu2 -> ../../../devices/system/cpu/cpu2
+#17 0.323 │   │   │   │   └── cpu3 -> ../../../devices/system/cpu/cpu3
+#17 0.325 │   │   │   ├── drivers
+#17 0.325 │   │   │   │   └── processor
+#17 0.325 │   │   │   │       ├── bind
+#17 0.325 │   │   │   │       ├── cpu0 -> ../../../../devices/system/cpu/cpu0
+#17 0.325 │   │   │   │       ├── cpu1 -> ../../../../devices/system/cpu/cpu1
+#17 0.325 │   │   │   │       ├── cpu2 -> ../../../../devices/system/cpu/cpu2
+#17 0.325 │   │   │   │       ├── cpu3 -> ../../../../devices/system/cpu/cpu3
+#17 0.325 │   │   │   │       ├── uevent
+#17 0.325 │   │   │   │       └── unbind
+#17 0.325 │   │   │   ├── drivers_autoprobe
+#17 0.325 │   │   │   ├── drivers_probe
+#17 0.325 │   │   │   └── uevent
+#17 0.325 │   │   ├── event_source
+#17 0.325 │   │   │   ├── devices
+#17 0.325 │   │   │   │   ├── breakpoint -> ../../../devices/breakpoint
+#17 0.325 │   │   │   │   ├── cpu -> ../../../devices/cpu
+#17 0.325 │   │   │   │   ├── kprobe -> ../../../devices/kprobe
+#17 0.325 │   │   │   │   ├── msr -> ../../../devices/msr
+#17 0.325 │   │   │   │   ├── power -> ../../../devices/power
+#17 0.325 │   │   │   │   ├── software -> ../../../devices/software
+#17 0.325 │   │   │   │   ├── tracepoint -> ../../../devices/tracepoint
+#17 0.325 │   │   │   │   └── uprobe -> ../../../devices/uprobe
+#17 0.325 │   │   │   ├── drivers
+#17 0.325 │   │   │   ├── drivers_autoprobe
+#17 0.325 │   │   │   ├── drivers_probe
+#17 0.325 │   │   │   └── uevent
+#17 0.325 │   │   ├── hid
+#17 0.325 │   │   │   ├── devices
+#17 0.325 │   │   │   ├── drivers
+#17 0.325 │   │   │   │   ├── chicony
+#17 0.325 │   │   │   │   │   ├── bind
+#17 0.325 │   │   │   │   │   ├── new_id
+#17 0.325 │   │   │   │   │   ├── uevent
+#17 0.325 │   │   │   │   │   └── unbind
+#17 0.325 │   │   │   │   └── hid-generic
+#17 0.325 │   │   │   │       ├── bind
+#17 0.325 │   │   │   │       ├── new_id
+#17 0.325 │   │   │   │       ├── uevent
+#17 0.325 │   │   │   │       └── unbind
+#17 0.325 │   │   │   ├── drivers_autoprobe
+#17 0.325 │   │   │   ├── drivers_probe
+#17 0.326 │   │   │   └── uevent
+#17 0.326 │   │   ├── i2c
+#17 0.326 │   │   │   ├── devices
+#17 0.326 │   │   │   ├── drivers
+#17 0.326 │   │   │   │   ├── dummy
+#17 0.326 │   │   │   │   │   ├── bind
+#17 0.326 │   │   │   │   │   ├── uevent
+#17 0.326 │   │   │   │   │   └── unbind
+#17 0.326 │   │   │   │   └── wl1273-fm
+#17 0.326 │   │   │   │       ├── bind
+#17 0.326 │   │   │   │       ├── uevent
+#17 0.326 │   │   │   │       └── unbind
+#17 0.326 │   │   │   ├── drivers_autoprobe
+#17 0.326 │   │   │   ├── drivers_probe
+#17 0.326 │   │   │   └── uevent
+#17 0.326 │   │   ├── iscsi_flashnode
+#17 0.326 │   │   │   ├── devices
+#17 0.326 │   │   │   ├── drivers
+#17 0.326 │   │   │   ├── drivers_autoprobe
+#17 0.326 │   │   │   ├── drivers_probe
+#17 0.326 │   │   │   └── uevent
+#17 0.326 │   │   ├── mdio_bus
+#17 0.326 │   │   │   ├── devices
+#17 0.326 │   │   │   ├── drivers
+#17 0.326 │   │   │   │   ├── Generic Clause 45 PHY
+#17 0.326 │   │   │   │   │   ├── bind
+#17 0.326 │   │   │   │   │   ├── uevent
+#17 0.326 │   │   │   │   │   └── unbind
+#17 0.326 │   │   │   │   └── Generic PHY
+#17 0.326 │   │   │   │       ├── bind
+#17 0.326 │   │   │   │       ├── uevent
+#17 0.326 │   │   │   │       └── unbind
+#17 0.326 │   │   │   ├── drivers_autoprobe
+#17 0.326 │   │   │   ├── drivers_probe
+#17 0.326 │   │   │   └── uevent
+#17 0.326 │   │   ├── memory
+#17 0.326 │   │   │   ├── devices
+#17 0.326 │   │   │   │   ├── memory0 -> ../../../devices/system/memory/memory0
+#17 0.326 │   │   │   │   ├── memory1 -> ../../../devices/system/memory/memory1
+#17 0.326 │   │   │   │   ├── memory10 -> ../../../devices/system/memory/memory10
+#17 0.326 │   │   │   │   ├── memory11 -> ../../../devices/system/memory/memory11
+#17 0.326 │   │   │   │   ├── memory12 -> ../../../devices/system/memory/memory12
+#17 0.326 │   │   │   │   ├── memory13 -> ../../../devices/system/memory/memory13
+#17 0.326 │   │   │   │   ├── memory14 -> ../../../devices/system/memory/memory14
+#17 0.327 │   │   │   │   ├── memory15 -> ../../../devices/system/memory/memory15
+#17 0.327 │   │   │   │   ├── memory2 -> ../../../devices/system/memory/memory2
+#17 0.327 │   │   │   │   ├── memory3 -> ../../../devices/system/memory/memory3
+#17 0.327 │   │   │   │   ├── memory4 -> ../../../devices/system/memory/memory4
+#17 0.327 │   │   │   │   ├── memory5 -> ../../../devices/system/memory/memory5
+#17 0.327 │   │   │   │   ├── memory6 -> ../../../devices/system/memory/memory6
+#17 0.327 │   │   │   │   ├── memory7 -> ../../../devices/system/memory/memory7
+#17 0.327 │   │   │   │   ├── memory8 -> ../../../devices/system/memory/memory8
+#17 0.327 │   │   │   │   └── memory9 -> ../../../devices/system/memory/memory9
+#17 0.327 │   │   │   ├── drivers
+#17 0.327 │   │   │   ├── drivers_autoprobe
+#17 0.327 │   │   │   ├── drivers_probe
+#17 0.327 │   │   │   └── uevent
+#17 0.327 │   │   ├── pci
+#17 0.327 │   │   │   ├── devices
+#17 0.327 │   │   │   │   ├── 0000:00:00.0 -> ../../../devices/pci0000:00/0000:00:00.0
+#17 0.329 │   │   │   │   ├── 0000:00:01.0 -> ../../../devices/pci0000:00/0000:00:01.0
+#17 0.329 │   │   │   │   ├── 0000:00:02.0 -> ../../../devices/pci0000:00/0000:00:02.0
+#17 0.329 │   │   │   │   ├── 0000:00:03.0 -> ../../../devices/pci0000:00/0000:00:03.0
+#17 0.329 │   │   │   │   ├── 0000:00:04.0 -> ../../../devices/pci0000:00/0000:00:04.0
+#17 0.329 │   │   │   │   ├── 0000:00:1f.0 -> ../../../devices/pci0000:00/0000:00:1f.0
+#17 0.329 │   │   │   │   ├── 0000:00:1f.2 -> ../../../devices/pci0000:00/0000:00:1f.2
+#17 0.329 │   │   │   │   └── 0000:00:1f.3 -> ../../../devices/pci0000:00/0000:00:1f.3
+#17 0.329 │   │   │   ├── drivers
+#17 0.329 │   │   │   │   ├── 8250_lpss
+#17 0.329 │   │   │   │   │   ├── bind
+#17 0.329 │   │   │   │   │   ├── new_id
+#17 0.329 │   │   │   │   │   ├── remove_id
+#17 0.329 │   │   │   │   │   ├── uevent
+#17 0.329 │   │   │   │   │   └── unbind
+#17 0.329 │   │   │   │   ├── 8250_pericom
+#17 0.330 │   │   │   │   │   ├── bind
+#17 0.330 │   │   │   │   │   ├── new_id
+#17 0.330 │   │   │   │   │   ├── remove_id
+#17 0.330 │   │   │   │   │   ├── uevent
+#17 0.330 │   │   │   │   │   └── unbind
+#17 0.330 │   │   │   │   ├── ehci-pci
+#17 0.330 │   │   │   │   │   ├── bind
+#17 0.330 │   │   │   │   │   ├── new_id
+#17 0.330 │   │   │   │   │   ├── remove_id
+#17 0.330 │   │   │   │   │   ├── uevent
+#17 0.330 │   │   │   │   │   └── unbind
+#17 0.330 │   │   │   │   ├── exar_serial
+#17 0.330 │   │   │   │   │   ├── bind
+#17 0.330 │   │   │   │   │   ├── new_id
+#17 0.330 │   │   │   │   │   ├── remove_id
+#17 0.330 │   │   │   │   │   ├── uevent
+#17 0.330 │   │   │   │   │   └── unbind
+#17 0.330 │   │   │   │   ├── intel ips
+#17 0.330 │   │   │   │   │   ├── bind
+#17 0.330 │   │   │   │   │   ├── new_id
+#17 0.330 │   │   │   │   │   ├── remove_id
+#17 0.330 │   │   │   │   │   ├── uevent
+#17 0.330 │   │   │   │   │   └── unbind
+#17 0.330 │   │   │   │   ├── lpc_ich
+#17 0.330 │   │   │   │   │   ├── 0000:00:1f.0 -> ../../../../devices/pci0000:00/0000:00:1f.0
+#17 0.330 │   │   │   │   │   ├── bind
+#17 0.330 │   │   │   │   │   ├── new_id
+#17 0.330 │   │   │   │   │   ├── remove_id
+#17 0.330 │   │   │   │   │   ├── uevent
+#17 0.330 │   │   │   │   │   └── unbind
+#17 0.330 │   │   │   │   ├── lpc_sch
+#17 0.330 │   │   │   │   │   ├── bind
+#17 0.330 │   │   │   │   │   ├── new_id
+#17 0.330 │   │   │   │   │   ├── remove_id
+#17 0.330 │   │   │   │   │   ├── uevent
+#17 0.330 │   │   │   │   │   └── unbind
+#17 0.330 │   │   │   │   ├── ohci-pci
+#17 0.330 │   │   │   │   │   ├── bind
+#17 0.330 │   │   │   │   │   ├── new_id
+#17 0.330 │   │   │   │   │   ├── remove_id
+#17 0.330 │   │   │   │   │   ├── uevent
+#17 0.330 │   │   │   │   │   └── unbind
+#17 0.330 │   │   │   │   ├── pci-stub
+#17 0.332 │   │   │   │   │   ├── bind
+#17 0.332 │   │   │   │   │   ├── new_id
+#17 0.332 │   │   │   │   │   ├── remove_id
+#17 0.332 │   │   │   │   │   ├── uevent
+#17 0.332 │   │   │   │   │   └── unbind
+#17 0.332 │   │   │   │   ├── pcieport
+#17 0.332 │   │   │   │   │   ├── bind
+#17 0.332 │   │   │   │   │   ├── new_id
+#17 0.332 │   │   │   │   │   ├── remove_id
+#17 0.332 │   │   │   │   │   ├── uevent
+#17 0.332 │   │   │   │   │   └── unbind
+#17 0.332 │   │   │   │   ├── pcips2
+#17 0.332 │   │   │   │   │   ├── bind
+#17 0.332 │   │   │   │   │   ├── new_id
+#17 0.332 │   │   │   │   │   ├── remove_id
+#17 0.332 │   │   │   │   │   ├── uevent
+#17 0.332 │   │   │   │   │   └── unbind
+#17 0.332 │   │   │   │   ├── serial
+#17 0.332 │   │   │   │   │   ├── bind
+#17 0.332 │   │   │   │   │   ├── new_id
+#17 0.332 │   │   │   │   │   ├── remove_id
+#17 0.332 │   │   │   │   │   ├── uevent
+#17 0.332 │   │   │   │   │   └── unbind
+#17 0.332 │   │   │   │   ├── sm501
+#17 0.332 │   │   │   │   │   ├── bind
+#17 0.332 │   │   │   │   │   ├── new_id
+#17 0.332 │   │   │   │   │   ├── remove_id
+#17 0.332 │   │   │   │   │   ├── uevent
+#17 0.332 │   │   │   │   │   └── unbind
+#17 0.332 │   │   │   │   ├── smartpqi
+#17 0.332 │   │   │   │   │   ├── bind
+#17 0.332 │   │   │   │   │   ├── new_id
+#17 0.332 │   │   │   │   │   ├── remove_id
+#17 0.332 │   │   │   │   │   ├── uevent
+#17 0.332 │   │   │   │   │   └── unbind
+#17 0.332 │   │   │   │   ├── virtio-pci
+#17 0.332 │   │   │   │   │   ├── 0000:00:01.0 -> ../../../../devices/pci0000:00/0000:00:01.0
+#17 0.332 │   │   │   │   │   ├── 0000:00:02.0 -> ../../../../devices/pci0000:00/0000:00:02.0
+#17 0.332 │   │   │   │   │   ├── 0000:00:03.0 -> ../../../../devices/pci0000:00/0000:00:03.0
+#17 0.332 │   │   │   │   │   ├── 0000:00:04.0 -> ../../../../devices/pci0000:00/0000:00:04.0
+#17 0.332 │   │   │   │   │   ├── bind
+#17 0.332 │   │   │   │   │   ├── new_id
+#17 0.332 │   │   │   │   │   ├── remove_id
+#17 0.332 │   │   │   │   │   ├── uevent
+#17 0.332 │   │   │   │   │   └── unbind
+#17 0.332 │   │   │   │   ├── vmw_pvscsi
+#17 0.332 │   │   │   │   │   ├── bind
+#17 0.332 │   │   │   │   │   ├── new_id
+#17 0.332 │   │   │   │   │   ├── remove_id
+#17 0.332 │   │   │   │   │   ├── uevent
+#17 0.332 │   │   │   │   │   └── unbind
+#17 0.332 │   │   │   │   ├── vmxnet3
+#17 0.332 │   │   │   │   │   ├── bind
+#17 0.332 │   │   │   │   │   ├── new_id
+#17 0.332 │   │   │   │   │   ├── remove_id
+#17 0.332 │   │   │   │   │   ├── uevent
+#17 0.332 │   │   │   │   │   └── unbind
+#17 0.332 │   │   │   │   ├── vx855
+#17 0.332 │   │   │   │   │   ├── bind
+#17 0.332 │   │   │   │   │   ├── new_id
+#17 0.332 │   │   │   │   │   ├── remove_id
+#17 0.332 │   │   │   │   │   ├── uevent
+#17 0.332 │   │   │   │   │   └── unbind
+#17 0.333 │   │   │   │   └── xhci_hcd
+#17 0.333 │   │   │   │       ├── bind
+#17 0.333 │   │   │   │       ├── new_id
+#17 0.333 │   │   │   │       ├── remove_id
+#17 0.333 │   │   │   │       ├── uevent
+#17 0.333 │   │   │   │       └── unbind
+#17 0.333 │   │   │   ├── drivers_autoprobe
+#17 0.333 │   │   │   ├── drivers_probe
+#17 0.333 │   │   │   ├── rescan
+#17 0.333 │   │   │   ├── resource_alignment
+#17 0.333 │   │   │   ├── slots
+#17 0.333 │   │   │   └── uevent
+#17 0.333 │   │   ├── pci_express
+#17 0.333 │   │   │   ├── devices
+#17 0.333 │   │   │   ├── drivers
+#17 0.333 │   │   │   ├── drivers_autoprobe
+#17 0.333 │   │   │   ├── drivers_probe
+#17 0.333 │   │   │   └── uevent
+#17 0.333 │   │   ├── platform
+#17 0.333 │   │   │   ├── devices
+#17 0.333 │   │   │   │   ├── Fixed MDIO bus.0 -> ../../../devices/platform/Fixed MDIO bus.0
+#17 0.333 │   │   │   │   ├── PNP0103:00 -> ../../../devices/platform/PNP0103:00
+#17 0.333 │   │   │   │   ├── QEMU0002:00 -> ../../../devices/pci0000:00/QEMU0002:00
+#17 0.335 │   │   │   │   ├── alarmtimer.1.auto -> ../../../devices/pnp0/00:04/rtc/rtc0/alarmtimer.1.auto
+#17 0.335 │   │   │   │   ├── i8042 -> ../../../devices/platform/i8042
+#17 0.335 │   │   │   │   ├── iTCO_wdt.0.auto -> ../../../devices/pci0000:00/0000:00:1f.0/iTCO_wdt.0.auto
+#17 0.335 │   │   │   │   ├── pcspkr -> ../../../devices/platform/pcspkr
+#17 0.335 │   │   │   │   ├── serial8250 -> ../../../devices/platform/serial8250
+#17 0.335 │   │   │   │   └── vhci_hcd.0 -> ../../../devices/platform/vhci_hcd.0
+#17 0.335 │   │   │   ├── drivers
+#17 0.335 │   │   │   │   ├── acpi-ged
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   ├── alarmtimer
+#17 0.335 │   │   │   │   │   ├── alarmtimer.1.auto -> ../../../../devices/pnp0/00:04/rtc/rtc0/alarmtimer.1.auto
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   ├── ehci-platform
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   ├── gpio-clk
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   ├── i8042
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── i8042 -> ../../../../devices/platform/i8042
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   ├── ohci-platform
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   ├── pcspkr
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── pcspkr -> ../../../../devices/platform/pcspkr
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   ├── serial8250
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── serial8250 -> ../../../../devices/platform/serial8250
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   ├── sm501
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   ├── sm501-usb
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   ├── timeriomem_rng
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   ├── vhci_hcd
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   ├── unbind
+#17 0.335 │   │   │   │   │   └── vhci_hcd.0 -> ../../../../devices/platform/vhci_hcd.0
+#17 0.335 │   │   │   │   ├── virtio-mmio
+#17 0.335 │   │   │   │   │   ├── bind
+#17 0.335 │   │   │   │   │   ├── uevent
+#17 0.335 │   │   │   │   │   └── unbind
+#17 0.335 │   │   │   │   └── xhci-hcd
+#17 0.335 │   │   │   │       ├── bind
+#17 0.335 │   │   │   │       ├── uevent
+#17 0.335 │   │   │   │       └── unbind
+#17 0.335 │   │   │   ├── drivers_autoprobe
+#17 0.335 │   │   │   ├── drivers_probe
+#17 0.335 │   │   │   └── uevent
+#17 0.335 │   │   ├── pnp
+#17 0.335 │   │   │   ├── devices
+#17 0.335 │   │   │   │   ├── 00:00 -> ../../../devices/pnp0/00:00
+#17 0.335 │   │   │   │   ├── 00:01 -> ../../../devices/pnp0/00:01
+#17 0.335 │   │   │   │   ├── 00:02 -> ../../../devices/pnp0/00:02
+#17 0.335 │   │   │   │   ├── 00:03 -> ../../../devices/pnp0/00:03
+#17 0.335 │   │   │   │   ├── 00:04 -> ../../../devices/pnp0/00:04
+#17 0.336 │   │   │   │   └── 00:05 -> ../../../devices/pnp0/00:05
+#17 0.336 │   │   │   ├── drivers
+#17 0.336 │   │   │   │   ├── i8042 aux
+#17 0.336 │   │   │   │   │   ├── 00:01 -> ../../../../devices/pnp0/00:01
+#17 0.336 │   │   │   │   │   └── uevent
+#17 0.336 │   │   │   │   ├── i8042 kbd
+#17 0.336 │   │   │   │   │   ├── 00:00 -> ../../../../devices/pnp0/00:00
+#17 0.336 │   │   │   │   │   └── uevent
+#17 0.336 │   │   │   │   ├── rtc_cmos
+#17 0.336 │   │   │   │   │   ├── 00:04 -> ../../../../devices/pnp0/00:04
+#17 0.336 │   │   │   │   │   ├── bind
+#17 0.336 │   │   │   │   │   ├── uevent
+#17 0.336 │   │   │   │   │   └── unbind
+#17 0.336 │   │   │   │   ├── serial
+#17 0.336 │   │   │   │   │   ├── 00:03 -> ../../../../devices/pnp0/00:03
+#17 0.336 │   │   │   │   │   ├── bind
+#17 0.336 │   │   │   │   │   ├── uevent
+#17 0.336 │   │   │   │   │   └── unbind
+#17 0.336 │   │   │   │   └── system
+#17 0.336 │   │   │   │       ├── 00:05 -> ../../../../devices/pnp0/00:05
+#17 0.337 │   │   │   │       ├── bind
+#17 0.337 │   │   │   │       ├── uevent
+#17 0.337 │   │   │   │       └── unbind
+#17 0.337 │   │   │   ├── drivers_autoprobe
+#17 0.337 │   │   │   ├── drivers_probe
+#17 0.337 │   │   │   └── uevent
+#17 0.337 │   │   ├── scsi
+#17 0.337 │   │   │   ├── devices
+#17 0.337 │   │   │   ├── drivers
+#17 0.337 │   │   │   │   ├── sd
+#17 0.337 │   │   │   │   │   ├── bind
+#17 0.337 │   │   │   │   │   ├── uevent
+#17 0.337 │   │   │   │   │   └── unbind
+#17 0.337 │   │   │   │   └── sr
+#17 0.337 │   │   │   │       ├── bind
+#17 0.337 │   │   │   │       ├── uevent
+#17 0.337 │   │   │   │       └── unbind
+#17 0.337 │   │   │   ├── drivers_autoprobe
+#17 0.337 │   │   │   ├── drivers_probe
+#17 0.337 │   │   │   └── uevent
+#17 0.337 │   │   ├── serial-base
+#17 0.337 │   │   │   ├── devices
+#17 0.337 │   │   │   │   ├── 00:03:0 -> ../../../devices/pnp0/00:03/00:03:0
+#17 0.337 │   │   │   │   ├── 00:03:0.0 -> ../../../devices/pnp0/00:03/00:03:0/00:03:0.0
+#17 0.337 │   │   │   │   ├── serial8250:0 -> ../../../devices/platform/serial8250/serial8250:0
+#17 0.337 │   │   │   │   ├── serial8250:0.1 -> ../../../devices/platform/serial8250/serial8250:0/serial8250:0.1
+#17 0.337 │   │   │   │   ├── serial8250:0.2 -> ../../../devices/platform/serial8250/serial8250:0/serial8250:0.2
+#17 0.337 │   │   │   │   └── serial8250:0.3 -> ../../../devices/platform/serial8250/serial8250:0/serial8250:0.3
+#17 0.337 │   │   │   ├── drivers
+#17 0.337 │   │   │   │   ├── ctrl
+#17 0.337 │   │   │   │   │   ├── 00:03:0 -> ../../../../devices/pnp0/00:03/00:03:0
+#17 0.337 │   │   │   │   │   ├── serial8250:0 -> ../../../../devices/platform/serial8250/serial8250:0
+#17 0.337 │   │   │   │   │   └── uevent
+#17 0.337 │   │   │   │   └── port
+#17 0.337 │   │   │   │       ├── 00:03:0.0 -> ../../../../devices/pnp0/00:03/00:03:0/00:03:0.0
+#17 0.337 │   │   │   │       ├── serial8250:0.1 -> ../../../../devices/platform/serial8250/serial8250:0/serial8250:0.1
+#17 0.338 │   │   │   │       ├── serial8250:0.2 -> ../../../../devices/platform/serial8250/serial8250:0/serial8250:0.2
+#17 0.338 │   │   │   │       ├── serial8250:0.3 -> ../../../../devices/platform/serial8250/serial8250:0/serial8250:0.3
+#17 0.338 │   │   │   │       └── uevent
+#17 0.338 │   │   │   ├── drivers_autoprobe
+#17 0.338 │   │   │   ├── drivers_probe
+#17 0.338 │   │   │   └── uevent
+#17 0.338 │   │   ├── serio
+#17 0.338 │   │   │   ├── devices
+#17 0.338 │   │   │   │   ├── serio0 -> ../../../devices/platform/i8042/serio0
+#17 0.338 │   │   │   │   └── serio1 -> ../../../devices/platform/i8042/serio1
+#17 0.338 │   │   │   ├── drivers
+#17 0.338 │   │   │   │   ├── atkbd
+#17 0.338 │   │   │   │   │   ├── bind
+#17 0.338 │   │   │   │   │   ├── bind_mode
+#17 0.338 │   │   │   │   │   ├── description
+#17 0.338 │   │   │   │   │   ├── serio0 -> ../../../../devices/platform/i8042/serio0
+#17 0.339 │   │   │   │   │   ├── uevent
+#17 0.339 │   │   │   │   │   └── unbind
+#17 0.339 │   │   │   │   └── serio_raw
+#17 0.339 │   │   │   │       ├── bind
+#17 0.339 │   │   │   │       ├── bind_mode
+#17 0.339 │   │   │   │       ├── description
+#17 0.339 │   │   │   │       ├── uevent
+#17 0.339 │   │   │   │       └── unbind
+#17 0.339 │   │   │   ├── drivers_autoprobe
+#17 0.339 │   │   │   ├── drivers_probe
+#17 0.339 │   │   │   └── uevent
+#17 0.339 │   │   ├── typec
+#17 0.339 │   │   │   ├── devices
+#17 0.339 │   │   │   ├── drivers
+#17 0.339 │   │   │   ├── drivers_autoprobe
+#17 0.339 │   │   │   ├── drivers_probe
+#17 0.339 │   │   │   └── uevent
+#17 0.339 │   │   ├── usb
+#17 0.339 │   │   │   ├── devices
+#17 0.339 │   │   │   │   ├── 1-0:1.0 -> ../../../devices/platform/vhci_hcd.0/usb1/1-0:1.0
+#17 0.339 │   │   │   │   ├── 2-0:1.0 -> ../../../devices/platform/vhci_hcd.0/usb2/2-0:1.0
+#17 0.339 │   │   │   │   ├── usb1 -> ../../../devices/platform/vhci_hcd.0/usb1
+#17 0.341 │   │   │   │   └── usb2 -> ../../../devices/platform/vhci_hcd.0/usb2
+#17 0.341 │   │   │   ├── drivers
+#17 0.341 │   │   │   │   ├── aircable
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── ark3116
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── belkin_sa
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── cdc_acm
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── new_id
+#17 0.341 │   │   │   │   │   ├── remove_id
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── cdc_wdm
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── new_id
+#17 0.341 │   │   │   │   │   ├── remove_id
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── ch341
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── cp210x
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── cyberjack
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── cypress_m8
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── digi_acceleport
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── empeg
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── f81232
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── f81534
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── f81534a_ctrl
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── new_id
+#17 0.341 │   │   │   │   │   ├── remove_id
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.341 │   │   │   │   ├── ftdi_sio
+#17 0.341 │   │   │   │   │   ├── bind
+#17 0.341 │   │   │   │   │   ├── uevent
+#17 0.341 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── garmin_gps
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── hub
+#17 0.342 │   │   │   │   │   ├── 1-0:1.0 -> ../../../../devices/platform/vhci_hcd.0/usb1/1-0:1.0
+#17 0.342 │   │   │   │   │   ├── 2-0:1.0 -> ../../../../devices/platform/vhci_hcd.0/usb2/2-0:1.0
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── new_id
+#17 0.342 │   │   │   │   │   ├── remove_id
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── io_edgeport
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── io_ti
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── ipaq
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── ipw
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── ir_usb
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── iuu_phoenix
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── keyspan
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── keyspan_pda
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── kl5kusb105
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── kobil_sct
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── mct_u232
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── metro_usb
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── mos7720
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.342 │   │   │   │   │   ├── uevent
+#17 0.342 │   │   │   │   │   └── unbind
+#17 0.342 │   │   │   │   ├── mos7840
+#17 0.342 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── mxuport
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── navman
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── omninet
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── opticon
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── option
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── oti6858
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── pl2303
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── qcaux
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── qcserial
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── quatech2
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── safe_serial
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── sierra
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── spcp8x5
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ssu100
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── symbolserial
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ti_usb_3410_5052
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── uas
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   ├── remove_id
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-alauda
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-cypress
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-datafab
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-freecom
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-isd200
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-jumpshot
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-karma
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-onetouch
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-realtek
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-sddr09
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-sddr55
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums-usbat
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── ums_eneub6250
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── upd78f0730
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── usb
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   ├── unbind
+#17 0.344 │   │   │   │   │   ├── usb1 -> ../../../../devices/platform/vhci_hcd.0/usb1
+#17 0.344 │   │   │   │   │   └── usb2 -> ../../../../devices/platform/vhci_hcd.0/usb2
+#17 0.344 │   │   │   │   ├── usb-storage
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   ├── remove_id
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── usb_debug
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── usb_serial_simple
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── usbfs
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   ├── remove_id
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── usbhid
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   ├── remove_id
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── usblp
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   ├── remove_id
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── usbserial_generic
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── usbtmc
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   ├── remove_id
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── visor
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── whiteheat
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── wishbone_serial
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   ├── xr_serial
+#17 0.344 │   │   │   │   │   ├── bind
+#17 0.344 │   │   │   │   │   ├── uevent
+#17 0.344 │   │   │   │   │   └── unbind
+#17 0.344 │   │   │   │   └── xsens_mt
+#17 0.344 │   │   │   │       ├── bind
+#17 0.344 │   │   │   │       ├── uevent
+#17 0.344 │   │   │   │       └── unbind
+#17 0.344 │   │   │   ├── drivers_autoprobe
+#17 0.344 │   │   │   ├── drivers_probe
+#17 0.344 │   │   │   └── uevent
+#17 0.344 │   │   ├── usb-serial
+#17 0.344 │   │   │   ├── devices
+#17 0.344 │   │   │   ├── drivers
+#17 0.344 │   │   │   │   ├── SPCP8x5
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   └── uevent
+#17 0.344 │   │   │   │   ├── aircable
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   └── uevent
+#17 0.344 │   │   │   │   ├── ark3116
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   └── uevent
+#17 0.344 │   │   │   │   ├── belkin
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   └── uevent
+#17 0.344 │   │   │   │   ├── carelink
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   └── uevent
+#17 0.344 │   │   │   │   ├── ch341-uart
+#17 0.344 │   │   │   │   │   ├── new_id
+#17 0.344 │   │   │   │   │   └── uevent
+#17 0.344 │   │   │   │   ├── clie_3.5
+#17 0.344 │   │
+#17 0.344 [output clipped, log limit 200KiB/s reached]
+#17 DONE 0.6s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 1.3s done
+#18 exporting manifest sha256:e4e2e364ae0e7220c4e8b8acd7c717b5894a009852b216265f259cd688dd23ed
+#18 exporting manifest sha256:e4e2e364ae0e7220c4e8b8acd7c717b5894a009852b216265f259cd688dd23ed 0.0s done
+#18 exporting config sha256:ef3b9f9000f9bafe6b7fa12931602ce6b720921c0538bf12c2458b065a91e907 0.0s done
+#18 exporting attestation manifest sha256:e8758ede4fcfdaad3d389f0813570e0f4be99b74f31913223f7e8718ca3caf4c
+#18 exporting attestation manifest sha256:e8758ede4fcfdaad3d389f0813570e0f4be99b74f31913223f7e8718ca3caf4c 0.1s done
+#18 exporting manifest list sha256:c6fdf5651796156e60d0363ee113e0e3f64e9dfe5df1d55d5bc6c0e68982b703 0.0s done
+#18 naming to docker.io/library/meow:latest
+#18 naming to docker.io/library/meow:latest done
+#18 unpacking to docker.io/library/meow:latest
+#18 unpacking to docker.io/library/meow:latest 0.2s done
+#18 DONE 1.7s
